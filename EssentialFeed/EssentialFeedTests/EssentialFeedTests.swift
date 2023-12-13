@@ -1,5 +1,5 @@
 import XCTest
-@testable import EssentialFeed
+import EssentialFeed
 
 final class RemoteFeedLoaderTests: XCTestCase {
     func test_init_doesNotRequestDataFromURL() {
