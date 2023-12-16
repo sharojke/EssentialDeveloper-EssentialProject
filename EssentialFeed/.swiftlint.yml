@@ -66,6 +66,7 @@ disabled_rules:
 ## New disables
   - identifier_name
   - no_magic_numbers
+  - trailing_closure
 
 ## Customization of rules
 attributes:

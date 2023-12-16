@@ -1,6 +1,6 @@
 import Foundation
 
-internal final class FeedItemsMapper {
+internal enum FeedItemsMapper {
     private struct Root: Decodable {
         let items: [Item]
         
@@ -18,9 +18,9 @@ internal final class FeedItemsMapper {
         var feedItem: FeedItem {
             return FeedItem(
                 id: id,
+                imageURL: image,
                 description: description,
-                location: location,
-                imageURL: image
+                location: location
             )
         }
     }

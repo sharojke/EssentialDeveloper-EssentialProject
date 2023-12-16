@@ -2,15 +2,15 @@ import Foundation
 
 public struct FeedItem: Equatable {
     public let id: UUID
+    public let imageURL: URL
     public let description: String?
     public let location: String?
-    public let imageURL: URL
     
     public init(
         id: UUID,
+        imageURL: URL,
         description: String? = nil,
-        location: String? = nil,
-        imageURL: URL
+        location: String? = nil
     ) {
         self.id = id
         self.description = description

@@ -1,5 +1,8 @@
-import XCTest
 import EssentialFeed
+import XCTest
+
+// swiftlint:disable force_unwrapping
+// swiftlint:disable force_try
 
 final class RemoteFeedLoaderTests: XCTestCase {
     func test_init_doesNotRequestDataFromURL() {
@@ -93,9 +96,9 @@ final class RemoteFeedLoaderTests: XCTestCase {
         
         let item2 = makeItem(
             id: UUID(),
+            imageURL: URL(string: "http://url.com")!,
             description: "a description",
-            location: "a location",
-            imageURL: URL(string: "http://url.com")!
+            location: "a location"
         )
         
         let items = [item1.model, item2.model]
@@ -135,7 +138,7 @@ final class RemoteFeedLoaderTests: XCTestCase {
         line: UInt = #line
     ) -> (sut: RemoteFeedLoader, client: HTTPClientSpy) {
         let client = HTTPClientSpy()
-        let sut = RemoteFeedLoader(url: url , client: client)
+        let sut = RemoteFeedLoader(url: url, client: client)
         
         trackForMemoryLeaks(sut, file: file, line: line)
         trackForMemoryLeaks(client, file: file, line: line)
@@ -166,22 +169,22 @@ final class RemoteFeedLoaderTests: XCTestCase {
     
     private func makeItem(
         id: UUID,
+        imageURL: URL,
         description: String? = nil,
-        location: String? = nil,
-        imageURL: URL
+        location: String? = nil
     ) -> (model: FeedItem, json: [String: Any]) {
         let model = FeedItem(
             id: id,
+            imageURL: imageURL,
             description: description,
-            location: location,
-            imageURL: imageURL
+            location: location
         )
         
         let json = [
             "id": model.id.uuidString,
             "description": model.description,
             "location": model.location,
-            "image": model.imageURL.absoluteString,
+            "image": model.imageURL.absoluteString
         ]
         
         return (model, json as [String: Any])
@@ -237,7 +240,9 @@ final class RemoteFeedLoaderTests: XCTestCase {
         
         wait(for: [exp], timeout: 1.0)
     }
-    
+}
+
+extension RemoteFeedLoaderTests {
     private class HTTPClientSpy: HTTPClient {
         private var messages = [
             (
@@ -247,7 +252,7 @@ final class RemoteFeedLoaderTests: XCTestCase {
         ]()
         
         var requestedURLs: [URL] {
-            return messages.map({ $0.url })
+            return messages.map { $0.url }
         }
         
         func get(
@@ -276,3 +281,6 @@ final class RemoteFeedLoaderTests: XCTestCase {
         }
     }
 }
+
+// swiftlint:enable force_unwrapping
+// swiftlint:enable force_try
