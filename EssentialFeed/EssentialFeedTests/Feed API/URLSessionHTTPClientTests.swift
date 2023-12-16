@@ -4,6 +4,8 @@ import XCTest
 // swiftlint:disable force_unwrapping
 
 final class URLSessionHTTPClient {
+    struct UnexpectedValuesRepresentation: Error {}
+    
     let session: URLSession
     
     init(session: URLSession = .shared) {
@@ -17,6 +19,8 @@ final class URLSessionHTTPClient {
         session.dataTask(with: url) { _, _, error in
             if let error {
                 completion(.failure(error))
+            } else {
+                completion(.failure(UnexpectedValuesRepresentation()))
             }
         }
         .resume()
@@ -68,7 +72,31 @@ final class URLSessionHTTPClientTests: XCTestCase {
                 XCTAssertEqual(receivedError.code, error.code)
                 
             case .success:
-                XCTFail("Expected failure with \(error) got \(result) instead")
+                XCTFail("Expected failure with \(error), got \(result) instead")
+            }
+            
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 1.0)
+    }
+    
+    func test_getFromURL_failsOnAllNilValues() {
+        URLProtocolStub.stub(
+            data: nil,
+            response: nil,
+            error: nil
+        )
+        
+        let exp = expectation(description: "Wait for completion")
+        
+        makeSUT().get(from: anyURL()) { result in
+            switch result {
+            case .failure:
+                break
+                
+            case .success:
+                XCTFail("Expected failure, got \(result) instead")
             }
             
             exp.fulfill()
