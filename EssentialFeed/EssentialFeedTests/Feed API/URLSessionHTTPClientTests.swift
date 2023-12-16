@@ -3,33 +3,6 @@ import XCTest
 
 // swiftlint:disable force_unwrapping
 
-final class URLSessionHTTPClient: HTTPClient {
-    struct UnexpectedValuesRepresentation: Error {}
-    
-    let session: URLSession
-    
-    init(session: URLSession = .shared) {
-        self.session = session
-    }
-    
-    func get(
-        from url: URL,
-        completion: @escaping (HTTPClientResult) -> Void
-    ) {
-        session.dataTask(with: url) { data, response, error in
-            if let error {
-                completion(.failure(error))
-            } else if let data,
-                      let response = response as? HTTPURLResponse {
-                completion(.success(data, response))
-            } else {
-                completion(.failure(UnexpectedValuesRepresentation()))
-            }
-        }
-        .resume()
-    }
-}
-
 final class URLSessionHTTPClientTests: XCTestCase {
     override func setUp() {
         super.setUp()
