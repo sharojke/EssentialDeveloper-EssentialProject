@@ -152,8 +152,29 @@ extension URLSessionHTTPClientTests {
         override func stopLoading() {}
     }
     
-    func makeSUT() -> URLSessionHTTPClient {
-        return URLSessionHTTPClient()
+    func makeSUT(
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) -> URLSessionHTTPClient {
+        let sut = URLSessionHTTPClient()
+        trackForMemoryLeaks(sut, file: file, line: line)
+        
+        return sut
+    }
+    
+    private func trackForMemoryLeaks(
+        _ instance: AnyObject,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        addTeardownBlock { [weak instance] in
+            XCTAssertNil(
+                instance,
+                "Instance should've been deallocated. Potential memory leak.",
+                file: file,
+                line: line
+            )
+        }
     }
 }
 
