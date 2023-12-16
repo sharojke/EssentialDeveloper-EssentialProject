@@ -29,7 +29,6 @@ final class URLSessionHTTPClientTests: XCTestCase {
         let url = URL(string: "http://any-url.com")!
         let error = NSError(domain: "any error", code: 1)
         URLProtocolStub.stub(
-            url: url,
             data: nil,
             response: nil,
             error: error
@@ -66,15 +65,14 @@ extension URLSessionHTTPClientTests {
     }
     
     private class URLProtocolStub: URLProtocol {
-        private static var stubs = [URL: Stub]()
+        private static var stub: Stub?
         
         static func stub(
-            url: URL,
             data: Data?,
             response: URLResponse?,
             error: Error?
         ) {
-            stubs[url] = Stub(
+            stub = Stub(
                 error: error,
                 data: data,
                 response: response
@@ -87,12 +85,11 @@ extension URLSessionHTTPClientTests {
         
         static func stopInterceptingRequests() {
             URLProtocol.unregisterClass(Self.self)
+            stub = nil
         }
         
         override class func canInit(with request: URLRequest) -> Bool {
-            guard let url = request.url else { return false }
-            
-            return Self.stubs[url] != nil
+            return true
         }
         
         override class func canonicalRequest(for request: URLRequest) -> URLRequest {
@@ -100,14 +97,13 @@ extension URLSessionHTTPClientTests {
         }
         
         override func startLoading() {
-            guard let url = request.url,
-                  let stub = Self.stubs[url] else { return }
+            let stub = Self.stub
             
-            if let data = stub.data {
+            if let data = stub?.data {
                 client?.urlProtocol(self, didLoad: data)
             }
             
-            if let response = stub.response {
+            if let response = stub?.response {
                 client?.urlProtocol(
                     self,
                     didReceive: response,
@@ -115,7 +111,7 @@ extension URLSessionHTTPClientTests {
                 )
             }
             
-            if let error = stub.error {
+            if let error = stub?.error {
                 client?.urlProtocol(self, didFailWithError: error)
             }
             
