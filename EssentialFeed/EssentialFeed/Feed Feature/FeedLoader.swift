@@ -1,12 +1,10 @@
 import Foundation
 
-public enum LoadFeedResult<Error: Swift.Error> {
+public enum LoadFeedResult {
     case success([FeedItem])
     case failure(Error)
 }
 
 protocol FeedLoader {
-    associatedtype Error: Swift.Error
-    
-    func load(_ completion: @escaping (LoadFeedResult<Error>) -> Void)
+    func load(_ completion: @escaping (LoadFeedResult) -> Void)
 }

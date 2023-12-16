@@ -32,7 +32,7 @@ final class RemoteFeedLoaderTests: XCTestCase {
         
         execute(
             sut,
-            toCompleteWithResult: .failure(.connectivity),
+            toCompleteWithResult: .failure(RemoteFeedLoader.Error.connectivity),
             when: {
                 let clientError = NSError(domain: "Test", code: 0)
                 client.complete(with: clientError)
@@ -48,7 +48,7 @@ final class RemoteFeedLoaderTests: XCTestCase {
         samples.enumerated().forEach { index, code in
             execute(
                 sut,
-                toCompleteWithResult: .failure(.invalidData),
+                toCompleteWithResult: .failure(RemoteFeedLoader.Error.invalidData),
                 when: {
                     let json = makeItemsJSON([])
                     client.complete(with: code, data: json, at: index)
@@ -62,7 +62,7 @@ final class RemoteFeedLoaderTests: XCTestCase {
         
         execute(
             sut,
-            toCompleteWithResult: .failure(.invalidData),
+            toCompleteWithResult: .failure(RemoteFeedLoader.Error.invalidData),
             when: {
                 let invalidJSON = Data("invalid.json".utf8)
                 client.complete(with: 200, data: invalidJSON)
@@ -205,7 +205,10 @@ final class RemoteFeedLoaderTests: XCTestCase {
                     line: line
                 )
                 
-            case let (.failure(receivedError), .failure(expectedError)):
+            case let (
+                .failure(receivedError as RemoteFeedLoader.Error),
+                .failure(expectedError as RemoteFeedLoader.Error)
+            ):
                 XCTAssertEqual(
                     receivedError,
                     expectedError,

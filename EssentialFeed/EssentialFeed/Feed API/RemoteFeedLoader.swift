@@ -1,7 +1,7 @@
 import Foundation
 
 public final class RemoteFeedLoader: FeedLoader {
-    public typealias Result = LoadFeedResult<Error>
+    public typealias Result = LoadFeedResult
     
     public enum Error: Swift.Error {
         case connectivity
@@ -16,7 +16,7 @@ public final class RemoteFeedLoader: FeedLoader {
         self.client = client
     }
     
-    public func load(_ completion: @escaping (LoadFeedResult<Error>) -> Void) {
+    public func load(_ completion: @escaping (LoadFeedResult) -> Void) {
         client.get(from: url) { [weak self] result in
             guard self != nil else { return }
             
@@ -24,7 +24,7 @@ public final class RemoteFeedLoader: FeedLoader {
             case .success(let data, let response):
                 completion(FeedItemsMapper.map(data, from: response))
             case .failure:
-                completion(.failure(.connectivity))
+                completion(.failure(Error.connectivity))
             }
         }
     }
