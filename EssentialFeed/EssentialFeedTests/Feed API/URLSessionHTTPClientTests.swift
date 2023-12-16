@@ -56,7 +56,7 @@ final class URLSessionHTTPClientTests: XCTestCase {
     }
     
     func test_getFromURL_failsOnRequestError() {
-        let error = NSError(domain: "any error", code: 1)
+        let error = anyNSError()
         let receivedError = makeErrorFor(data: nil, response: nil, error: error)
         
         compare(error: error, with: receivedError as? NSError)
@@ -67,44 +67,29 @@ final class URLSessionHTTPClientTests: XCTestCase {
     }
     
     func test_getFromURL_failsOnAllInvalidRepresentationCases() {
-        let anyData = Data("any data".utf8)
-        let anyError = NSError(domain: "any error", code: 0)
-        let nonHTTPURLResponse = URLResponse(
-            url: anyURL(),
-            mimeType: nil,
-            expectedContentLength: 0,
-            textEncodingName: nil
-        )
-        let anyHTTPURLResponse = HTTPURLResponse(
-            url: anyURL(),
-            statusCode: 200,
-            httpVersion: nil,
-            headerFields: nil
-        )
-        
         XCTAssertNotNil(makeErrorFor(data: nil, response: nil, error: nil))
-        XCTAssertNotNil(makeErrorFor(data: nil, response: nonHTTPURLResponse, error: nil))
-        XCTAssertNotNil(makeErrorFor(data: nil, response: anyHTTPURLResponse, error: nil))
-        XCTAssertNotNil(makeErrorFor(data: anyData, response: nil, error: nil))
-        XCTAssertNotNil(makeErrorFor(data: anyData, response: nil, error: anyError))
-        XCTAssertNotNil(makeErrorFor(data: nil, response: nonHTTPURLResponse, error: anyError))
-        XCTAssertNotNil(makeErrorFor(data: nil, response: anyHTTPURLResponse, error: anyError))
-        XCTAssertNotNil(makeErrorFor(data: anyData, response: nonHTTPURLResponse, error: anyError))
-        XCTAssertNotNil(makeErrorFor(data: anyData, response: anyHTTPURLResponse, error: anyError))
-        XCTAssertNotNil(makeErrorFor(data: anyData, response: nonHTTPURLResponse, error: nil))
+        XCTAssertNotNil(makeErrorFor(data: nil, response: nonHTTPURLResponse(), error: nil))
+        XCTAssertNotNil(makeErrorFor(data: nil, response: anyHTTPURLResponse(), error: nil))
+        XCTAssertNotNil(makeErrorFor(data: anyData(), response: nil, error: nil))
+        XCTAssertNotNil(makeErrorFor(data: anyData(), response: nil, error: anyNSError()))
+        XCTAssertNotNil(makeErrorFor(data: nil, response: nonHTTPURLResponse(), error: anyNSError()))
+        XCTAssertNotNil(makeErrorFor(data: nil, response: anyHTTPURLResponse(), error: anyNSError()))
+        XCTAssertNotNil(makeErrorFor(data: anyData(), response: nonHTTPURLResponse(), error: anyNSError()))
+        XCTAssertNotNil(makeErrorFor(data: anyData(), response: anyHTTPURLResponse(), error: anyNSError()))
+        XCTAssertNotNil(makeErrorFor(data: anyData(), response: nonHTTPURLResponse(), error: nil))
     }
 }
 
 // MARK: - Helpers
 
-extension URLSessionHTTPClientTests {
-    private struct Stub {
+private extension URLSessionHTTPClientTests {
+    struct Stub {
         let error: Error?
         let data: Data?
         let response: URLResponse?
     }
     
-    private class URLProtocolStub: URLProtocol {
+    class URLProtocolStub: URLProtocol {
         private static var stub: Stub?
         private static var requestObserver: ((URLRequest) -> Void)?
         
@@ -180,6 +165,32 @@ extension URLSessionHTTPClientTests {
     
     func anyURL() -> URL {
         return URL(string: "http://any-url.com")!
+    }
+    
+    func anyData() -> Data {
+        return Data("any data".utf8)
+    }
+    
+    func anyNSError() -> NSError {
+        return NSError(domain: "any error", code: 0)
+    }
+    
+    func anyHTTPURLResponse() -> HTTPURLResponse {
+        return HTTPURLResponse(
+            url: anyURL(),
+            statusCode: 200,
+            httpVersion: nil,
+            headerFields: nil
+        )!
+    }
+    
+    func nonHTTPURLResponse() -> URLResponse {
+        return URLResponse(
+            url: anyURL(),
+            mimeType: nil,
+            expectedContentLength: 0,
+            textEncodingName: nil
+        )
     }
     
     func makeErrorFor(
