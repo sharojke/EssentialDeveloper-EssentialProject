@@ -148,7 +148,7 @@ extension RemoteFeedLoaderTests {
         
         func get(
             from url: URL,
-            _ completion: @escaping (HTTPClientResult) -> Void
+            completion: @escaping (HTTPClientResult) -> Void
         ) {
             messages.append((url, completion))
         }

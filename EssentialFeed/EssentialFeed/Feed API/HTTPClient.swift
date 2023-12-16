@@ -8,6 +8,6 @@ public enum HTTPClientResult {
 public protocol HTTPClient {
     func get(
         from url: URL,
-        _ completion: @escaping (HTTPClientResult) -> Void
+        completion: @escaping (HTTPClientResult) -> Void
     )
 }

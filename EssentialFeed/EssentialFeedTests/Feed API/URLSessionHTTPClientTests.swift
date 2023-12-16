@@ -3,7 +3,7 @@ import XCTest
 
 // swiftlint:disable force_unwrapping
 
-final class URLSessionHTTPClient {
+final class URLSessionHTTPClient: HTTPClient {
     struct UnexpectedValuesRepresentation: Error {}
     
     let session: URLSession
@@ -184,7 +184,7 @@ private extension URLSessionHTTPClientTests {
     func makeSUT(
         file: StaticString = #filePath,
         line: UInt = #line
-    ) -> URLSessionHTTPClient {
+    ) -> HTTPClient {
         let sut = URLSessionHTTPClient()
         trackForMemoryLeaks(sut, file: file, line: line)
         
