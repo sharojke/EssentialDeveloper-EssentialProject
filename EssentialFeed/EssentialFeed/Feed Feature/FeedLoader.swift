@@ -10,5 +10,5 @@ extension LoadFeedResult: Equatable where Error: Equatable {}
 protocol FeedLoader {
     associatedtype Error: Swift.Error
     
-    func load(_ completion: (LoadFeedResult<Error>) -> Void)
+    func load(_ completion: @escaping (LoadFeedResult<Error>) -> Void)
 }

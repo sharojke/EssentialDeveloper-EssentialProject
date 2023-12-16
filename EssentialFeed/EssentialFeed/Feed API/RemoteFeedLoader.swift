@@ -1,6 +1,6 @@
 import Foundation
 
-public final class RemoteFeedLoader {
+public final class RemoteFeedLoader: FeedLoader {
     public typealias Result = LoadFeedResult<Error>
     
     public enum Error: Swift.Error {
@@ -16,7 +16,7 @@ public final class RemoteFeedLoader {
         self.client = client
     }
     
-    public func load(_ completion: @escaping (Result) -> Void) {
+    public func load(_ completion: @escaping (LoadFeedResult<Error>) -> Void) {
         client.get(from: url) { [weak self] result in
             guard self != nil else { return }
             
