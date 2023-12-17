@@ -29,11 +29,8 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:EssentialFeed.xctestplan"
+            reference = "container:EssentialFeedAPIEndToEnd.xctestplan"
             default = "YES">
-         </TestPlanReference>
-         <TestPlanReference
-            reference = "container:EssentialFeedAPIEndToEnd.xctestplan">
          </TestPlanReference>
       </TestPlans>
    </TestAction>
