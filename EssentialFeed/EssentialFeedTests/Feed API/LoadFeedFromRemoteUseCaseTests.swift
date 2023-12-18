@@ -4,7 +4,7 @@ import XCTest
 // swiftlint:disable force_unwrapping
 // swiftlint:disable force_try
 
-final class RemoteFeedLoaderTests: XCTestCase {
+final class LoadFeedFromRemoteUseCaseTests: XCTestCase {
     func test_init_doesNotRequestDataFromURL() {
         let (_, client) = makeSUT()
         
@@ -133,7 +133,7 @@ final class RemoteFeedLoaderTests: XCTestCase {
 
 // MARK: - Helpers
 
-extension RemoteFeedLoaderTests {
+extension LoadFeedFromRemoteUseCaseTests {
     private class HTTPClientSpy: HTTPClient {
         private var messages = [
             (
