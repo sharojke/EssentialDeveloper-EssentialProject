@@ -12,12 +12,17 @@ class LocalFeedLoader {
         self.currentDate = currentDate
     }
     
-    func save(_ items: [FeedItem]) {
+    func save(
+        _ items: [FeedItem],
+        completion: @escaping (Error?) -> Void
+    ) {
         store.deleteCachedFeed { [weak self] error in
+            completion(error)
             guard let self else { return }
             
             if error == nil {
                 store.insert(items: items, timestamp: currentDate())
+                completion(error)
             }
         }
     }
@@ -64,7 +69,7 @@ final class CacheFeedUseCaseTests: XCTestCase {
         let uniqueItem1 = uniqueItem()
         let uniqueItem2 = uniqueItem()
         
-        sut.save([uniqueItem1, uniqueItem2])
+        sut.save([uniqueItem1, uniqueItem2]) { _ in }
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed])
     }
@@ -75,7 +80,7 @@ final class CacheFeedUseCaseTests: XCTestCase {
         let uniqueItem2 = uniqueItem()
         let deletionError = anyNSError()
         
-        sut.save([uniqueItem1, uniqueItem2])
+        sut.save([uniqueItem1, uniqueItem2]) { _ in }
         store.completeDeletion(with: deletionError)
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed])
@@ -88,7 +93,7 @@ final class CacheFeedUseCaseTests: XCTestCase {
         let uniqueItem2 = uniqueItem()
         let items = [uniqueItem1, uniqueItem2]
         
-        sut.save([uniqueItem1, uniqueItem2])
+        sut.save([uniqueItem1, uniqueItem2]) { _ in }
         store.completeDeletionSuccessfully()
         
         XCTAssertEqual(
@@ -98,6 +103,25 @@ final class CacheFeedUseCaseTests: XCTestCase {
                 .insert(items, timestamp)
             ]
         )
+    }
+    
+    func test_save_failsOnDeletionError() {
+        let (sut, store) = makeSUT()
+        let uniqueItem1 = uniqueItem()
+        let uniqueItem2 = uniqueItem()
+        let deletionError = anyNSError()
+        let exp = expectation(description: "Wait for save completion")
+        
+        var receivedError: Error?
+        sut.save([uniqueItem1, uniqueItem2]) { error in
+            receivedError = error
+            exp.fulfill()
+        }
+        
+        store.completeDeletion(with: deletionError)
+        wait(for: [exp], timeout: 1.0)
+        
+        compare(error: receivedError as? NSError, with: deletionError)
     }
 }
 
