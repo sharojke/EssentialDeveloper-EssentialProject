@@ -197,10 +197,10 @@ extension LoadFeedFromRemoteUseCaseTests {
         imageURL: URL,
         description: String? = nil,
         location: String? = nil
-    ) -> (model: FeedItem, json: [String: Any]) {
-        let model = FeedItem(
+    ) -> (model: FeedImage, json: [String: Any]) {
+        let model = FeedImage(
             id: id,
-            imageURL: imageURL,
+            url: imageURL,
             description: description,
             location: location
         )
@@ -209,7 +209,7 @@ extension LoadFeedFromRemoteUseCaseTests {
             "id": model.id.uuidString,
             "description": model.description,
             "location": model.location,
-            "image": model.imageURL.absoluteString
+            "image": model.url.absoluteString
         ]
         
         return (model, json as [String: Any])

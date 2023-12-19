@@ -6,4 +6,3 @@ struct RemoteFeedItem: Decodable {
     let location: String?
     let image: URL
 }
-
