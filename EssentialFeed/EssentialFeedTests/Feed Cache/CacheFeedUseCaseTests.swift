@@ -14,7 +14,7 @@ final class CacheFeedUseCaseTests: XCTestCase {
     func test_save_requestsCacheDeletion() {
         let (sut, store) = makeSUT()
         
-        sut.save([uniqueItem(), uniqueItem()]) { _ in }
+        sut.save(uniqueItems().models) { _ in }
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed])
     }
@@ -23,7 +23,7 @@ final class CacheFeedUseCaseTests: XCTestCase {
         let (sut, store) = makeSUT()
         let deletionError = anyNSError()
         
-        sut.save([uniqueItem(), uniqueItem()]) { _ in }
+        sut.save(uniqueItems().models) { _ in }
         store.completeDeletion(with: deletionError)
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed])
@@ -32,22 +32,14 @@ final class CacheFeedUseCaseTests: XCTestCase {
     func test_save_requestsNewCacheInsertionWithTimestampOnSuccessfulDeletion() {
         let timestamp = Date()
         let (sut, store) = makeSUT { timestamp }
-        let items = [uniqueItem(), uniqueItem()]
-        let localItems = items.map { feedItem in
-            LocalFeedItem(
-                id: feedItem.id,
-                imageURL: feedItem.imageURL,
-                description: feedItem.description,
-                location: feedItem.location
-            )
-        }
+        let items = uniqueItems()
         
-        sut.save(items) { _ in }
+        sut.save(items.models) { _ in }
         store.completeDeletionSuccessfully()
         
         XCTAssertEqual(store.receivedMessages, [
             .deleteCachedFeed,
-            .insert(localItems, timestamp)
+            .insert(items.local, timestamp)
         ])
     }
     
@@ -172,11 +164,10 @@ private extension CacheFeedUseCaseTests {
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
-        let items = [uniqueItem(), uniqueItem()]
         let exp = expectation(description: "Wait for save completion")
         
         var receivedError: Error?
-        sut.save(items) { error in
+        sut.save(uniqueItems().models) { error in
             receivedError = error
             exp.fulfill()
         }
@@ -197,6 +188,19 @@ private extension CacheFeedUseCaseTests {
             id: UUID(),
             imageURL: anyURL()
         )
+    }
+    
+    func uniqueItems() -> (models: [FeedItem], local: [LocalFeedItem]) {
+        let items = [uniqueItem(), uniqueItem()]
+        let localItems = items.map { feedItem in
+            LocalFeedItem(
+                id: feedItem.id,
+                imageURL: feedItem.imageURL,
+                description: feedItem.description,
+                location: feedItem.location
+            )
+        }
+        return (items, localItems)
     }
     
     func anyURL() -> URL {
