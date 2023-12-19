@@ -4,55 +4,6 @@ import XCTest
 // swiftlint:disable force_unwrapping
 // swiftlint:disable nesting
 
-protocol FeedStore {
-    typealias DeletionCompletion = (Error?) -> Void
-    typealias InsertionCompletion = (Error?) -> Void
-    
-    func deleteCachedFeed(completion: @escaping DeletionCompletion)
-    func insert(
-        items: [FeedItem],
-        timestamp: Date,
-        completion: @escaping InsertionCompletion
-    )
-}
-
-class LocalFeedLoader {
-    private let store: FeedStore
-    let currentDate: () -> Date
-    
-    init(store: FeedStore, currentDate: @escaping () -> Date) {
-        self.store = store
-        self.currentDate = currentDate
-    }
-    
-    func save(
-        _ items: [FeedItem],
-        completion: @escaping (Error?) -> Void
-    ) {
-        store.deleteCachedFeed { [weak self] error in
-            guard let strongSelf = self else { return }
-            
-            if let cacheDeletionError = error {
-                completion(cacheDeletionError)
-            } else {
-                strongSelf.cache(items) { [weak self] error in
-                    guard self != nil else { return }
-                    
-                    completion(error)
-                }
-            }
-        }
-    }
-    
-    private func cache(_ items: [FeedItem], with completion: @escaping (Error?) -> Void) {
-        store.insert(
-            items: items,
-            timestamp: currentDate(),
-            completion: completion
-        )
-    }
-}
-
 final class CacheFeedUseCaseTests: XCTestCase {
     func test_init_doesNotMessageStoreUponCreation() {
         let (_, store) = makeSUT()
@@ -214,7 +165,6 @@ private extension CacheFeedUseCaseTests {
         line: UInt = #line
     ) {
         let items = [uniqueItem(), uniqueItem()]
-        let insertionError = anyNSError()
         let exp = expectation(description: "Wait for save completion")
         
         var receivedError: Error?

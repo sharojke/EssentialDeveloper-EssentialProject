@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB24A14B2B321B5F00251E48 /* LocalFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB24A14A2B321B5F00251E48 /* LocalFeedLoader.swift */; };
 		BB2849F82B2E19E000E0CBD7 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = BB2849F72B2E19E000E0CBD7 /* .swiftlint.yml */; };
 		BB2849F92B2E19E000E0CBD7 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = BB2849F72B2E19E000E0CBD7 /* .swiftlint.yml */; };
 		BB2849FE2B2E1EA400E0CBD7 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2849FD2B2E1EA400E0CBD7 /* URLSessionHTTPClientTests.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB24A14A2B321B5F00251E48 /* LocalFeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFeedLoader.swift; sourceTree = "<group>"; };
 		BB2849F72B2E19E000E0CBD7 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		BB2849FD2B2E1EA400E0CBD7 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		BB284A002B2E491D00E0CBD7 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
@@ -94,6 +96,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB24A1492B321B4D00251E48 /* Feed Cache */ = {
+			isa = PBXGroup;
+			children = (
+				BB24A14A2B321B5F00251E48 /* LocalFeedLoader.swift */,
+			);
+			path = "Feed Cache";
+			sourceTree = "<group>";
+		};
 		BB2849FF2B2E48EF00E0CBD7 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +157,7 @@
 			children = (
 				BB5CA5F52B28F3FD00AF0D66 /* Feed Feature */,
 				BBE21D052B2A2FA800552177 /* Feed API */,
+				BB24A1492B321B4D00251E48 /* Feed Cache */,
 				BB5CA5E02B28EA7900AF0D66 /* EssentialFeed.h */,
 			);
 			path = EssentialFeed;
@@ -368,6 +379,7 @@
 				BB7F39252B2CE8BE00BB37BE /* FeedItemsMapper.swift in Sources */,
 				BB5CA5F92B28F44100AF0D66 /* FeedLoader.swift in Sources */,
 				BBE21D072B2A2FB700552177 /* RemoteFeedLoader.swift in Sources */,
+				BB24A14B2B321B5F00251E48 /* LocalFeedLoader.swift in Sources */,
 				BB7F39232B2CE84400BB37BE /* HTTPClient.swift in Sources */,
 				BB5CA5F72B28F41400AF0D66 /* FeedItem.swift in Sources */,
 				BB284A072B2E608500E0CBD7 /* URLSessionHTTPClient.swift in Sources */,
