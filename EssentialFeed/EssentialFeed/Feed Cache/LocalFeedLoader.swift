@@ -48,7 +48,11 @@ public final class LocalFeedLoader {
             ) where strongSelf.validate(timestamp):
                 completion(.success(feed.toModels()))
                 
-            case .empty, .found:
+            case .found:
+                strongSelf.store.deleteCachedFeed { _ in }
+                completion(.success([]))
+                
+            case .empty:
                 completion(.success([]))
             }
         }
