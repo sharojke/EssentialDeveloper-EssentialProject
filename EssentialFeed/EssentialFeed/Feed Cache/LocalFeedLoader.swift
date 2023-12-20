@@ -5,7 +5,9 @@ public final class LocalFeedLoader {
     public typealias LoadResult = LoadFeedResult
     
     private let store: FeedStore
-    let currentDate: () -> Date
+    private let currentDate: () -> Date
+    private let calendar = Calendar(identifier: .gregorian)
+    private let maxCacheAgeInDays = 7
     
     public init(store: FeedStore, currentDate: @escaping () -> Date) {
         self.store = store
@@ -63,10 +65,9 @@ public final class LocalFeedLoader {
     }
     
     private func validate(_ timestamp: Date) -> Bool {
-        let calendar = Calendar(identifier: .gregorian)
         guard let maxCacheAge = calendar.date(
             byAdding: .day,
-            value: 7,
+            value: maxCacheAgeInDays,
             to: timestamp
         ) else {
             return false
