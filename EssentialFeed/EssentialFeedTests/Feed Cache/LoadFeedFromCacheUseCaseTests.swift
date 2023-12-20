@@ -1,6 +1,8 @@
 import EssentialFeed
 import XCTest
 
+// swiftlint:disable force_unwrapping
+
 final class LoadFeedFromCacheUseCaseTests: XCTestCase {
     func test_init_doesNotMessageStoreUponCreation() {
         let (_, store) = makeSUT()
@@ -39,6 +41,24 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
             }
         )
     }
+    
+    func test_load_deliversCachedImagesOnLessThanSevenDaysOldCache() {
+        let feed = uniqueImageFeed()
+        let fixedCurrentDate = Date()
+        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
+        let lessThanSevenDaysOldTimestamp = fixedCurrentDate.adding(days: -7).adding(seconds: 1)
+        
+        expect(
+            sut,
+            toCompleteWithResult: .success(feed.models),
+            on: {
+                store.completeRetrieval(
+                    with: feed.local,
+                    timestamp: lessThanSevenDaysOldTimestamp
+                )
+            }
+        )
+    }
 }
 
 // MARK: - Helpers
@@ -56,10 +76,6 @@ private extension LoadFeedFromCacheUseCaseTests {
         trackForMemoryLeaks(sut, file: file, line: line)
         
         return (sut, store)
-    }
-    
-    func anyNSError() -> NSError {
-        return NSError(domain: "any error", code: 0)
     }
     
     func expect(
@@ -103,4 +119,44 @@ private extension LoadFeedFromCacheUseCaseTests {
         action()
         wait(for: [exp], timeout: 1.0)
     }
+    
+    func uniqueImage() -> FeedImage {
+        return FeedImage(
+            id: UUID(),
+            url: anyURL()
+        )
+    }
+    
+    func uniqueImageFeed() -> (models: [FeedImage], local: [LocalFeedImage]) {
+        let items = [uniqueImage(), uniqueImage()]
+        let localItems = items.map { feedItem in
+            LocalFeedImage(
+                id: feedItem.id,
+                url: feedItem.url,
+                description: feedItem.description,
+                location: feedItem.location
+            )
+        }
+        return (items, localItems)
+    }
+    
+    func anyURL() -> URL {
+        return URL(string: "http://any-url.com")!
+    }
+    
+    func anyNSError() -> NSError {
+        return NSError(domain: "any error", code: 0)
+    }
 }
+
+private extension Date {
+    func adding(days: Int) -> Self {
+        return Calendar(identifier: .gregorian).date(byAdding: .day, value: days, to: self)!
+    }
+    
+    func adding(seconds: TimeInterval) -> Self {
+        return self + seconds
+    }
+}
+
+// swiftlint:enable force_unwrapping
