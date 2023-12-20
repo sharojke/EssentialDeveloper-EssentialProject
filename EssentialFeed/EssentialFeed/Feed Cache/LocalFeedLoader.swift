@@ -39,6 +39,7 @@ public final class LocalFeedLoader {
             
             switch result {
             case .failure(let error):
+                strongSelf.store.deleteCachedFeed { _ in }
                 completion(.failure(error))
                 
             case .found(
