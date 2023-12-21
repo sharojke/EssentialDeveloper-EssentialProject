@@ -47,10 +47,7 @@ public final class LocalFeedLoader {
             ) where strongSelf.validate(timestamp):
                 completion(.success(feed.toModels()))
                 
-            case .found:
-                completion(.success([]))
-                
-            case .empty:
+            case .empty, .found:
                 completion(.success([]))
             }
         }
