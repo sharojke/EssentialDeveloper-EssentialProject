@@ -1,8 +1,6 @@
 import EssentialFeed
 import XCTest
 
-// swiftlint:disable force_unwrapping
-
 final class CacheFeedUseCaseTests: XCTestCase {
     func test_init_doesNotMessageStoreUponCreation() {
         let (_, store) = makeSUT()
@@ -140,34 +138,4 @@ private extension CacheFeedUseCaseTests {
             line: line
         )
     }
-    
-    func uniqueImage() -> FeedImage {
-        return FeedImage(
-            id: UUID(),
-            url: anyURL()
-        )
-    }
-    
-    func uniqueImageFeed() -> (models: [FeedImage], local: [LocalFeedImage]) {
-        let items = [uniqueImage(), uniqueImage()]
-        let localItems = items.map { feedItem in
-            LocalFeedImage(
-                id: feedItem.id,
-                url: feedItem.url,
-                description: feedItem.description,
-                location: feedItem.location
-            )
-        }
-        return (items, localItems)
-    }
-    
-    func anyURL() -> URL {
-        return URL(string: "http://any-url.com")!
-    }
-    
-    func anyNSError() -> NSError {
-        return NSError(domain: "any error", code: 0)
-    }
 }
-
-// swiftlint:enable force_unwrapping
