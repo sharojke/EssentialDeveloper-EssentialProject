@@ -48,7 +48,6 @@ public final class LocalFeedLoader {
                 completion(.success(feed.toModels()))
                 
             case .found:
-                strongSelf.store.deleteCachedFeed { _ in }
                 completion(.success([]))
                 
             case .empty:
@@ -59,9 +58,20 @@ public final class LocalFeedLoader {
     
     public func validateCache() {
         store .retrieve { [weak self] result in
+            guard let strongSelf = self else { return }
+            
             switch result {
             case .failure:
                 self?.store.deleteCachedFeed { _ in }
+                
+            case .found(
+                _,
+                let timestamp
+            ) where strongSelf.validate(timestamp):
+                break
+                
+            case .found:
+                strongSelf.store.deleteCachedFeed { _ in }
                 
             default:
                 break
