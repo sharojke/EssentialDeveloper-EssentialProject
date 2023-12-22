@@ -1,15 +1,10 @@
 import Foundation
 
 private final class FeedCachePrivacy {
-    let currentDate: () -> Date
     private let calendar = Calendar(identifier: .gregorian)
     private let maxCacheAgeInDays = 7
     
-    init(currentDate: @escaping () -> Date) {
-        self.currentDate = currentDate
-    }
-    
-    func validate(_ timestamp: Date) -> Bool {
+    func validate(_ timestamp: Date, against date: Date) -> Bool {
         guard let maxCacheAge = calendar.date(
             byAdding: .day,
             value: maxCacheAgeInDays,
@@ -18,17 +13,18 @@ private final class FeedCachePrivacy {
             return false
         }
         
-        return currentDate() < maxCacheAge
+        return date < maxCacheAge
     }
 }
 
 public final class LocalFeedLoader {
     private let store: FeedStore
-    private let cachePrivacy: FeedCachePrivacy
+    private let currentDate: () -> Date
+    private let cachePrivacy = FeedCachePrivacy()
     
     public init(store: FeedStore, currentDate: @escaping () -> Date) {
         self.store = store
-        cachePrivacy = FeedCachePrivacy(currentDate: currentDate)
+        self.currentDate = currentDate
     }
 }
     
@@ -60,7 +56,7 @@ extension LocalFeedLoader {
     ) {
         store.insert(
             feed: items.toLocal(),
-            timestamp: cachePrivacy.currentDate(),
+            timestamp: currentDate(),
             completion: completion
         )
     }
@@ -80,7 +76,7 @@ extension LocalFeedLoader: FeedLoader {
             case .found(
                 let feed,
                 let timestamp
-            ) where strongSelf.cachePrivacy.validate(timestamp):
+            ) where strongSelf.cachePrivacy.validate(timestamp, against: strongSelf.currentDate()):
                 completion(.success(feed.toModels()))
                 
             case .empty, .found:
@@ -102,7 +98,7 @@ public extension LocalFeedLoader {
             case .found(
                 _,
                 let timestamp
-            ) where strongSelf.cachePrivacy.validate(timestamp):
+            ) where strongSelf.cachePrivacy.validate(timestamp, against: strongSelf.currentDate()):
                 break
                 
             case .found:
