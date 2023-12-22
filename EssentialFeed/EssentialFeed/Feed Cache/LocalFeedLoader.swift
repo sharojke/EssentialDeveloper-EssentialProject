@@ -1,17 +1,15 @@
 import Foundation
 
-public final class LocalFeedLoader {
-    private let store: FeedStore
-    private let currentDate: () -> Date
+private final class FeedCachePrivacy {
+    let currentDate: () -> Date
     private let calendar = Calendar(identifier: .gregorian)
     private let maxCacheAgeInDays = 7
     
-    public init(store: FeedStore, currentDate: @escaping () -> Date) {
-        self.store = store
+    init(currentDate: @escaping () -> Date) {
         self.currentDate = currentDate
     }
     
-    private func validate(_ timestamp: Date) -> Bool {
+    func validate(_ timestamp: Date) -> Bool {
         guard let maxCacheAge = calendar.date(
             byAdding: .day,
             value: maxCacheAgeInDays,
@@ -21,6 +19,16 @@ public final class LocalFeedLoader {
         }
         
         return currentDate() < maxCacheAge
+    }
+}
+
+public final class LocalFeedLoader {
+    private let store: FeedStore
+    private let cachePrivacy: FeedCachePrivacy
+    
+    public init(store: FeedStore, currentDate: @escaping () -> Date) {
+        self.store = store
+        cachePrivacy = FeedCachePrivacy(currentDate: currentDate)
     }
 }
     
@@ -52,7 +60,7 @@ extension LocalFeedLoader {
     ) {
         store.insert(
             feed: items.toLocal(),
-            timestamp: currentDate(),
+            timestamp: cachePrivacy.currentDate(),
             completion: completion
         )
     }
@@ -72,7 +80,7 @@ extension LocalFeedLoader: FeedLoader {
             case .found(
                 let feed,
                 let timestamp
-            ) where strongSelf.validate(timestamp):
+            ) where strongSelf.cachePrivacy.validate(timestamp):
                 completion(.success(feed.toModels()))
                 
             case .empty, .found:
@@ -94,7 +102,7 @@ public extension LocalFeedLoader {
             case .found(
                 _,
                 let timestamp
-            ) where strongSelf.validate(timestamp):
+            ) where strongSelf.cachePrivacy.validate(timestamp):
                 break
                 
             case .found:
