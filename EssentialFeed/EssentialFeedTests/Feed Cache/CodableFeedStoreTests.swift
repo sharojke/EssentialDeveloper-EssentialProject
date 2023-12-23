@@ -1,13 +1,57 @@
 import EssentialFeed
 import XCTest
 
+// swiftlint:disable force_try
+// swiftlint:disable force_unwrapping
+
 class CodableFeedStore {
+    private struct Cache: Codable {
+        let feed: [LocalFeedImage]
+        let timestamp: Date
+    }
+    
+    private let storeURL = FileManager.default.urls(
+        for: .documentDirectory,
+        in: .userDomainMask
+    )
+        .first!
+        .appendingPathComponent("image-feed.store")
+    
+    func insert(
+        feed: [LocalFeedImage],
+        timestamp: Date,
+        completion: @escaping FeedStore.InsertionCompletion
+    ) {
+        let encoder = JSONEncoder()
+        let encoded = try! encoder.encode(Cache(feed: feed, timestamp: timestamp))
+        try! encoded.write(to: storeURL)
+        completion(nil)
+    }
+    
     func retrieve(completion: @escaping FeedStore.RetrievalCompletion) {
-        completion(.empty)
+        guard let data = try? Data(contentsOf: storeURL) else {
+            return completion(.empty)
+        }
+        
+        let decoder = JSONDecoder()
+        let decoded = try! decoder.decode(Cache.self, from: data)
+        completion(.found(feed: decoded.feed, timestamp: decoded.timestamp))
     }
 }
 
 final class CodableFeedStoreTests: XCTestCase {
+    override func setUp() {
+        super.setUp()
+        
+        let storeURL = FileManager.default.urls(
+            for: .documentDirectory,
+            in: .userDomainMask
+        )
+            .first!
+            .appendingPathComponent("image-feed.store")
+        try? FileManager.default.removeItem(at: storeURL)
+    }
+    
     func test_retrieve_deliversEmptyOnEmptyCache() {
         let sut = CodableFeedStore()
         let exp = expectation(description: "Wait for cache retrieval")
@@ -47,4 +91,34 @@ final class CodableFeedStoreTests: XCTestCase {
         
         wait(for: [exp], timeout: 1.0)
     }
+    
+    func test_retrieveAfterInsertingToEmptyCache_deliversInsertedValues() {
+        let sut = CodableFeedStore()
+        let feed = uniqueImageFeed().local
+        let timestamp = Date()
+        
+        let exp = expectation(description: "Wait for cache retrieval")
+        
+        sut.insert(feed: feed, timestamp: timestamp) { insertionError in
+            XCTAssertNil(insertionError, "Expected to be inserted successfully")
+            
+            sut.retrieve { result in
+                switch result {
+                case .found(let receivedFeed, let receivedTimestamp):
+                    XCTAssertEqual(receivedFeed, feed)
+                    XCTAssertEqual(receivedTimestamp, timestamp)
+                    
+                default:
+                    XCTFail("Expected .found result, got \(result) instead")
+                }
+                
+                exp.fulfill()
+            }
+        }
+        
+        wait(for: [exp], timeout: 1.0)
+    }
 }
+
+// swiftlint:enable force_try
+// swiftlint:enable force_unwrapping

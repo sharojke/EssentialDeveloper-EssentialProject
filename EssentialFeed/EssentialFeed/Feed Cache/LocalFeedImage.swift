@@ -1,6 +1,6 @@
 import Foundation
 
-public struct LocalFeedImage: Equatable {
+public struct LocalFeedImage: Equatable, Codable {
     public let id: UUID
     public let url: URL
     public let description: String?
