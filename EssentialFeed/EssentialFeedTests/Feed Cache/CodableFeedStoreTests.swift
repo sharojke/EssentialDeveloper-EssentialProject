@@ -232,6 +232,15 @@ final class CodableFeedStoreTests: XCTestCase {
         XCTAssertNil(deletionError, "Expected successful deletion")
         expect(sut, toCompleteWithResult: .empty)
     }
+    
+    func test_delete_deliversErrorOnDeletionError() {
+        let noDeletePermissionURL = cachesDirectory()
+        let sut = makeSUT(storeURL: noDeletePermissionURL)
+        
+        let deletionError = deleteCache(from: sut)
+        
+        XCTAssertNotNil(deletionError, "Expected to delete with an error")
+    }
 }
 
 // MARK: - Helpers
@@ -338,6 +347,13 @@ private extension CodableFeedStoreTests {
         }
         wait(for: [exp], timeout: 1.0)
         return deletionError
+    }
+    
+    func cachesDirectory() -> URL {
+        return FileManager.default.urls(
+            for: .cachesDirectory,
+            in: .userDomainMask
+        ).first!
     }
 }
 
