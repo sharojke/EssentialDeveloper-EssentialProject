@@ -129,6 +129,19 @@ final class CodableFeedStoreTests: XCTestCase {
         
         expect(sut, toCompleteWithResult: .failure(anyNSError()))
     }
+    
+    func test_retrieve_hasNoSideEffectsOnFailure() {
+        let storeURL = testSpecificStoreURL()
+        let sut = makeSUT(storeURL: storeURL)
+        
+        try! "failure".write(
+            to: storeURL,
+            atomically: false,
+            encoding: .utf8
+        )
+        
+        expect(sut, toRetrieveTwice: .failure(anyNSError()))
+    }
 }
 
 // MARK: - Helpers
