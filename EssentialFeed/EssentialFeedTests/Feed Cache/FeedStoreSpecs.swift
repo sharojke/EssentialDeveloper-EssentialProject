@@ -1,5 +1,11 @@
 import Foundation
 
+// swiftlint:disable file_types_order
+
+typealias FailableFeedStoreSpecs = FailableRetrieveFeedStoreSpecs &
+                                   FailableInsertFeedStoreSpecs &
+                                   FailableDeleteFeedStoreSpecs
+
 protocol FeedStoreSpecs {
     func test_retrieve_deliversEmptyOnEmptyCache()
     func test_retrieve_hasNoSideEffectsOnEmptyCache()
@@ -33,6 +39,4 @@ protocol FailableDeleteFeedStoreSpecs: FeedStoreSpecs {
     func test_delete_hasNoSideEffectsOnDeletionError()
 }
 
-typealias FailableFeedStoreSpecs = FailableRetrieveFeedStoreSpecs &
-                                   FailableInsertFeedStoreSpecs &
-                                   FailableDeleteFeedStoreSpecs
+// swiftlint:enable file_types_order
