@@ -4,7 +4,7 @@ import XCTest
 // swiftlint:disable force_try
 // swiftlint:disable force_unwrapping
 
-class CodableFeedStore {
+class CodableFeedStore: FeedStore {
     private struct Cache: Codable {
         let feed: [CodableFeedImage]
         let timestamp: Date
@@ -43,7 +43,7 @@ class CodableFeedStore {
         self.storeURL = storeURL
     }
     
-    func deleteCachedFeed(completion: @escaping FeedStore.DeletionCompletion) {
+    func deleteCachedFeed(completion: @escaping DeletionCompletion) {
         let fileManager = FileManager.default
         guard fileManager.fileExists(atPath: storeURL.path) else {
             return completion(nil)
@@ -60,7 +60,7 @@ class CodableFeedStore {
     func insert(
         feed: [LocalFeedImage],
         timestamp: Date,
-        completion: @escaping FeedStore.InsertionCompletion
+        completion: @escaping InsertionCompletion
     ) {
         let encoder = JSONEncoder()
         let cache = Cache(
@@ -77,7 +77,7 @@ class CodableFeedStore {
         }
     }
     
-    func retrieve(completion: @escaping FeedStore.RetrievalCompletion) {
+    func retrieve(completion: @escaping RetrievalCompletion) {
         guard let data = try? Data(contentsOf: storeURL) else {
             return completion(.empty)
         }
