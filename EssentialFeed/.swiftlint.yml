@@ -2,6 +2,7 @@ included:
   - EssentialFeed
   - EssentialFeedTests
   - EssentialFeedAPIEndToEndTests
+  - EssentialFeedCacheIntegrationTests
   
 opt_in_rules:
   - all
