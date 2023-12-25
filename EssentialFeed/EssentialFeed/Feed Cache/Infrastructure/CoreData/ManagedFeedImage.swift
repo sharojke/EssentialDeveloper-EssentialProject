@@ -7,7 +7,11 @@ class ManagedFeedImage: NSManagedObject {
     @NSManaged var location: String?
     @NSManaged var url: URL
     @NSManaged var cache: ManagedCache
-    
+}
+
+// MARK: - Helpers
+
+extension ManagedFeedImage {
     var local: LocalFeedImage {
         return LocalFeedImage(
             id: id,
