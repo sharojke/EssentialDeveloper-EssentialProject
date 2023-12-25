@@ -1,6 +1,8 @@
 import EssentialFeed
 import XCTest
 
+// swiftlint:disable force_try
+
 final class CoreDataFeedStoreTests: XCTestCase, FeedStoreSpecs {
     func test_retrieve_deliversEmptyOnEmptyCache() {
         let sut = makeSUT()
@@ -52,8 +54,15 @@ private extension CoreDataFeedStoreTests {
         file: StaticString = #filePath,
         line: UInt = #line
     ) -> FeedStore {
-        let sut = CoreDataFeedStore()
+        let storeBundle = Bundle(for: CoreDataFeedStore.self)
+        let storeURL = URL(fileURLWithPath: "/dev/null")
+        let sut = try! CoreDataFeedStore(
+            storeURL: storeURL,
+            bundle: storeBundle
+        )
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
 }
+
+// swiftlint:enable force_try

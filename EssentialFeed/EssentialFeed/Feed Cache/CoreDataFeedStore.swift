@@ -6,9 +6,13 @@ public class CoreDataFeedStore: FeedStore {
     private let container: NSPersistentContainer
     private let context: NSManagedObjectContext
     
-    public init(bundle: Bundle = .main) throws {
+    public init(
+        storeURL: URL,
+        bundle: Bundle = .main
+    ) throws {
         container = try NSPersistentContainer.load(
             modelName: "FeedStore",
+            url: storeURL,
             in: bundle
         )
         context = container.newBackgroundContext()
@@ -31,12 +35,19 @@ private extension NSPersistentContainer {
         case failedToLoadPersistentStores(Error)
     }
     
-    static func load(modelName name: String, in bundle: Bundle) throws -> Self {
+    static func load(
+        modelName name: String,
+        url: URL,
+        in bundle: Bundle
+    ) throws -> Self {
         guard let model = NSManagedObjectModel.with(name: name, in: bundle) else {
             throw(LoadingError.modelNotFound)
         }
         
+        let description = NSPersistentStoreDescription(url: url)
         let container = Self(name: name, managedObjectModel: model)
+        container.persistentStoreDescriptions = [description]
+        
         var loadError: Error?
         container.loadPersistentStores { loadError = $1 }
         try loadError.map { throw LoadingError.failedToLoadPersistentStores($0) }
