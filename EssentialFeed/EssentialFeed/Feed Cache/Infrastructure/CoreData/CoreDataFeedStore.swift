@@ -3,7 +3,7 @@ import CoreData
 // swiftlint:disable file_types_order
 // swiftlint:disable force_unwrapping
 
-public class CoreDataFeedStore: FeedStore {
+public final class CoreDataFeedStore: FeedStore {
     private let container: NSPersistentContainer
     private let context: NSManagedObjectContext
     
