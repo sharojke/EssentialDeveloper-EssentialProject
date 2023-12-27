@@ -18,14 +18,11 @@ public final class CoreDataFeedStore: FeedStore {
     
     public func deleteCachedFeed(completion: @escaping DeletionCompletion) {
         perform { context in
-            do {
+            completion(Result {
                 try ManagedCache.find(in: context)
                     .map(context.delete)
                     .map(context.save)
-                completion(.success(Void()))
-            } catch {
-                completion(.failure(error))
-            }
+            })
         }
     }
     
@@ -35,38 +32,27 @@ public final class CoreDataFeedStore: FeedStore {
         completion: @escaping InsertionCompletion
     ) {
         perform { context in
-            do {
+            completion(Result {
                 let managedCache = try ManagedCache.newUniqueInstance(in: context)
                 
                 managedCache.timestamp = timestamp
                 managedCache.feed = ManagedFeedImage.images(from: feed, in: context)
                 
                 try context.save()
-                completion(.success(Void()))
-            } catch {
-                completion(.failure(error))
-            }
+            })
         }
     }
     
     public func retrieve(completion: @escaping RetrievalCompletion) {
         perform { context in
-            do {
-                if let cache = try ManagedCache.find(in: context) {
-                    completion(
-                        .success(
-                            CacheFeed(
-                                feed: cache.localFeed,
-                                timestamp: cache.timestamp
-                            )
-                        )
+            completion(Result {
+                try ManagedCache.find(in: context).map { cache in
+                    return CacheFeed(
+                        feed: cache.localFeed,
+                        timestamp: cache.timestamp
                     )
-                } else {
-                    completion(.success(nil))
                 }
-            } catch {
-                completion(.failure(error))
-            }
+            })
         }
     }
 }
