@@ -36,7 +36,7 @@ private extension EssentialFeedAPIEndToEndTests {
     func getFeedResult(
         file: StaticString = #filePath,
         line: UInt = #line
-    ) -> LoadFeedResult? {
+    ) -> FeedLoader.Result? {
         let testServerURL = URL(
             string: "https://essentialdeveloper.com/feed-case-study/test-api/feed"
         )!
@@ -49,8 +49,7 @@ private extension EssentialFeedAPIEndToEndTests {
         trackForMemoryLeaks(loader, file: file, line: line)
         
         let exp = expectation(description: "Wait for completion")
-        var receivedResult: LoadFeedResult?
-        
+        var receivedResult: FeedLoader.Result?
         loader.load { result in
             receivedResult = result
             exp.fulfill()
