@@ -9,7 +9,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
     ) {
         expect(
             sut,
-            toCompleteWithResult: .empty,
+            toCompleteWithResult: .success(.empty),
             file: file,
             line: line
         )
@@ -20,7 +20,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
-        expect(sut, toRetrieveTwice: .empty, file: file, line: line)
+        expect(sut, toRetrieveTwice: .success(.empty), file: file, line: line)
     }
     
     func assertThatRetrieveDeliversFoundValuesOnNonEmptyCache(
@@ -35,7 +35,9 @@ extension FeedStoreSpecs where Self: XCTestCase {
         
         expect(
             sut,
-            toCompleteWithResult: .found(feed: feed, timestamp: timestamp),
+            toCompleteWithResult: .success(
+                .found(feed: feed, timestamp: timestamp)
+            ),
             file: file,
             line: line
         )
@@ -53,7 +55,9 @@ extension FeedStoreSpecs where Self: XCTestCase {
         
         expect(
             sut,
-            toRetrieveTwice: .found(feed: feed, timestamp: timestamp),
+            toRetrieveTwice: .success(
+                .found(feed: feed, timestamp: timestamp)
+            ),
             file: file,
             line: line
         )
@@ -110,7 +114,9 @@ extension FeedStoreSpecs where Self: XCTestCase {
         
         expect(
             sut,
-            toCompleteWithResult: .found(feed: latestFeed, timestamp: latestTimestamp),
+            toCompleteWithResult: .success(
+                .found(feed: latestFeed, timestamp: latestTimestamp)
+            ),
             file: file,
             line: line
         )
@@ -140,7 +146,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
         
         expect(
             sut,
-            toCompleteWithResult: .empty,
+            toCompleteWithResult: .success(.empty),
             file: file,
             line: line
         )
@@ -172,7 +178,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
         
         deleteCache(from: sut)
         
-        expect(sut, toCompleteWithResult: .empty, file: file, line: line)
+        expect(sut, toCompleteWithResult: .success(.empty), file: file, line: line)
     }
     
     func assertThatSideEffectsRunSerially(
@@ -218,7 +224,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
 extension FeedStoreSpecs where Self: XCTestCase {
     func expect(
         _ sut: FeedStore,
-        toCompleteWithResult expectedResult: RetrievalCachedFeedResult,
+        toCompleteWithResult expectedResult: FeedStore.RetrievalResult,
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
@@ -226,13 +232,13 @@ extension FeedStoreSpecs where Self: XCTestCase {
         
         sut.retrieve { receivedResult in
             switch (expectedResult, receivedResult) {
-            case (.empty, .empty),
+            case (.success(.empty), .success(.empty)),
                  (.failure, .failure):
                 break
                 
             case let (
-                .found(expectedFeed, expectedTimestamp),
-                .found(receivedFeed, receivedTimestamp)
+                .success(.found(expectedFeed, expectedTimestamp)),
+                .success(.found(receivedFeed, receivedTimestamp))
             ):
                 XCTAssertEqual(expectedFeed, receivedFeed, file: file, line: line)
                 XCTAssertEqual(expectedTimestamp, receivedTimestamp, file: file, line: line)
@@ -253,7 +259,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
     
     func expect(
         _ sut: FeedStore,
-        toRetrieveTwice expectedResult: RetrievalCachedFeedResult,
+        toRetrieveTwice expectedResult: FeedStore.RetrievalResult,
         file: StaticString = #filePath,
         line: UInt = #line
     ) {

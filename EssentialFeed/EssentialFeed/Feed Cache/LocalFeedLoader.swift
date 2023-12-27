@@ -55,13 +55,15 @@ extension LocalFeedLoader: FeedLoader {
             case .failure(let error):
                 completion(.failure(error))
                 
-            case .found(
-                let feed,
-                let timestamp
-            ) where FeedCachePrivacy.validate(timestamp, against: strongSelf.currentDate()):
+            case .success(
+                .found(let feed, let timestamp)
+            ) where FeedCachePrivacy.validate(
+                timestamp,
+                against: strongSelf.currentDate()
+            ):
                 completion(.success(feed.toModels()))
                 
-            case .empty, .found:
+            case .success:
                 completion(.success([]))
             }
         }
@@ -77,13 +79,18 @@ public extension LocalFeedLoader {
             case .failure:
                 self?.store.deleteCachedFeed { _ in }
                 
-            case .found(
-                _,
-                let timestamp
-            ) where FeedCachePrivacy.validate(timestamp, against: strongSelf.currentDate()):
+            case .success(
+                .found(
+                    _,
+                    let timestamp
+                )
+            ) where FeedCachePrivacy.validate(
+                timestamp,
+                against: strongSelf.currentDate()
+            ):
                 break
                 
-            case .found:
+            case .success(.found):
                 strongSelf.store.deleteCachedFeed { _ in }
                 
             default:
