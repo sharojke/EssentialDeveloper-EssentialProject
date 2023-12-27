@@ -95,13 +95,15 @@ private extension EssentialFeedCacheIntegrationTests {
         line: UInt = #line
     ) {
         let exp = expectation(description: "Wait for completion")
-        sut.save(feed) { error in
-            XCTAssertNil(
-                error,
-                "Expected to complete successfully",
-                file: file,
-                line: line
-            )
+        sut.save(feed) { result in
+            if case let .failure(error) = result {
+                XCTAssertNil(
+                    error,
+                    "Expected to save feed successfully",
+                    file: file,
+                    line: line
+                )
+            }
             exp.fulfill()
         }
         wait(for: [exp], timeout: 1.0)

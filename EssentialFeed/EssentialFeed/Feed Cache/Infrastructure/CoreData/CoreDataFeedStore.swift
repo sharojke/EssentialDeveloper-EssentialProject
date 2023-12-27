@@ -22,9 +22,9 @@ public final class CoreDataFeedStore: FeedStore {
                 try ManagedCache.find(in: context)
                     .map(context.delete)
                     .map(context.save)
-                completion(nil)
+                completion(.success(Void()))
             } catch {
-                completion(error)
+                completion(.failure(error))
             }
         }
     }
@@ -42,9 +42,9 @@ public final class CoreDataFeedStore: FeedStore {
                 managedCache.feed = ManagedFeedImage.images(from: feed, in: context)
                 
                 try context.save()
-                completion(nil)
+                completion(.success(Void()))
             } catch {
-                completion(error)
+                completion(.failure(error))
             }
         }
     }
