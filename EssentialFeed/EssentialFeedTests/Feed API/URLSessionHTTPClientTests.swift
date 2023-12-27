@@ -236,7 +236,7 @@ private extension URLSessionHTTPClientTests {
         ) 
         
         switch result {
-        case .success(let data, let response):
+        case .success((let data, let response)):
             return (data, response)
             
         case .failure:
@@ -256,7 +256,7 @@ private extension URLSessionHTTPClientTests {
         error: Error?,
         file: StaticString = #filePath,
         line: UInt = #line
-    ) -> HTTPClientResult {
+    ) -> HTTPClient.Result {
         URLProtocolStub.stub(
             data: data,
             response: response,
@@ -265,7 +265,7 @@ private extension URLSessionHTTPClientTests {
         
         let sut = makeSUT(file: file, line: line)
         let exp = expectation(description: "Wait for completion")
-        var capturedResult: HTTPClientResult?
+        var capturedResult: HTTPClient.Result?
         
         sut.get(from: anyURL()) { result in
             capturedResult = result

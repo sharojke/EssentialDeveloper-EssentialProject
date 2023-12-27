@@ -30,7 +30,7 @@ public final class RemoteFeedLoader: FeedLoader {
             guard self != nil else { return }
             
             switch result {
-            case .success(let data, let response):
+            case .success((let data, let response)):
                 completion(Self.map(data, from: response))
                 
             case .failure:
