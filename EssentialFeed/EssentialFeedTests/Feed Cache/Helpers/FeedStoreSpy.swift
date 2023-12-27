@@ -52,7 +52,7 @@ class FeedStoreSpy: FeedStore {
     }
     
     func completeRetrievalWithEmptyCache(at index: Int = 0) {
-        retrievalCompletions[index](.success(.empty))
+        retrievalCompletions[index](.success(nil))
     }
     
     func completeRetrieval(
@@ -62,7 +62,7 @@ class FeedStoreSpy: FeedStore {
     ) {
         retrievalCompletions[index](
             .success(
-                .found(feed: feed, timestamp: timestamp)
+                CacheFeed(feed: feed, timestamp: timestamp)
             )
         )
     }

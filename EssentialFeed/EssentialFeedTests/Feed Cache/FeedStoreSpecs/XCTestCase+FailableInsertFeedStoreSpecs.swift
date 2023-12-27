@@ -36,6 +36,6 @@ extension FailableInsertFeedStoreSpecs where Self: XCTestCase {
             into: sut
         )
         
-        expect(sut, toCompleteWithResult: .success(.empty), file: file, line: line)
+        expect(sut, toCompleteWithResult: .success(nil), file: file, line: line)
     }
 }
