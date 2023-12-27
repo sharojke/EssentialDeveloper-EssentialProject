@@ -210,9 +210,9 @@ extension LoadFeedFromRemoteUseCaseTests {
             "description": model.description,
             "location": model.location,
             "image": model.url.absoluteString
-        ]
+        ].compactMapValues { $0 }
         
-        return (model, json as [String: Any])
+        return (model, json)
     }
     
     private func makeItemsJSON(_ items: [[String: Any]]) -> Data {
