@@ -75,6 +75,33 @@ final class CoreDataFeedStoreTests: XCTestCase, FeedStoreSpecs {
         
         assertThatSideEffectsRunSerially(on: sut)
     }
+    
+    func test_imageEntity_properties() throws {
+        let entity = try XCTUnwrap(
+            CoreDataFeedStore.model?.entitiesByName["ManagedFeedImage"]
+        )
+
+        entity.verify(
+            attribute: "id",
+            hasType: .UUIDAttributeType,
+            isOptional: false
+        )
+        entity.verify(
+            attribute: "imageDescription",
+            hasType: .stringAttributeType,
+            isOptional: true
+        )
+        entity.verify(
+            attribute: "location",
+            hasType: .stringAttributeType,
+            isOptional: true
+        )
+        entity.verify(
+            attribute: "url",
+            hasType: .URIAttributeType,
+            isOptional: false
+        )
+    }
 }
 
 // MARK: - Helpers

@@ -34,3 +34,16 @@ private extension NSManagedObjectModel {
             .flatMap { Self(contentsOf: $0) }
     }
 }
+
+extension NSManagedObjectModel {
+    convenience init?(name: String, in bundle: Bundle) {
+        guard let momd = bundle.url(
+            forResource: name,
+            withExtension: "momd"
+        ) else {
+            return nil
+        }
+        
+        self.init(contentsOf: momd)
+    }
+}

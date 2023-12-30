@@ -1,6 +1,11 @@
 import CoreData
 
 public final class CoreDataFeedStore: FeedStore {
+    public static let modelName = "FeedStore"
+    public static let model = NSManagedObjectModel(
+        name: modelName,
+        in: Bundle(for: CoreDataFeedStore.self)
+    )
     private let container: NSPersistentContainer
     private let context: NSManagedObjectContext
     
