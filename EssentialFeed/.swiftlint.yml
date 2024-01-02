@@ -3,6 +3,8 @@ included:
   - EssentialFeedTests
   - EssentialFeedAPIEndToEndTests
   - EssentialFeedCacheIntegrationTests
+  - EssentialFeediOS
+  - EssentialFeediOSTests
   
 opt_in_rules:
   - all
