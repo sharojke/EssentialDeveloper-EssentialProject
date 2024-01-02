@@ -255,11 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				BB2849F72B2E19E000E0CBD7 /* .swiftlint.yml */,
-				BB5CA6002B2909A500AF0D66 /* EssentialFeed.xctestplan */,
-				BB4A9D5F2B2F2CCD0049D178 /* EssentialFeedAPIEndToEnd.xctestplan */,
-				BB7DFFD02B3A01D1000B1293 /* EssentialFeedCacheIntegration.xctestplan */,
-				BB0E1C402B4449140031DA09 /* EssentialFeediOS.xctestplan */,
-				BB0E1C412B444E520031DA09 /* EssentialFeediOSEndToEnd.xctestplan */,
+				BBC5FB292B4453B9000A8612 /* Test plans */,
 				BB5CA5DF2B28EA7900AF0D66 /* EssentialFeed */,
 				BB5CA5E92B28EA7900AF0D66 /* EssentialFeedTests */,
 				BB4A9D542B2F269A0049D178 /* EssentialFeedAPIEndToEndTests */,
@@ -360,6 +356,18 @@
 				BB2849FD2B2E1EA400E0CBD7 /* URLSessionHTTPClientTests.swift */,
 			);
 			path = "Feed API";
+			sourceTree = "<group>";
+		};
+		BBC5FB292B4453B9000A8612 /* Test plans */ = {
+			isa = PBXGroup;
+			children = (
+				BB5CA6002B2909A500AF0D66 /* EssentialFeed.xctestplan */,
+				BB4A9D5F2B2F2CCD0049D178 /* EssentialFeedAPIEndToEnd.xctestplan */,
+				BB7DFFD02B3A01D1000B1293 /* EssentialFeedCacheIntegration.xctestplan */,
+				BB0E1C402B4449140031DA09 /* EssentialFeediOS.xctestplan */,
+				BB0E1C412B444E520031DA09 /* EssentialFeediOSEndToEnd.xctestplan */,
+			);
+			path = "Test plans";
 			sourceTree = "<group>";
 		};
 		BBE21D052B2A2FA800552177 /* Feed API */ = {
