@@ -13,8 +13,8 @@ public struct FeedImage: Equatable {
         location: String? = nil
     ) {
         self.id = id
+        self.url = url
         self.description = description
         self.location = location
-        self.url = url
     }
 }
