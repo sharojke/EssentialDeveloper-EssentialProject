@@ -3,6 +3,9 @@ import EssentialFeediOS
 import UIKit
 import XCTest
 
+// swiftlint:disable force_unwrapping
+// swiftlint:disable file_length
+
 private final class FakeRefreshControl: UIRefreshControl {
     private var _isRefreshing = false
     
@@ -154,6 +157,35 @@ final class FeedViewControllerTests: XCTestCase {
             "Expected second image URL request once second view becomes visible"
         )
     }
+    
+    func test_feedImageView_cancelsImageLoadingWhenNotVisibleAnymore() {
+        let (sut, loader) = makeSUT()
+        let image0 = makeImage()
+        let image1 = makeImage()
+        
+        sut.simulateAppearance()
+        loader.completeFeedLoading(with: [image0, image1])
+        
+        XCTAssertEqual(
+            loader.cancelledImageURLs,
+            [],
+            "Expected no cancelled image URLs until image gets invisible"
+        )
+        
+        sut.simulateFeedImageViewNotVisible(at: 0)
+        XCTAssertEqual(
+            loader.cancelledImageURLs,
+            [image0.url],
+            "Expected one cancelled image URL request once the first image isn't visible"
+        )
+        
+        sut.simulateFeedImageViewNotVisible(at: 1)
+        XCTAssertEqual(
+            loader.cancelledImageURLs,
+            [image0.url, image1.url],
+            "Expected two cancelled image URL requests once the second image is also not visible"
+        )
+    }
 }
 
 // MARK: - Helpers
@@ -259,6 +291,7 @@ private extension FeedViewControllerTests {
     class LoaderSpy {
         private var _loadedImageURLs = [URL]()
         private var _feedRequests = [(FeedLoader.Result) -> Void]()
+        private var _cancelledImageURLs = [URL]()
         
         func completeFeedLoading(
             with feed: [FeedImage] = [],
@@ -288,8 +321,16 @@ extension FeedViewControllerTests.LoaderSpy: FeedImageDataLoader {
         return _loadedImageURLs
     }
     
+    var cancelledImageURLs: [URL] {
+        return _cancelledImageURLs
+    }
+    
     func loadImageData(from url: URL) {
         _loadedImageURLs.append(url)
+    }
+    
+    func cancelImageDataLoading(from url: URL) {
+        _cancelledImageURLs.append(url)
     }
 }
 
@@ -356,8 +397,21 @@ private extension FeedViewController {
         refreshControl?.simulatePullToRefresh()
     }
     
-    func simulateFeedImageViewVisible(at index: Int) {
-        _ = feedImageView(at: index)
+    @discardableResult
+    func simulateFeedImageViewVisible(at index: Int) -> FeedImageCell? {
+        return feedImageView(at: index) as? FeedImageCell
+    }
+    
+    func simulateFeedImageViewNotVisible(at row: Int) {
+        let view = simulateFeedImageViewVisible(at: row)
+        let delegate = tableView.delegate
+        let index = IndexPath(row: row, section: 0)
+        
+        delegate?.tableView?(
+            tableView,
+            didEndDisplaying: view!,
+            forRowAt: index
+        )
     }
     
     func feedImageView(at row: Int) -> UITableViewCell? {
@@ -380,3 +434,6 @@ private extension FeedImageCell {
         return locationLabel.text
     }
 }
+
+// swiftlint:enable force_unwrapping
+// swiftlint:enable file_length
