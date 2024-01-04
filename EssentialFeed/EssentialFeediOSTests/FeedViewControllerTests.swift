@@ -4,6 +4,7 @@ import UIKit
 import XCTest
 
 // swiftlint:disable force_unwrapping
+// swiftlint:disable line_length
 // swiftlint:disable file_length
 
 private final class FakeRefreshControl: UIRefreshControl {
@@ -186,6 +187,50 @@ final class FeedViewControllerTests: XCTestCase {
             "Expected two cancelled image URL requests once the second image is also not visible"
         )
     }
+    
+    func test_feedImageViewLoadingIndicator_isVisibleWhileLoadingImage() {
+        let (sut, loader) = makeSUT()
+        
+        sut.simulateAppearance()
+        loader.completeFeedLoading(with: [makeImage(), makeImage()])
+        
+        let view0 = sut.simulateFeedImageViewVisible(at: 0)
+        let view1 = sut.simulateFeedImageViewVisible(at: 1)
+        XCTAssertEqual(
+            view0?.isShowingImageLoadingIndicator,
+            true,
+            "Expected loading indicator for the first view while loading the the first image"
+        )
+        XCTAssertEqual(
+            view1?.isShowingImageLoadingIndicator,
+            true,
+            "Expected loading indicator for the second view while loading the the second image"
+        )
+        
+        loader.completeImageLoading(at: 0)
+        XCTAssertEqual(
+            view0?.isShowingImageLoadingIndicator,
+            false,
+            "Expected no loading indicator for the first view while it's loaded successfully"
+        )
+        XCTAssertEqual(
+            view1?.isShowingImageLoadingIndicator,
+            true,
+            "Expected loading indicator for the second view since the loading isn't finished yet"
+        )
+        
+        loader.competeImageLoadingWithError(at: 1)
+        XCTAssertEqual(
+            view0?.isShowingImageLoadingIndicator,
+            false,
+            "Expected no loading indicator state change for the first view once the second image loading completes with error"
+        )
+        XCTAssertEqual(
+            view1?.isShowingImageLoadingIndicator,
+            false,
+            "Expected no loading indicator for the second view once the second image loading completes with  error"
+        )
+    }
 }
 
 // MARK: - Helpers
@@ -289,20 +334,9 @@ private extension FeedViewControllerTests {
 
 private extension FeedViewControllerTests {
     class LoaderSpy {
-        private var _loadedImageURLs = [URL]()
         private var _feedRequests = [(FeedLoader.Result) -> Void]()
         private var _cancelledImageURLs = [URL]()
-        
-        func completeFeedLoading(
-            with feed: [FeedImage] = [],
-            at index: Int = 0
-        ) {
-            feedRequests[index](.success(feed))
-        }
-        
-        func completeFeedLoadingWithError(at index: Int = 0) {
-            feedRequests[index](.failure(anyNSError()))
-        }
+        private var _imageRequests = [(url: URL, completion: (FeedImageDataLoader.Result) -> Void)]()
     }
 }
 
@@ -324,19 +358,37 @@ extension FeedViewControllerTests.LoaderSpy: FeedLoader {
     func load(completion: @escaping (FeedLoader.Result) -> Void) {
         _feedRequests.append(completion)
     }
+    
+    func completeFeedLoading(
+        with feed: [FeedImage] = [],
+        at index: Int = 0
+    ) {
+        feedRequests[index](.success(feed))
+    }
+    
+    func completeFeedLoadingWithError(at index: Int = 0) {
+        feedRequests[index](.failure(anyNSError()))
+    }
 }
 
 extension FeedViewControllerTests.LoaderSpy: FeedImageDataLoader {
+    var imageRequests: [(url: URL, completion: (FeedImageDataLoader.Result) -> Void)] {
+        return _imageRequests
+    }
+    
     var loadedImageURLs: [URL] {
-        return _loadedImageURLs
+        return imageRequests.map { $0.url }
     }
     
     var cancelledImageURLs: [URL] {
         return _cancelledImageURLs
     }
     
-    func loadImageData(from url: URL) -> FeedImageDataLoaderTask {
-        _loadedImageURLs.append(url)
+    func loadImageData(
+        from url: URL,
+        completion: @escaping (FeedImageDataLoader.Result) -> Void
+    ) -> FeedImageDataLoaderTask {
+        _imageRequests.append((url, completion))
         return TaskSpy { [weak self] in
             self?.cancelImageDataLoading(from: url)
         }
@@ -344,6 +396,17 @@ extension FeedViewControllerTests.LoaderSpy: FeedImageDataLoader {
     
     func cancelImageDataLoading(from url: URL) {
         _cancelledImageURLs.append(url)
+    }
+    
+    func completeImageLoading(
+        with imageData: Data = Data(),
+        at index: Int = 0
+    ) {
+        imageRequests[index].completion(.success(imageData))
+    }
+    
+    func competeImageLoadingWithError(at index: Int) {
+        imageRequests[index].completion(.failure(anyNSError()))
     }
 }
 
@@ -439,6 +502,10 @@ private extension FeedImageCell {
         return !locationContainer.isHidden
     }
     
+    var isShowingImageLoadingIndicator: Bool {
+        return feedImageContainer.isShimmering
+    }
+    
     var descriptionText: String? {
         return descriptionLabel.text
     }
@@ -449,4 +516,5 @@ private extension FeedImageCell {
 }
 
 // swiftlint:enable force_unwrapping
+// swiftlint:enable line_length
 // swiftlint:enable file_length
