@@ -306,6 +306,16 @@ private extension FeedViewControllerTests {
     }
 }
 
+private extension FeedViewControllerTests.LoaderSpy {
+    struct TaskSpy: FeedImageDataLoaderTask {
+        let cancelCallBack: () -> Void
+        
+        func cancel() {
+            cancelCallBack()
+        }
+    }
+}
+
 extension FeedViewControllerTests.LoaderSpy: FeedLoader {
     var feedRequests: [(FeedLoader.Result) -> Void] {
         return _feedRequests
@@ -325,8 +335,11 @@ extension FeedViewControllerTests.LoaderSpy: FeedImageDataLoader {
         return _cancelledImageURLs
     }
     
-    func loadImageData(from url: URL) {
+    func loadImageData(from url: URL) -> FeedImageDataLoaderTask {
         _loadedImageURLs.append(url)
+        return TaskSpy { [weak self] in
+            self?.cancelImageDataLoading(from: url)
+        }
     }
     
     func cancelImageDataLoading(from url: URL) {
