@@ -40,6 +40,7 @@ public final class FeedViewController: UITableViewController {
             action: #selector(load),
             for: .valueChanged
         )
+        tableView.prefetchDataSource = self
         
         onViewIsAppearing = { viewController in
             viewController.load()
@@ -102,5 +103,19 @@ public final class FeedViewController: UITableViewController {
     override public func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         tasks[indexPath]?.cancel()
         tasks[indexPath] = nil
+    }
+}
+
+extension FeedViewController: UITableViewDataSourcePrefetching {
+    public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        indexPaths.forEach { [weak self] indexPath in
+            guard let self else { return }
+            
+            let cellModel = tableModel[indexPath.row]
+            _ = imageLoader?.loadImageData(
+                from: cellModel.url,
+                completion: { _ in }
+            )
+        }
     }
 }
