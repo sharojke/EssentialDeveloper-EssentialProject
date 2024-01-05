@@ -5,6 +5,7 @@ import XCTest
 
 // swiftlint:disable force_unwrapping
 // swiftlint:disable line_length
+// swiftlint:disable type_body_length
 // swiftlint:disable file_length
 
 private final class FakeRefreshControl: UIRefreshControl {
@@ -278,6 +279,28 @@ final class FeedViewControllerTests: XCTestCase {
         )
     }
     
+    func test_feedImageViewRetryButton_isVisibleOnInvalidImageData() {
+        let (sut, loader) = makeSUT()
+        
+        sut.simulateAppearance()
+        loader.completeFeedLoading(with: [makeImage()])
+        
+        let view = sut.simulateFeedImageViewVisible(at: 0)
+        XCTAssertEqual(
+            view?.isShowingRetryAction,
+            false,
+            "Expected no retry action while loading the image"
+        )
+        
+        let imageData = Data("invalid image data".utf8)
+        loader.completeImageLoading(with: imageData)
+        XCTAssertEqual(
+            view?.isShowingRetryAction,
+            true,
+            "Expected the retry action to be visible since the image image loading completes with a invalid image data"
+        )
+    }
+    
     func test_feedImageViewRetryButton_isVisibleOnImageURLLoadError() {
         let (sut, loader) = makeSUT()
         
@@ -310,7 +333,7 @@ final class FeedViewControllerTests: XCTestCase {
             "Expected no retry action for the second view on the first image loading is completed successfully"
         )
         
-        loader.completeFeedLoadingWithError(at: 1)
+        loader.completeImageLoadingWithError(at: 1)
         XCTAssertEqual(
             view0?.isShowingRetryAction,
             false,
@@ -629,4 +652,5 @@ private extension UIImage {
 
 // swiftlint:enable force_unwrapping
 // swiftlint:enable line_length
+// swiftlint:enable type_body_length
 // swiftlint:enable file_length
