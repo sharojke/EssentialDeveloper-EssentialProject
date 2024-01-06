@@ -1,15 +1,11 @@
 import EssentialFeed
 import UIKit
 
-// swiftlint:disable force_unwrapping
-
 public final class FeedViewController: UITableViewController {
     private var onViewIsAppearing: ((FeedViewController) -> Void)?
     private var refreshController: FeedRefreshViewController?
-    private var imageLoader: FeedImageDataLoader?
-    private var cellControllers = [IndexPath: FeedImageCellController]()
     
-    private var tableModel = [FeedImage]() {
+    var tableModel = [FeedImageCellController]() {
         didSet { tableView.reloadData() }
     }
     
@@ -24,14 +20,9 @@ public final class FeedViewController: UITableViewController {
         }
     }
     
-    public convenience init(
-        feedLoader: FeedLoader,
-        imageLoader: FeedImageDataLoader
-    ) {
+    convenience init(refreshController: FeedRefreshViewController) {
         self.init()
-        
-        self.refreshController = FeedRefreshViewController(feedLoader: feedLoader)
-        self.imageLoader = imageLoader
+        self.refreshController = refreshController
     }
     
     override public func viewDidLoad() {
@@ -39,10 +30,6 @@ public final class FeedViewController: UITableViewController {
         
         tableView.prefetchDataSource = self
         refreshControl = refreshController?.view
-        
-        refreshController?.onRefresh = { [weak self] feed in
-            self?.tableModel = feed
-        }
         
         onViewIsAppearing = { viewController in
             viewController.refreshController?.refresh()
@@ -60,19 +47,13 @@ public final class FeedViewController: UITableViewController {
         // TODO: Start the task here when the implementation is clear
     }
     
-    private func removeCellController(forRawAt indexPath: IndexPath) {
-        cellControllers[indexPath] = nil
-    }
-    
     @discardableResult
     private func cellController(forRowAt indexPath: IndexPath) -> FeedImageCellController {
-        let cellModel = tableModel[indexPath.row]
-        let cellController = FeedImageCellController(
-            model: cellModel,
-            imageLoader: imageLoader!
-        )
-        cellControllers[indexPath] = cellController
-        return cellController
+        return tableModel[indexPath.row]
+    }
+    
+    private func cancelCellControllerLoad(forRawAt indexPath: IndexPath) {
+        cellController(forRowAt: indexPath).cancelLoad()
     }
     
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -88,7 +69,7 @@ public final class FeedViewController: UITableViewController {
     }
     
     override public func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        removeCellController(forRawAt: indexPath)
+        cancelCellControllerLoad(forRawAt: indexPath)
     }
 }
 
@@ -98,8 +79,6 @@ extension FeedViewController: UITableViewDataSourcePrefetching {
     }
     
     public func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-        indexPaths.forEach(removeCellController)
+        indexPaths.forEach(cancelCellControllerLoad)
     }
 }
-
-// swiftlint:enable force_unwrapping
