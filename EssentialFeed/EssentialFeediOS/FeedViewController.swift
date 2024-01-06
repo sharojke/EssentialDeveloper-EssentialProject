@@ -68,6 +68,10 @@ public final class FeedViewController: UITableViewController {
         }
     }
     
+    private func startTask(forRowAt indexPath: IndexPath) {
+        // TODO: Start the task here when the implementation is clear
+    }
+    
     private func cancelTask(forRawAt indexPath: IndexPath) {
         tasks[indexPath]?.cancel()
         tasks[indexPath] = nil
@@ -103,6 +107,10 @@ public final class FeedViewController: UITableViewController {
         loadImage()
         
         return feedImageCell
+    }
+    
+    override public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        startTask(forRowAt: indexPath)
     }
     
     override public func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
