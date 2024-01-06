@@ -311,8 +311,8 @@
 		BB1768762B49A08900FEDA3F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				BB17687D2B49A45400FEDA3F /* FeedViewController+Extensions.swift */,
 				BB17687F2B49A47F00FEDA3F /* FeedImageCell+Extensions.swift */,
+				BB17687D2B49A45400FEDA3F /* FeedViewController+Extensions.swift */,
 				BB1768812B49A56500FEDA3F /* FeedViewControllerTests+LoaderSpy.swift */,
 				BB1768832B49A60D00FEDA3F /* FeedViewControllerTests+CustomAssertions.swift */,
 			);
