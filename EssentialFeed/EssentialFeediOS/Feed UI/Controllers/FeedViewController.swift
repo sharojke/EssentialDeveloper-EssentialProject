@@ -1,11 +1,13 @@
 import EssentialFeed
 import UIKit
 
+// swiftlint:disable force_unwrapping
+
 public final class FeedViewController: UITableViewController {
     private var onViewIsAppearing: ((FeedViewController) -> Void)?
     private var refreshController: FeedRefreshViewController?
     private var imageLoader: FeedImageDataLoader?
-    private var tasks = [IndexPath: FeedImageDataLoaderTask]()
+    private var cellControllers = [IndexPath: FeedImageCellController]()
     
     private var tableModel = [FeedImage]() {
         didSet { tableView.reloadData() }
@@ -58,9 +60,19 @@ public final class FeedViewController: UITableViewController {
         // TODO: Start the task here when the implementation is clear
     }
     
-    private func cancelTask(forRawAt indexPath: IndexPath) {
-        tasks[indexPath]?.cancel()
-        tasks[indexPath] = nil
+    private func removeCellController(forRawAt indexPath: IndexPath) {
+        cellControllers[indexPath] = nil
+    }
+    
+    @discardableResult
+    private func cellController(forRowAt indexPath: IndexPath) -> FeedImageCellController {
+        let cellModel = tableModel[indexPath.row]
+        let cellController = FeedImageCellController(
+            model: cellModel,
+            imageLoader: imageLoader!
+        )
+        cellControllers[indexPath] = cellController
+        return cellController
     }
     
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -68,31 +80,7 @@ public final class FeedViewController: UITableViewController {
     }
     
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellModel = tableModel[indexPath.row]
-        let feedImageCell = FeedImageCell()
-        feedImageCell.locationContainer.isHidden = cellModel.location == nil
-        feedImageCell.descriptionLabel.text = cellModel.description
-        feedImageCell.locationLabel.text = cellModel.location
-        feedImageCell.feedImageView.image = nil
-        feedImageCell.feedImageRetryButton.isHidden = true
-        feedImageCell.feedImageContainer.startShimmering()
-        
-        let loadImage = { [weak self] in
-            guard let self else { return }
-            
-            tasks[indexPath] = imageLoader?.loadImageData(from: cellModel.url) { [weak feedImageCell] result in
-                let data = try? result.get()
-                let image = data.flatMap(UIImage.init)
-                feedImageCell?.feedImageView.image = image
-                feedImageCell?.feedImageRetryButton.isHidden = image != nil
-                feedImageCell?.feedImageContainer.stopShimmering()
-            }
-        }
-        
-        feedImageCell.onRetry = loadImage
-        loadImage()
-        
-        return feedImageCell
+        return cellController(forRowAt: indexPath).view()
     }
     
     override public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -100,26 +88,18 @@ public final class FeedViewController: UITableViewController {
     }
     
     override public func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cancelTask(forRawAt: indexPath)
+        removeCellController(forRawAt: indexPath)
     }
 }
 
 extension FeedViewController: UITableViewDataSourcePrefetching {
     public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        indexPaths.forEach { [weak self] indexPath in
-            guard let self else { return }
-            
-            let cellModel = tableModel[indexPath.row]
-            tasks[indexPath] = imageLoader?.loadImageData(
-                from: cellModel.url,
-                completion: { _ in }
-            )
-        }
+        indexPaths.forEach { cellController(forRowAt: $0).preload() }
     }
     
     public func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-        indexPaths.forEach { [weak self] indexPath in
-            self?.cancelTask(forRawAt: indexPath)
-        }
+        indexPaths.forEach(removeCellController)
     }
 }
+
+// swiftlint:enable force_unwrapping
