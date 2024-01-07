@@ -24,7 +24,8 @@ public enum FeedUIComposer {
             controller?.tableModel = feed.map { feedImage in
                 let viewModel = FeedImageViewModel(
                     model: feedImage,
-                    imageLoader: loader
+                    imageLoader: loader, 
+                    imageTransformer: UIImage.init
                 )
                 return FeedImageCellController(viewModel: viewModel)
             }
