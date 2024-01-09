@@ -10,8 +10,8 @@ private final class FeedViewAdapter: FeedView {
         self.loader = loader
     }
     
-    func display(feed: [EssentialFeed.FeedImage]) {
-        controller?.tableModel = feed.map { feedImage in
+    func display(_ viewModel: FeedViewModel) {
+        controller?.tableModel = viewModel.feed.map { feedImage in
             let viewModel = FeedImageViewModel(
                 model: feedImage,
                 imageLoader: loader,
@@ -48,7 +48,7 @@ public enum FeedUIComposer {
 }
 
 extension WeakRefVirtualProxy: FeedLoadingView where T: FeedLoadingView {
-    func display(isLoading: Bool) {
-        object?.display(isLoading: isLoading)
+    func display(_ viewModel: FeedLoadingViewModel) {
+        object?.display(viewModel)
     }
 }
