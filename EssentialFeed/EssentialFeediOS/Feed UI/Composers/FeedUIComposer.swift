@@ -30,7 +30,7 @@ private final class WeakRefVirtualProxy<T: AnyObject> {
     }
 }
 
-private final class FeedPresentationAdapter {
+private final class FeedPresentationAdapter: FeedRefreshViewControllerDelegate {
     let feedLoader: FeedLoader
     let presenter: FeedPresenter
     
@@ -39,7 +39,7 @@ private final class FeedPresentationAdapter {
         self.presenter = presenter
     }
     
-    func loadFeed() {
+    func didRequestFeedRefresh() {
         presenter.didStartLoadingFeed()
         feedLoader.load { [weak self] result in
             switch result {
@@ -63,7 +63,7 @@ public enum FeedUIComposer {
             feedLoader: feedLoader,
             presenter: presenter
         )
-        let refreshController = FeedRefreshViewController(loadFeed: presentationAdapter.loadFeed)
+        let refreshController = FeedRefreshViewController(delegate: presentationAdapter)
         let feedController = FeedViewController(refreshController: refreshController)
         presenter.loadingView = WeakRefVirtualProxy(object: refreshController)
         presenter.feedView = FeedViewAdapter(

@@ -1,11 +1,17 @@
 import UIKit
 
+// swiftlint:disable weak_delegate
+
+protocol FeedRefreshViewControllerDelegate {
+    func didRequestFeedRefresh()
+}
+
 final class FeedRefreshViewController: NSObject, FeedLoadingView {
-    private let loadFeed: () -> Void
+    private let delegate: FeedRefreshViewControllerDelegate
     lazy var view = loadView()
     
-    init(loadFeed: @escaping () -> Void) {
-        self.loadFeed = loadFeed
+    init(delegate: FeedRefreshViewControllerDelegate) {
+        self.delegate = delegate
     }
     
     private func loadView() -> UIRefreshControl {
@@ -28,6 +34,8 @@ final class FeedRefreshViewController: NSObject, FeedLoadingView {
     
     @objc
     func refresh() {
-        loadFeed()
+        delegate.didRequestFeedRefresh()
     }
 }
+
+// swiftlint:enable weak_delegate
