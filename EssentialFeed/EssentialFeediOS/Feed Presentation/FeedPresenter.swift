@@ -9,14 +9,6 @@ protocol FeedView {
     func display(_ viewModel: FeedViewModel)
 }
 
-struct FeedLoadingViewModel {
-    let isLoading: Bool
-}
-
-struct FeedViewModel {
-    let feed: [FeedImage]
-}
-
 final class FeedPresenter {
     private let loadingView: FeedLoadingView
     private let feedView: FeedView
