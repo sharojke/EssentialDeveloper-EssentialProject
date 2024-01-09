@@ -31,23 +31,22 @@ private final class WeakRefVirtualProxy<T: AnyObject> {
 }
 
 private final class FeedPresentationAdapter: FeedRefreshViewControllerDelegate {
-    let feedLoader: FeedLoader
-    let presenter: FeedPresenter
+    private let feedLoader: FeedLoader
+    var presenter: FeedPresenter?
     
-    init(feedLoader: FeedLoader, presenter: FeedPresenter) {
+    init(feedLoader: FeedLoader) {
         self.feedLoader = feedLoader
-        self.presenter = presenter
     }
     
     func didRequestFeedRefresh() {
-        presenter.didStartLoadingFeed()
+        presenter?.didStartLoadingFeed()
         feedLoader.load { [weak self] result in
             switch result {
             case .success(let feed):
-                self?.presenter.didFinishLoadingFeed(with: feed)
+                self?.presenter?.didFinishLoadingFeed(with: feed)
                 
             case .failure(let error):
-                self?.presenter.didFinishLoadingFeed(with: error)
+                self?.presenter?.didFinishLoadingFeed(with: error)
             }
         }
     }
@@ -58,18 +57,18 @@ public enum FeedUIComposer {
         feedLoader: FeedLoader,
         imageLoader: FeedImageDataLoader
     ) -> FeedViewController {
-        let presenter = FeedPresenter()
-        let presentationAdapter = FeedPresentationAdapter(
-            feedLoader: feedLoader,
-            presenter: presenter
-        )
+        let presentationAdapter = FeedPresentationAdapter(feedLoader: feedLoader)
         let refreshController = FeedRefreshViewController(delegate: presentationAdapter)
         let feedController = FeedViewController(refreshController: refreshController)
-        presenter.loadingView = WeakRefVirtualProxy(object: refreshController)
-        presenter.feedView = FeedViewAdapter(
+        let feedViewAdapter = FeedViewAdapter(
             controller: feedController,
             loader: imageLoader
         )
+        let presenter = FeedPresenter(
+            loadingView: WeakRefVirtualProxy(object: refreshController),
+            feedView: feedViewAdapter
+        )
+        presentationAdapter.presenter = presenter
         return feedController
     }
 }
