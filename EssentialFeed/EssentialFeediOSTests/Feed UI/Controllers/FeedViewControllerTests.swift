@@ -3,7 +3,6 @@ import EssentialFeediOS
 import UIKit
 import XCTest
 
-// swiftlint:disable force_unwrapping
 // swiftlint:disable line_length
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
@@ -238,7 +237,7 @@ final class FeedViewControllerTests: XCTestCase {
             "Expected no image for the second view while loading the second image"
         )
         
-        let imageData0 = UIImage.make(withColor: .red).pngData()!
+        let imageData0 = anyImageData()
         loader.completeImageLoading(with: imageData0, at: 0)
         XCTAssertEqual(
             view0?.renderedImage,
@@ -251,7 +250,7 @@ final class FeedViewControllerTests: XCTestCase {
             "Expected no image for the second view on the first image loading is completed successfully"
         )
         
-        let imageData1 = UIImage.make(withColor: .blue).pngData()!
+        let imageData1 = anyImageData()
         loader.completeImageLoading(with: imageData1, at: 1)
         XCTAssertEqual(
             view0?.renderedImage,
@@ -306,7 +305,7 @@ final class FeedViewControllerTests: XCTestCase {
             "Expected no retry action for the second view while loading the second image"
         )
         
-        let imageData0 = UIImage.make(withColor: .red).pngData()!
+        let imageData0 = anyImageData()
         loader.completeImageLoading(with: imageData0, at: 0)
         XCTAssertEqual(
             view0?.isShowingRetryAction,
@@ -426,6 +425,20 @@ final class FeedViewControllerTests: XCTestCase {
             "Expected the second url request is cancelled once the second image view is not near visible"
         )
     }
+    
+    func test_feedImageView_doesNotRenderLoadedImageWhenNotVisibleAnymore() {
+        let (sut, loader) = makeSUT()
+        sut.simulateAppearance()
+        loader.completeFeedLoading(with: [makeImage()])
+        
+        let view = sut.simulateFeedImageViewNotVisible(at: 0)
+        loader.completeImageLoading(with: anyImageData())
+        
+        XCTAssertNil(
+            view?.renderedImage,
+            "Expected not rendered message when an image load finished after the view is not visible anymore"
+        )
+    }
 }
 
 // MARK: - Helpers
@@ -462,7 +475,6 @@ private extension FeedViewControllerTests {
     }
 }
 
-// swiftlint:enable force_unwrapping
 // swiftlint:enable line_length
 // swiftlint:enable type_body_length
 // swiftlint:enable file_length
