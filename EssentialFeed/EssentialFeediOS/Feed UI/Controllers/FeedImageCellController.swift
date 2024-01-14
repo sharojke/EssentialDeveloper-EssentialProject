@@ -1,7 +1,7 @@
 import UIKit
 
 // swiftlint:disable weak_delegate
-// swiftlint:disable force_cast
+// swiftlint:disable force_unwrapping
 
 protocol FeedImageCellControllerDelegate {
     func didRequestImage()
@@ -17,10 +17,9 @@ final class FeedImageCellController: FeedImageView {
     }
     
     func view(in tableView: UITableView) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedImageCell") as! FeedImageCell
-        self.cell = cell
+        cell = tableView.dequeueReusableCell()
         delegate.didRequestImage()
-        return cell
+        return cell!
     }
     
     func preload() {
@@ -48,4 +47,4 @@ final class FeedImageCellController: FeedImageView {
 }
 
 // swiftlint:enable weak_delegate
-// swiftlint:enable force_cast
+// swiftlint:enable force_unwrapping
