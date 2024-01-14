@@ -2,7 +2,6 @@ import EssentialFeed
 import UIKit
 
 // swiftlint:disable force_cast
-// swiftlint:disable force_unwrapping
 
 private final class FeedViewAdapter: FeedView {
     typealias WeakCellController = WeakRefVirtualProxy<FeedImageCellController>
@@ -42,7 +41,7 @@ private final class WeakRefVirtualProxy<T: AnyObject> {
     }
 }
 
-private final class FeedPresentationAdapter: FeedRefreshViewControllerDelegate {
+private final class FeedPresentationAdapter: FeedViewControllerDelegate {
     private let feedLoader: FeedLoader
     var presenter: FeedPresenter?
     
@@ -105,15 +104,14 @@ public enum FeedUIComposer {
         let bundle = Bundle(for: FeedViewController.self)
         let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
         let feedController = storyboard.instantiateInitialViewController() as! FeedViewController
-        let refreshController = feedController.refreshController!
-        refreshController.delegate = presentationAdapter
+        feedController.delegate = presentationAdapter
         
         let feedViewAdapter = FeedViewAdapter(
             controller: feedController,
             loader: imageLoader
         )
         let presenter = FeedPresenter(
-            loadingView: WeakRefVirtualProxy(refreshController),
+            loadingView: WeakRefVirtualProxy(feedController),
             feedView: feedViewAdapter
         )
         presentationAdapter.presenter = presenter
@@ -134,4 +132,3 @@ extension WeakRefVirtualProxy: FeedImageView where T: FeedImageView, T.Image == 
 }
 
 // swiftlint:enable force_cast
-// swiftlint:enable force_unwrapping
