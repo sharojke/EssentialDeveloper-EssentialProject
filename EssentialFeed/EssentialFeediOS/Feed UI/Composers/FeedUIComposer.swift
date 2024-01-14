@@ -1,6 +1,8 @@
 import EssentialFeed
 import UIKit
 
+// swiftlint:disable force_cast
+
 private final class FeedViewAdapter: FeedView {
     typealias WeakCellController = WeakRefVirtualProxy<FeedImageCellController>
     typealias PresentationAdapter = FeedImageDataLoaderPresentationAdapter<WeakCellController, UIImage>
@@ -99,7 +101,11 @@ public enum FeedUIComposer {
     ) -> FeedViewController {
         let presentationAdapter = FeedPresentationAdapter(feedLoader: feedLoader)
         let refreshController = FeedRefreshViewController(delegate: presentationAdapter)
-        let feedController = FeedViewController(refreshController: refreshController)
+        
+        let bundle = Bundle(for: FeedViewController.self)
+        let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
+        let feedController = storyboard.instantiateInitialViewController() as! FeedViewController
+        feedController.refreshController = refreshController
         let feedViewAdapter = FeedViewAdapter(
             controller: feedController,
             loader: imageLoader
@@ -124,3 +130,5 @@ extension WeakRefVirtualProxy: FeedImageView where T: FeedImageView, T.Image == 
         object?.display(model)
     }
 }
+
+// swiftlint:enable force_cast

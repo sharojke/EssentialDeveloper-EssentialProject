@@ -2,7 +2,7 @@ import UIKit
 
 public final class FeedViewController: UITableViewController {
     private var onViewIsAppearing: ((FeedViewController) -> Void)?
-    private var refreshController: FeedRefreshViewController?
+    var refreshController: FeedRefreshViewController?
     
     var tableModel = [FeedImageCellController]() {
         didSet { tableView.reloadData() }
@@ -17,11 +17,6 @@ public final class FeedViewController: UITableViewController {
             
             refreshController?.view = newValue
         }
-    }
-    
-    convenience init(refreshController: FeedRefreshViewController) {
-        self.init()
-        self.refreshController = refreshController
     }
     
     override public func viewDidLoad() {
