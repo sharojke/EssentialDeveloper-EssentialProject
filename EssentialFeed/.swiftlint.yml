@@ -72,6 +72,9 @@ disabled_rules:
   - no_magic_numbers
   - trailing_closure
   - file_name
+  
+  - private_action
+  - private_outlet
 
 ## Customization of rules
 attributes:
