@@ -2,7 +2,7 @@ import EssentialFeed
 import EssentialFeediOS
 import UIKit
 
-extension FeedViewControllerTests {
+extension FeedUIIntegrationTests {
     class LoaderSpy {
         private var _feedRequests = [(FeedLoader.Result) -> Void]()
         private var _cancelledImageURLs = [URL]()
@@ -10,7 +10,7 @@ extension FeedViewControllerTests {
     }
 }
 
-extension FeedViewControllerTests.LoaderSpy {
+extension FeedUIIntegrationTests.LoaderSpy {
     struct TaskSpy: FeedImageDataLoaderTask {
         let cancelCallBack: () -> Void
         
@@ -20,7 +20,7 @@ extension FeedViewControllerTests.LoaderSpy {
     }
 }
 
-extension FeedViewControllerTests.LoaderSpy: FeedLoader {
+extension FeedUIIntegrationTests.LoaderSpy: FeedLoader {
     var feedRequests: [(FeedLoader.Result) -> Void] {
         return _feedRequests
     }
@@ -41,7 +41,7 @@ extension FeedViewControllerTests.LoaderSpy: FeedLoader {
     }
 }
 
-extension FeedViewControllerTests.LoaderSpy: FeedImageDataLoader {
+extension FeedUIIntegrationTests.LoaderSpy: FeedImageDataLoader {
     var imageRequests: [(url: URL, completion: (FeedImageDataLoader.Result) -> Void)] {
         return _imageRequests
     }

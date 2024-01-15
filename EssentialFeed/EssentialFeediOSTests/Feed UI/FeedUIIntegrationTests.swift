@@ -7,7 +7,7 @@ import XCTest
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
 
-final class FeedViewControllerTests: XCTestCase {
+final class FeedUIIntegrationTests: XCTestCase {
     func test_feedView_hasTitle() {
         let (sut, _) = makeSUT()
         
@@ -451,7 +451,7 @@ final class FeedViewControllerTests: XCTestCase {
 
 // MARK: - Helpers
 
-private extension FeedViewControllerTests {
+private extension FeedUIIntegrationTests {
     func makeSUT(
         file: StaticString = #filePath,
         line: UInt = #line

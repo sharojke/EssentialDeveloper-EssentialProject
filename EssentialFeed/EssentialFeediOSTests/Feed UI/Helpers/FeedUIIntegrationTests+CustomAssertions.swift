@@ -2,7 +2,7 @@ import EssentialFeed
 import EssentialFeediOS
 import XCTest
 
-extension FeedViewControllerTests {
+extension FeedUIIntegrationTests {
     func assertThat(
         _ sut: FeedViewController,
         isRendering feed: [FeedImage],
