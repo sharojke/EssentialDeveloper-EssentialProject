@@ -447,6 +447,18 @@ final class FeedUIIntegrationTests: XCTestCase {
             "Expected not rendered message when an image load finished after the view is not visible anymore"
         )
     }
+    
+    func test_loadFeedCompletion_dispatchesFromBackgroundToMainThread() {
+        let (sut, loader) = makeSUT()
+        sut.simulateAppearance()
+        
+        let exp = expectation(description: "Wait for background queue")
+        DispatchQueue.global().async {
+            loader.completeFeedLoading()
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+    }
 }
 
 // MARK: - Helpers
