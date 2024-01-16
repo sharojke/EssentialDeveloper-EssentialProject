@@ -69,7 +69,7 @@ extension FeedUIIntegrationTests.LoaderSpy: FeedImageDataLoader {
     }
     
     func completeImageLoading(
-        with imageData: Data = Data(),
+        with imageData: Data = anyImageData(),
         at index: Int = 0
     ) {
         imageRequests[index].completion(.success(imageData))

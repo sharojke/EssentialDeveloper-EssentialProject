@@ -127,6 +127,9 @@ public enum FeedUIComposer {
             delegate: presentationAdapter,
             title: FeedPresenter.title
         )
+        let imageLoader = MainQueueDispatchDecorator(
+            decoratee: imageLoader
+        )
         let feedViewAdapter = FeedViewAdapter(
             controller: feedController,
             loader: imageLoader
@@ -170,6 +173,17 @@ extension WeakRefVirtualProxy: FeedImageView where T: FeedImageView, T.Image == 
 extension MainQueueDispatchDecorator: FeedLoader where T == FeedLoader {
     func load(completion: @escaping (FeedLoader.Result) -> Void) {
         decoratee.load { [weak self] result in
+            self?.dispatch { completion(result) }
+        }
+    }
+}
+
+extension MainQueueDispatchDecorator: FeedImageDataLoader where T == FeedImageDataLoader {
+    func loadImageData(
+        from url: URL,
+        completion: @escaping (FeedImageDataLoader.Result) -> Void
+    ) -> FeedImageDataLoaderTask {
+        decoratee.loadImageData(from: url) { [weak self] result in
             self?.dispatch { completion(result) }
         }
     }
