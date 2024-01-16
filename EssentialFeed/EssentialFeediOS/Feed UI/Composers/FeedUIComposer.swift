@@ -14,7 +14,7 @@ public enum FeedUIComposer {
         let presentationAdapter = FeedPresentationAdapter(
             feedLoader: feedLoader
         )
-        let feedController = FeedViewController.makeWith(
+        let feedController = Self.makeFeedViewController(
             delegate: presentationAdapter,
             title: FeedPresenter.title
         )
@@ -34,8 +34,10 @@ public enum FeedUIComposer {
     }
 }
 
-private extension FeedViewController {
-    static func makeWith(
+// MARK: - Helpers
+
+private extension FeedUIComposer {
+    static func makeFeedViewController(
         delegate: FeedViewControllerDelegate,
         title: String
     ) -> FeedViewController {
