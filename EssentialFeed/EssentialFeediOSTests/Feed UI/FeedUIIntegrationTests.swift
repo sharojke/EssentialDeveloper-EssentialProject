@@ -448,6 +448,24 @@ final class FeedUIIntegrationTests: XCTestCase {
         )
     }
     
+    func test_feedImageView_doesNotShowDataFromPreviousRequestWhenCellIsReused() throws {
+            let (sut, loader) = makeSUT()
+
+            sut.simulateAppearance()
+            loader.completeFeedLoading(with: [makeImage(), makeImage()])
+
+            let view0 = try XCTUnwrap(sut.simulateFeedImageViewVisible(at: 0))
+            view0.prepareForReuse()
+
+            let imageData0 = anyImageData()
+            loader.completeImageLoading(with: imageData0, at: 0)
+
+        XCTAssertNil(
+            view0.renderedImage,
+            "Expected no image state change for reused view once image loading completes successfully"
+        )
+        }
+    
     func test_loadFeedCompletion_dispatchesFromBackgroundToMainThread() {
         let (sut, loader) = makeSUT()
         sut.simulateAppearance()

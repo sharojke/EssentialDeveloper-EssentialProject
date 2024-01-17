@@ -40,15 +40,11 @@ public final class FeedViewController: UITableViewController {
     }
     
     override public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        startTask(forRowAt: indexPath)
+        cellController(forRowAt: indexPath).preload()
     }
     
     override public func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cancelCellControllerLoad(forRawAt: indexPath)
-    }
-    
-    private func startTask(forRowAt indexPath: IndexPath) {
-        // TODO: Start the task here when the implementation is clear
     }
     
     @discardableResult

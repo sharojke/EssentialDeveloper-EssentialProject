@@ -2,6 +2,7 @@ import UIKit
 
 public final class FeedImageCell: UITableViewCell {
     var onRetry: (() -> Void)?
+    var onReuse: (() -> Void)?
     
     @IBOutlet public private(set) var locationContainer: UIView!
     @IBOutlet public private(set) var descriptionLabel: UILabel!
@@ -12,5 +13,11 @@ public final class FeedImageCell: UITableViewCell {
     
     @IBAction private func onRetryButtonTapped() {
         onRetry?()
+    }
+    
+    override public func prepareForReuse() {
+        super.prepareForReuse()
+        
+        onReuse?()
     }
 }
