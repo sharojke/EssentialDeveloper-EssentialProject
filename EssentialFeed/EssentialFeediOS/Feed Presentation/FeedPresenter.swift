@@ -9,7 +9,7 @@ protocol FeedView {
     func display(_ viewModel: FeedViewModel)
 }
 
-final class FeedPresenter {
+public final class FeedPresenter {
     static var title: String {
         return NSLocalizedString(
             "My Feed",
