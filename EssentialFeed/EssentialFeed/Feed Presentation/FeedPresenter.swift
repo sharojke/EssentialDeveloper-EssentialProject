@@ -1,5 +1,17 @@
 import Foundation
 
+public protocol FeedLoadingView {
+    func display(_ viewModel: FeedLoadingViewModel)
+}
+
+public protocol FeedView {
+    func display(_ viewModel: FeedViewModel)
+}
+
+public protocol FeedErrorView {
+    func display(_ viewModel: FeedErrorViewModel)
+}
+
 public final class FeedPresenter {
     public static var title: String {
         return NSLocalizedString(

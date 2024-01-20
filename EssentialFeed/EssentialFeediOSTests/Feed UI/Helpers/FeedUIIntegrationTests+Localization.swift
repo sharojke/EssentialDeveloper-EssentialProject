@@ -1,4 +1,4 @@
-import EssentialFeediOS
+import EssentialFeed
 import XCTest
 
 extension FeedUIIntegrationTests {
@@ -7,7 +7,7 @@ extension FeedUIIntegrationTests {
         file: StaticString = #filePath,
         line: UInt = #line
     ) -> String {
-        let bundle = Bundle(for: FeedViewController.self)
+        let bundle = Bundle(for: FeedPresenter.self)
         let table = "Feed"
         let value = bundle.localizedString(
             forKey: key,
