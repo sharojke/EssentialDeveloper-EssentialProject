@@ -1,4 +1,3 @@
-enum FeedErrorViewModel {
-    case noError
-    case error(message: String)
+struct FeedErrorViewModel {
+    let message: String
 }

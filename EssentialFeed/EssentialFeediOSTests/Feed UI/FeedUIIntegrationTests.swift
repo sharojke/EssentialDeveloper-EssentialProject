@@ -13,7 +13,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         
         sut.loadViewIfNeeded()
         
-        XCTAssertEqual(sut.title, localized("FEED_VIEW_TITLE"))
+        XCTAssertEqual(sut.title, FeedPresenter.title)
     }
     
     func test_loadFeedActions_requestsFeedFromLoader() {
@@ -511,12 +511,23 @@ final class FeedUIIntegrationTests: XCTestCase {
     }
     
     func test_errorView_doesNotRenderErrorOnLoad() {
-            let (sut, _) = makeSUT()
-
-            sut.loadViewIfNeeded()
-
-            XCTAssertEqual(sut.errorMessage, nil)
-        }
+        let (sut, _) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        
+        XCTAssertEqual(sut.errorMessage, nil)
+    }
+    
+    func test_loadFeedCompletion_rendersErrorMessageOnError() {
+        let (sut, loader) = makeSUT()
+        
+        sut.simulateAppearance()
+        
+        XCTAssertEqual(sut.errorMessage, nil)
+        
+        loader.completeFeedLoadingWithError(at: 0)
+        XCTAssertEqual(sut.errorMessage, localized("FEED_VIEW_CONNECTION_ERROR"))
+    }
 }
 
 // MARK: - Helpers
