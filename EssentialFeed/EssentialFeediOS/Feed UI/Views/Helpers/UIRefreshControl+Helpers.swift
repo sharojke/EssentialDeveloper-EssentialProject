@@ -2,6 +2,10 @@ import UIKit
 
 extension UIRefreshControl {
     func update(isRefreshing: Bool) {
-        isRefreshing ? beginRefreshing() : endRefreshing()
+        if isRefreshing {
+            beginRefreshing()
+        } else {
+            endRefreshing()
+        }
     }
 }
