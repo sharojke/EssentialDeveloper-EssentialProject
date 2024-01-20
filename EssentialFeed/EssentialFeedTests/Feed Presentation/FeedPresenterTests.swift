@@ -39,19 +39,19 @@ final class FeedPresenter {
 }
 
 final class ViewSpy: FeedLoadingView, FeedErrorView {
-    enum Message: Equatable {
+    enum Message: Hashable {
         case displayError(message: String?)
         case displayLoading(isLoading: Bool)
     }
     
-    private(set) var messages = [Message]()
+    private(set) var messages = Set<Message>()
     
     func display(_ viewModel: FeedLoadingViewModel) {
-        messages.append(.displayLoading(isLoading: viewModel.isLoading))
+        messages.insert(.displayLoading(isLoading: viewModel.isLoading))
     }
     
     func display(_ viewModel: FeedErrorViewModel) {
-        messages.append(.displayError(message: viewModel.message))
+        messages.insert(.displayError(message: viewModel.message))
     }
 }
 
