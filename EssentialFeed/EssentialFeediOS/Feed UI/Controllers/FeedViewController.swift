@@ -5,8 +5,11 @@ protocol FeedViewControllerDelegate {
 }
 
 public final class FeedViewController: UITableViewController {
-    private var onViewIsAppearing: ((FeedViewController) -> Void)?
+    public let errorView = ErrorView()
+    
     var delegate: FeedViewControllerDelegate?
+    
+    private var onViewIsAppearing: ((FeedViewController) -> Void)?
     
     var tableModel = [FeedImageCellController]() {
         didSet { tableView.reloadData() }
@@ -74,5 +77,10 @@ extension FeedViewController: FeedLoadingView {
         } else {
             refreshControl?.endRefreshing()
         }
+    }
+}
+
+extension FeedViewController: FeedErrorView {
+    func display(_ viewModel: FeedErrorViewModel) {
     }
 }

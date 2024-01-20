@@ -1,8 +1,4 @@
-//
-//  FeedErrorViewModel.swift
-//  EssentialFeediOS
-//
-//  Created by Macbook Gray on 1/20/24.
-//
-
-import Foundation
+enum FeedErrorViewModel {
+    case noError
+    case error(message: String)
+}
