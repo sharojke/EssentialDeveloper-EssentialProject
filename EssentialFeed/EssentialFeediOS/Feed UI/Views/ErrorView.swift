@@ -12,6 +12,16 @@ public final class ErrorView: UIView {
     
     @IBOutlet private var label: UILabel!
     
+    @IBAction private func hideMessageAnimated() {
+        UIView.animate(
+            withDuration: 0.25,
+            animations: { self.alpha = 0 },
+            completion: { completed in
+                if completed { self.label.text = nil }
+            }
+        )
+    }
+    
     override public func awakeFromNib() {
         super.awakeFromNib()
         
@@ -33,15 +43,5 @@ public final class ErrorView: UIView {
         UIView.animate(withDuration: 0.25) {
             self.alpha = 1
         }
-    }
-    
-    private func hideMessageAnimated() {
-        UIView.animate(
-            withDuration: 0.25,
-            animations: { self.alpha = 0 },
-            completion: { completed in
-                if completed { self.label.text = nil }
-            }
-        )
     }
 }
