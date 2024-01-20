@@ -1,37 +1,5 @@
 import Foundation
 
-public protocol FeedLoadingView {
-    func display(_ viewModel: FeedLoadingViewModel)
-}
-
-public protocol FeedView {
-    func display(_ viewModel: FeedViewModel)
-}
-
-public protocol FeedErrorView {
-    func display(_ viewModel: FeedErrorViewModel)
-}
-
-public struct FeedLoadingViewModel {
-    public let isLoading: Bool
-}
-
-public struct FeedErrorViewModel {
-    static var noError: Self {
-        return Self(message: nil)
-    }
-
-    public let message: String?
-    
-    static func error(message: String) -> Self {
-        return Self(message: message)
-    }
-}
-
-public struct FeedViewModel {
-    public let feed: [FeedImage]
-}
-
 public final class FeedPresenter {
     public static var title: String {
         return NSLocalizedString(
