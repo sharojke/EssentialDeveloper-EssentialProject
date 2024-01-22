@@ -1,3 +1,4 @@
+import EssentialFeed
 import UIKit
 
 // swiftlint:disable weak_delegate
