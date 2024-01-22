@@ -1,7 +1,7 @@
 import EssentialFeed
 import XCTest
 
-final class ViewSpy: FeedLoadingView, FeedView, FeedErrorView {
+private final class ViewSpy: FeedLoadingView, FeedView, FeedErrorView {
     enum Message: Hashable {
         case displayError(message: String?)
         case displayLoading(isLoading: Bool)
