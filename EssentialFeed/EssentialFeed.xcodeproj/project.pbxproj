@@ -11,7 +11,7 @@
 		BB0E1C382B4448910031DA09 /* FeedUIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0E1C372B4448910031DA09 /* FeedUIIntegrationTests.swift */; };
 		BB0E1C392B4448910031DA09 /* EssentialFeediOS.h in Headers */ = {isa = PBXBuildFile; fileRef = BB0E1C2D2B4448900031DA09 /* EssentialFeediOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BB0F2BD72B47458100EF301F /* UIView+Shimmering.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0F2BD62B47458100EF301F /* UIView+Shimmering.swift */; };
-		BB17686F2B49A03600FEDA3F /* FeedImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB17686E2B49A03600FEDA3F /* FeedImageDataLoader.swift */; };
+		BB1160332B62E2510098A182 /* FeedImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB17686E2B49A03600FEDA3F /* FeedImageDataLoader.swift */; };
 		BB1768792B49A14700FEDA3F /* UIKit+Simulations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1768782B49A14700FEDA3F /* UIKit+Simulations.swift */; };
 		BB17687B2B49A23000FEDA3F /* UIImage+Make.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB17687A2B49A23000FEDA3F /* UIImage+Make.swift */; };
 		BB17687E2B49A45400FEDA3F /* FeedViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB17687D2B49A45400FEDA3F /* FeedViewController+Extensions.swift */; };
@@ -290,7 +290,6 @@
 		BB0E1C2C2B4448900031DA09 /* EssentialFeediOS */ = {
 			isa = PBXGroup;
 			children = (
-				BB17686D2B49A01F00FEDA3F /* Feed Image Loader */,
 				BB1768702B49A04000FEDA3F /* Feed UI */,
 				BB0E1C2D2B4448900031DA09 /* EssentialFeediOS.h */,
 			);
@@ -303,14 +302,6 @@
 				BB1768732B49A07000FEDA3F /* Feed UI */,
 			);
 			path = EssentialFeediOSTests;
-			sourceTree = "<group>";
-		};
-		BB17686D2B49A01F00FEDA3F /* Feed Image Loader */ = {
-			isa = PBXGroup;
-			children = (
-				BB17686E2B49A03600FEDA3F /* FeedImageDataLoader.swift */,
-			);
-			path = "Feed Image Loader";
 			sourceTree = "<group>";
 		};
 		BB1768702B49A04000FEDA3F /* Feed UI */ = {
@@ -480,6 +471,7 @@
 			children = (
 				BB5CA5F62B28F41400AF0D66 /* FeedImage.swift */,
 				BB5CA5F82B28F44100AF0D66 /* FeedLoader.swift */,
+				BB17686E2B49A03600FEDA3F /* FeedImageDataLoader.swift */,
 			);
 			path = "Feed Feature";
 			sourceTree = "<group>";
@@ -875,7 +867,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB4FC9292B5714D400DBA041 /* FeedViewAdapter.swift in Sources */,
-				BB17686F2B49A03600FEDA3F /* FeedImageDataLoader.swift in Sources */,
 				BBE2F3C72B5BF60F00117DF2 /* UIRefreshControl+Helpers.swift in Sources */,
 				BB0F2BD72B47458100EF301F /* UIView+Shimmering.swift in Sources */,
 				BBC0C7312B546FFC00CFF729 /* UITableView+Dequeueing.swift in Sources */,
@@ -943,6 +934,7 @@
 				BB5CA5F72B28F41400AF0D66 /* FeedImage.swift in Sources */,
 				BB284A072B2E608500E0CBD7 /* URLSessionHTTPClient.swift in Sources */,
 				BBE2F3D72B5C073D00117DF2 /* FeedErrorViewModel.swift in Sources */,
+				BB1160332B62E2510098A182 /* FeedImageDataLoader.swift in Sources */,
 				BBE2F3D52B5C072300117DF2 /* FeedLoadingViewModel.swift in Sources */,
 				BB9C46E22B5EFFB400052D7D /* FeedImagePresenter.swift in Sources */,
 				BB7DFFB52B39A0E6000B1293 /* CoreDataFeedStore.swift in Sources */,
