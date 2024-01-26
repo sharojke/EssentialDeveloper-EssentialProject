@@ -4,6 +4,49 @@ import XCTest
 // swiftlint:disable force_unwrapping
 // swiftlint:disable force_try
 
+private class HTTPClientSpy: HTTPClient {
+    private struct Task: HTTPClientTask {
+        func cancel() {}
+    }
+    
+    private var messages = [
+        (
+            url: URL,
+            completion: (HTTPClient.Result) -> Void
+        )
+    ]()
+    
+    var requestedURLs: [URL] {
+        return messages.map { $0.url }
+    }
+    
+    func get(
+        from url: URL,
+        completion: @escaping (HTTPClient.Result) -> Void
+    ) -> EssentialFeed.HTTPClientTask {
+        messages.append((url, completion))
+        return Task()
+    }
+    
+    func complete(with error: Error, at index: Int = 0) {
+        messages[index].completion(.failure(error))
+    }
+    
+    func complete(
+        with statusCode: Int,
+        data: Data,
+        at index: Int = 0
+    ) {
+        let response = HTTPURLResponse(
+            url: messages[index].url,
+            statusCode: statusCode,
+            httpVersion: nil,
+            headerFields: nil
+        )!
+        messages[index].completion(.success((data, response)))
+    }
+}
+
 final class LoadFeedFromRemoteUseCaseTests: XCTestCase {
     func test_init_doesNotRequestDataFromURL() {
         let (_, client) = makeSUT()
@@ -134,44 +177,6 @@ final class LoadFeedFromRemoteUseCaseTests: XCTestCase {
 // MARK: - Helpers
 
 extension LoadFeedFromRemoteUseCaseTests {
-    private class HTTPClientSpy: HTTPClient {
-        private var messages = [
-            (
-                url: URL,
-                completion: (HTTPClient.Result) -> Void
-            )
-        ]()
-        
-        var requestedURLs: [URL] {
-            return messages.map { $0.url }
-        }
-        
-        func get(
-            from url: URL,
-            completion: @escaping (HTTPClient.Result) -> Void
-        ) {
-            messages.append((url, completion))
-        }
-        
-        func complete(with error: Error, at index: Int = 0) {
-            messages[index].completion(.failure(error))
-        }
-        
-        func complete(
-            with statusCode: Int,
-            data: Data,
-            at index: Int = 0
-        ) {
-            let response = HTTPURLResponse(
-                url: messages[index].url,
-                statusCode: statusCode,
-                httpVersion: nil,
-                headerFields: nil
-            )!
-            messages[index].completion(.success((data, response)))
-        }
-    }
-    
     private func makeSUT(
         url: URL = URL(string: "http://url.com")!,
         file: StaticString = #filePath,
