@@ -4,49 +4,6 @@ import XCTest
 // swiftlint:disable force_unwrapping
 // swiftlint:disable force_try
 
-private class HTTPClientSpy: HTTPClient {
-    private struct Task: HTTPClientTask {
-        func cancel() {}
-    }
-    
-    private var messages = [
-        (
-            url: URL,
-            completion: (HTTPClient.Result) -> Void
-        )
-    ]()
-    
-    var requestedURLs: [URL] {
-        return messages.map { $0.url }
-    }
-    
-    func get(
-        from url: URL,
-        completion: @escaping (HTTPClient.Result) -> Void
-    ) -> HTTPClientTask {
-        messages.append((url, completion))
-        return Task()
-    }
-    
-    func complete(with error: Error, at index: Int = 0) {
-        messages[index].completion(.failure(error))
-    }
-    
-    func complete(
-        with statusCode: Int,
-        data: Data,
-        at index: Int = 0
-    ) {
-        let response = HTTPURLResponse(
-            url: messages[index].url,
-            statusCode: statusCode,
-            httpVersion: nil,
-            headerFields: nil
-        )!
-        messages[index].completion(.success((data, response)))
-    }
-}
-
 final class LoadFeedFromRemoteUseCaseTests: XCTestCase {
     func test_init_doesNotRequestDataFromURL() {
         let (_, client) = makeSUT()
@@ -97,7 +54,7 @@ final class LoadFeedFromRemoteUseCaseTests: XCTestCase {
                 toCompleteWithResult: failure(.invalidData),
                 when: {
                     let json = makeItemsJSON([])
-                    client.complete(with: code, data: json, at: index)
+                    client.complete(withStatusCode: code, data: json, at: index)
                 }
             )
         }
@@ -111,7 +68,7 @@ final class LoadFeedFromRemoteUseCaseTests: XCTestCase {
             toCompleteWithResult: failure(.invalidData),
             when: {
                 let invalidJSON = Data("invalid.json".utf8)
-                client.complete(with: 200, data: invalidJSON)
+                client.complete(withStatusCode: 200, data: invalidJSON)
             }
         )
     }
@@ -124,7 +81,7 @@ final class LoadFeedFromRemoteUseCaseTests: XCTestCase {
             toCompleteWithResult: .success([]),
             when: {
                 let emptyJSONList = makeItemsJSON([])
-                client.complete(with: 200, data: emptyJSONList)
+                client.complete(withStatusCode: 200, data: emptyJSONList)
             }
         )
     }
@@ -151,7 +108,7 @@ final class LoadFeedFromRemoteUseCaseTests: XCTestCase {
             toCompleteWithResult: .success(items),
             when: {
                 let json = makeItemsJSON([item1.json, item2.json])
-                client.complete(with: 200, data: json)
+                client.complete(withStatusCode: 200, data: json)
             }
         )
     }
@@ -168,7 +125,7 @@ final class LoadFeedFromRemoteUseCaseTests: XCTestCase {
         sut?.load { capturedResults.append($0) }
         
         sut = nil
-        client.complete(with: 200, data: makeItemsJSON([]))
+        client.complete(withStatusCode: 200, data: makeItemsJSON([]))
         
         XCTAssertTrue(capturedResults.isEmpty)
     }
