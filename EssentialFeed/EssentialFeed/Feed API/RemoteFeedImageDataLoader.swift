@@ -1,4 +1,4 @@
-public final class RemoteFeedImageDataLoader {
+public final class RemoteFeedImageDataLoader: FeedImageDataLoader {
     private final class HTTPClientTaskWrapper: FeedImageDataLoaderTask {
         var wrapped: HTTPClientTask?
         private var completion: ((FeedImageDataLoader.Result) -> Void)?
