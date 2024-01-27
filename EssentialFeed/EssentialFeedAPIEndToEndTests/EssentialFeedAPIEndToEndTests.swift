@@ -54,15 +54,14 @@ private extension EssentialFeedAPIEndToEndTests {
         file: StaticString = #filePath,
         line: UInt = #line
     ) -> FeedLoader.Result? {
-        let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
         let loader = RemoteFeedLoader(
             url: feedTestServerURL,
-            client: client
+            client: ephemeralClient()
         )
-        trackForMemoryLeaks(client, file: file, line: line)
         trackForMemoryLeaks(loader, file: file, line: line)
         
         let exp = expectation(description: "Wait for completion")
+        
         var receivedResult: FeedLoader.Result?
         loader.load { result in
             receivedResult = result
@@ -77,14 +76,12 @@ private extension EssentialFeedAPIEndToEndTests {
         file: StaticString = #filePath,
         line: UInt = #line
     ) -> FeedImageDataLoader.Result? {
-        let feedTestServerURL = feedTestServerURL
-            .appendingPathComponent("73A7F70C-75DA-4C2E-B5A3-EED40DC53AA6/image")
-        let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
-        let loader = RemoteFeedImageDataLoader(client: client)
-        trackForMemoryLeaks(client, file: file, line: line)
+        let loader = RemoteFeedImageDataLoader(client: ephemeralClient())
         trackForMemoryLeaks(loader, file: file, line: line)
         
         let exp = expectation(description: "Wait for load completion")
+        let feedTestServerURL = feedTestServerURL
+            .appendingPathComponent("73A7F70C-75DA-4C2E-B5A3-EED40DC53AA6/image")
         
         var receivedResult: FeedImageDataLoader.Result?
         _ = loader.loadImageData(from: feedTestServerURL) { result in
@@ -146,6 +143,16 @@ private extension EssentialFeedAPIEndToEndTests {
     
     func imageURL(at index: Int) -> URL {
         return URL(string: "https://url-\(index + 1).com")!
+    }
+    
+    func ephemeralClient(
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) -> URLSessionHTTPClient {
+        let session = URLSession(configuration: .ephemeral)
+        let client = URLSessionHTTPClient(session: session)
+        trackForMemoryLeaks(client)
+        return client
     }
 }
 
