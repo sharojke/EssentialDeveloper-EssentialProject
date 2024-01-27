@@ -285,10 +285,6 @@ private extension RemoteFeedImageDataLoaderTests {
         wait(for: [exp], timeout: 1)
     }
     
-    func anyData() -> Data {
-        return Data("any data".utf8)
-    }
-    
     func failure(_ error: RemoteFeedImageDataLoader.Error) -> FeedImageDataLoader.Result {
         return .failure(error)
     }

@@ -168,10 +168,6 @@ private extension URLSessionHTTPClientTests {
         return sut
     }
     
-    func anyData() -> Data {
-        return Data("any data".utf8)
-    }
-    
     func anyHTTPURLResponse() -> HTTPURLResponse {
         return HTTPURLResponse(
             url: anyURL(),
