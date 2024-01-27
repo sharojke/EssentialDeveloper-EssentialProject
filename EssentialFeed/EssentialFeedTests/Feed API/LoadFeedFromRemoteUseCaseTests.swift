@@ -23,7 +23,7 @@ private class HTTPClientSpy: HTTPClient {
     func get(
         from url: URL,
         completion: @escaping (HTTPClient.Result) -> Void
-    ) -> EssentialFeed.HTTPClientTask {
+    ) -> HTTPClientTask {
         messages.append((url, completion))
         return Task()
     }
