@@ -14,6 +14,7 @@ private final class LocalFeedImageDataLoader: FeedImageDataLoader {
     
     public enum Error: Swift.Error {
         case failed
+        case notFound
     }
     
     private let store: FeedImageDataStore
@@ -26,8 +27,12 @@ private final class LocalFeedImageDataLoader: FeedImageDataLoader {
         from url: URL,
         completion: @escaping (FeedImageDataLoader.Result) -> Void
     ) -> EssentialFeed.FeedImageDataLoaderTask {
-        store.retrieve(dataForURL: url) { _ in
-            completion(.failure(Error.failed))
+        store.retrieve(dataForURL: url) { result in
+            completion(
+                result
+                    .mapError { _ in Error.failed }
+                    .flatMap { _ in .failure(Error.notFound) }
+            )
         }
         return Task()
     }
@@ -48,6 +53,10 @@ private final class StoreSpy: FeedImageDataStore {
     
     func complete(with error: Error, at index: Int = 0) {
         completions[index](.failure(error))
+    }
+    
+    func complete(with data: Data?, at index: Int = 0) {
+        completions[index](.success(data))
     }
 }
 
@@ -73,9 +82,17 @@ final class LocalFeedImageDataLoaderTests: XCTestCase {
     func test_loadImageDataFromURL_failsOnStoreError() {
         let (sut, store) = makeSUT()
         
-        expect(sut, toCompleteWith: failed()) {
+        expect(sut, toCompleteWith: failure(with: .failed)) {
             let retrievalError = anyNSError()
             store.complete(with: retrievalError)
+        }
+    }
+    
+    func test_loadImageDataFromURL_deliversNotFoundErrorOnNotFound() {
+        let (sut, store) = makeSUT()
+        
+        expect(sut, toCompleteWith: failure(with: .notFound)) {
+            store.complete(with: nil)
         }
     }
 }
@@ -140,7 +157,7 @@ private extension LocalFeedImageDataLoaderTests {
         wait(for: [exp], timeout: 1)
     }
     
-    func failed() -> FeedImageDataLoader.Result {
-        return .failure(LocalFeedImageDataLoader.Error.failed)
+    func failure(with error: LocalFeedImageDataLoader.Error) -> FeedImageDataLoader.Result {
+        return .failure(error)
     }
 }
