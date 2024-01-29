@@ -45,7 +45,9 @@ private final class LocalFeedImageDataLoader: FeedImageDataLoader {
     ) -> EssentialFeed.FeedImageDataLoaderTask {
         let task = Task(completion: completion)
         
-        store.retrieve(dataForURL: url) { result in
+        store.retrieve(dataForURL: url) { [weak self] result in
+            guard self != nil else { return }
+            
             task.complete(with: result
                 .mapError { _ in Error.failed }
                 .flatMap { data in data.map { .success($0) } ?? .failure(Error.notFound) })
@@ -130,6 +132,21 @@ final class LocalFeedImageDataLoaderTests: XCTestCase {
         task.cancel()
         
         store.complete(with: anyFoundData)
+        store.complete(with: nil)
+        store.complete(with: anyNSError())
+        
+        XCTAssertTrue(receivedResults.isEmpty)
+    }
+    
+    func test_loadImageDataFromURL_doesNotDeliverResultAfterSUTHasBeenDeallocated() {
+        let store = StoreSpy()
+        var sut: LocalFeedImageDataLoader? = LocalFeedImageDataLoader(store: store)
+        
+        var receivedResults = [(Result<Data, Error>)]()
+        _ = sut?.loadImageData(from: anyURL()) { receivedResults.append($0) }
+        
+        sut = nil
+        store.complete(with: anyData())
         store.complete(with: nil)
         store.complete(with: anyNSError())
         
