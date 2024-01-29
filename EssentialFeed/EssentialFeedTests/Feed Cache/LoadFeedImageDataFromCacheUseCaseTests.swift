@@ -31,7 +31,7 @@ private final class StoreSpy: FeedImageDataStore {
     }
 }
 
-final class LocalFeedImageDataLoaderTests: XCTestCase {
+final class LoadFeedImageDataFromCacheUseCaseTests: XCTestCase {
     func test_init_doesNotMessageStoreUponCreation() {
         let (_, store) = makeSUT()
         
@@ -119,7 +119,7 @@ final class LocalFeedImageDataLoaderTests: XCTestCase {
 
 // MARK: - Helpers
 
-private extension LocalFeedImageDataLoaderTests {
+private extension LoadFeedImageDataFromCacheUseCaseTests {
     func makeSUT(
         currentDate: @escaping () -> Date = Date.init,
         file: StaticString = #filePath,
