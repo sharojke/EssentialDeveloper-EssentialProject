@@ -4,6 +4,7 @@ import XCTest
 private final class StoreSpy: FeedImageDataStore {
     enum Message: Equatable {
         case retrieve(dataFor: URL)
+        case insert(data: Data, for: URL)
     }
     
     private var completions = [(FeedImageDataStore.Result) -> Void]()
@@ -12,6 +13,10 @@ private final class StoreSpy: FeedImageDataStore {
     func retrieve(dataForURL url: URL, completion: @escaping (FeedImageDataStore.Result) -> Void) {
         receivedMessages.append(.retrieve(dataFor: url))
         completions.append(completion)
+    }
+    
+    func insert(_ data: Data, for url: URL, completion: @escaping (InsertionResult) -> Void) {
+        receivedMessages.append(.insert(data: data, for: url))
     }
     
     func complete(with error: Error, at index: Int = 0) {
@@ -96,6 +101,16 @@ final class LocalFeedImageDataLoaderTests: XCTestCase {
         store.complete(with: anyNSError())
         
         XCTAssertTrue(receivedResults.isEmpty)
+    }
+    
+    func test_loadDataFromURL_requestsImageDataInsertionForURL() {
+        let (sut, store) = makeSUT()
+        let anyData = anyData()
+        let anyURL = anyURL()
+        
+        sut.save(anyData, for: anyURL) { _ in }
+        
+        XCTAssertEqual(store.receivedMessages, [.insert(data: anyData, for: anyURL)])
     }
 }
 
