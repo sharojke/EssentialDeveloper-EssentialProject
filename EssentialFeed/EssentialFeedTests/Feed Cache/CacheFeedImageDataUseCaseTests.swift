@@ -27,12 +27,26 @@ final class CacheFeedImageDataUseCaseTests: XCTestCase {
     }
     
     func test_saveImageDataForURL_succeedsOnSuccessfulStoreInsertion() {
-            let (sut, store) = makeSUT()
-
-            expect(sut, toCompleteWith: .success(Void()), when: {
-                store.completeInsertionSuccessfully()
-            })
+        let (sut, store) = makeSUT()
+        
+        expect(sut, toCompleteWith: .success(Void()), when: {
+            store.completeInsertionSuccessfully()
+        })
+    }
+    
+    func test_saveImageDataForURL_doesNotReceiveResultAfterSUTHasBeenDeallocated() {
+        let store = FeedImageDataStoreSpy()
+        var sut: LocalFeedImageDataLoader? = LocalFeedImageDataLoader(store: store)
+        
+        var received = [LocalFeedImageDataLoader.SaveResult]()
+        sut?.save(anyData(), for: anyURL()) { result in
+            received.append(result)
         }
+        sut = nil
+        store.completeInsertionSuccessfully()
+        
+        XCTAssertTrue(received.isEmpty)
+    }
 }
 
 // MARK: - Helpers
