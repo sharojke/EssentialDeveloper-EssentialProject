@@ -2,16 +2,23 @@ import EssentialFeed
 import XCTest
 
 // swiftlint:disable force_try
+// swiftlint:disable force_unwrapping
 
 final class CoreDataFeedImageDataStoreTests: XCTestCase {
     func test_retrieveImageData_deliversNotFoundWhenEmpty() {
         let sut = makeSUT()
         
-        expect(
-            sut,
-            toCompleteRetrievalWith: notFound(),
-            for: anyURL()
-        )
+        expect(sut, toCompleteRetrievalWith: notFound(), for: anyURL())
+    }
+    
+    func test_retrieveImageData_deliversNotFoundWhenStoredDataURLDoesNotMatch() {
+        let sut = makeSUT()
+        let url = anyURL()
+        let notMatchingURL = URL(string: "http://another-url.com")!
+        
+        insert(anyData(), for: url, into: sut)
+        
+        expect(sut, toCompleteRetrievalWith: notFound(), for: notMatchingURL)
     }
 }
 
@@ -60,8 +67,55 @@ private extension CoreDataFeedImageDataStoreTests {
         wait(for: [exp], timeout: 1)
     }
     
+    func insert(
+        _ data: Data,
+        for url: URL,
+        into sut: CoreDataFeedStore,
+        file: StaticString = #file,
+        line: UInt = #line
+    ) {
+        let exp = expectation(description: "Wait for cache insertion")
+        let image = localImage(url: url)
+        
+        sut.insert(
+            feed: [image],
+            timestamp: Date()
+        ) { result in
+            switch result {
+            case .success:
+                sut.insert(data, for: url) { result in
+                    if case .failure(let error) = result {
+                        XCTFail(
+                            "Failed to insert \(data) with error \(error)",
+                            file: file,
+                            line: line
+                        )
+                    }
+                }
+                
+            case .failure(let error):
+                XCTFail(
+                    "Failed to save \(image) with error \(error)",
+                    file: file,
+                    line: line
+                )
+            }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1)
+    }
+    
     func notFound() -> FeedImageDataStore.RetrievalResult {
         return .success(nil)
+    }
+    
+    func localImage(url: URL) -> LocalFeedImage {
+        return LocalFeedImage(
+            id: UUID(),
+            url: url,
+            description: "any",
+            location: "any"
+        )
     }
 }
 
@@ -75,3 +129,4 @@ extension CoreDataFeedStore: FeedImageDataStore {
 }
 
 // swiftlint:enable force_try
+// swiftlint:enable force_unwrapping
