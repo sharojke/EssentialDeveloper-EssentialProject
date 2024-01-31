@@ -78,19 +78,16 @@ public extension LocalFeedLoader {
             
             switch result {
             case .failure:
-                self?.store.deleteCachedFeed(completion: completion)
+                strongSelf.store.deleteCachedFeed(completion: completion)
                 
-            case .success(let .some(cache)) where FeedCachePrivacy.validate(
+            case .success(let .some(cache)) where !FeedCachePrivacy.validate(
                 cache.timestamp,
                 against: strongSelf.currentDate()
             ):
-                completion(.success(Void()))
-                
-            case .success(.some):
                 strongSelf.store.deleteCachedFeed { _ in completion(.success(Void())) }
                 
-            default:
-                break
+            case .success:
+                completion(.success(Void()))
             }
         }
     }
