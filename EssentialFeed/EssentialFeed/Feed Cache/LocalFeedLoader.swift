@@ -84,7 +84,7 @@ public extension LocalFeedLoader {
                 cache.timestamp,
                 against: strongSelf.currentDate()
             ):
-                strongSelf.store.deleteCachedFeed { _ in completion(.success(Void())) }
+                strongSelf.store.deleteCachedFeed(completion: completion)
                 
             case .success:
                 completion(.success(Void()))
