@@ -78,7 +78,7 @@ public extension LocalFeedLoader {
             
             switch result {
             case .failure:
-                self?.store.deleteCachedFeed { _ in completion(.success(Void())) }
+                self?.store.deleteCachedFeed(completion: completion)
                 
             case .success(let .some(cache)) where FeedCachePrivacy.validate(
                 cache.timestamp,

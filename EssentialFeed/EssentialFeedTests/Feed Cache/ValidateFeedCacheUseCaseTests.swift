@@ -82,6 +82,25 @@ final class ValidateFeedCacheUseCaseTests: XCTestCase {
         
         XCTAssertEqual(store.receivedMessages, [.retrieve])
     }
+    
+    func test_validateCache_failsOnDeletionErrorOfFailedRetrieval() {
+        let (sut, store) = makeSUT()
+        let deletionError = anyNSError()
+        
+        expect(sut, toCompleteWith: .failure(deletionError)) {
+            store.completeRetrieval(with: anyNSError())
+            store.completeDeletion(with: deletionError)
+        }
+    }
+    
+    func test_validateCache_succeedsOnSuccessfulDeletionOfFailedRetrieval() {
+        let (sut, store) = makeSUT()
+        
+        expect(sut, toCompleteWith: .success(Void())) {
+            store.completeRetrieval(with: anyNSError())
+            store.completeDeletionSuccessfully()
+        }
+    }
 }
 
 // MARK: - Helpers
@@ -141,5 +160,40 @@ private extension ValidateFeedCacheUseCaseTests {
         
         action()
         wait(for: [exp], timeout: 1.0)
+    }
+    
+    func expect(
+        _ sut: LocalFeedLoader,
+        toCompleteWith expectedResult: LocalFeedLoader.ValidationResult,
+        when action: () -> Void,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        let exp = expectation(description: "Wait for completion")
+        sut.validateCache { receivedResult in
+            switch (receivedResult, expectedResult) {
+            case (.success, .success):
+                break
+                
+            case let (.failure(receivedError), .failure(expectedError)):
+                XCTAssertEqual(
+                    receivedError as NSError,
+                    expectedError as NSError,
+                    file: file,
+                    line: line
+                )
+                
+            default:
+                XCTFail(
+                    "Expected result \(expectedResult), got \(receivedResult) instead",
+                    file: file,
+                    line: line
+                )
+            }
+            
+            exp.fulfill()
+        }
+        action()
+        wait(for: [exp], timeout: 1)
     }
 }
