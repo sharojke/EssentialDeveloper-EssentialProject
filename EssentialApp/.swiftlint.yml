@@ -1,0 +1,108 @@
+included:
+  - EssentialApp
+  - EssentialAppTests
+  
+opt_in_rules:
+  - all
+
+analyzer_rules:
+  - capture_variable # Capture Variable
+  - typesafe_array_init # Type-safe Array Init
+  - unused_import # Unused Import
+  - unused_declaration # Unused Declaration
+  
+disabled_rules:
+## Default rules
+  - class_delegate_protocol # Class Delegate Protocol
+  - todo # Todo
+  - notification_center_detachment # Notification Center Detachment
+  - unused_control_flow_label # Unused Control Flow Label
+  - trailing_whitespace # Trailing Whitespace ### PROHIBITS USAGE OF EMPTY LINES
+  - xctfail_message # XCTFail Message ### Test
+  - private_unit_test # Private Unit Test ### Test
+
+## Opt-in rules
+  - anyobject_protocol # AnyObject Protocol
+  - expiring_todo # Expiring Todo
+  - explicit_acl # Explicit ACL
+  - explicit_enum_raw_value # Explicit Enum Raw Value
+  - explicit_top_level_acl # Explicit Top Level ACL
+  - lower_acl_than_parent # Lower ACL than Parent
+  - missing_docs # Missing Docs
+  - no_extension_access_modifier # No Extension Access Modifier
+  - no_grouping_extension # No Grouping Extension
+  - nslocalizedstring_key # NSLocalizedString Key
+  - nslocalizedstring_require_bundle # NSLocalizedString Require Bundle
+  - object_literal # Object Literal
+  - pattern_matching_keywords # Pattern Matching Keywords
+  - prefixed_toplevel_constant # Prefixed Top-Level Constant
+  - prohibited_interface_builder # Prohibited Interface Builder
+  - raw_value_for_camel_cased_codable_enum # Raw Value for Camel Cased Codable Enum
+  - required_deinit # Required Deinit
+  - return_value_from_void_function # Return Value from Void Function
+  - strong_iboutlet # Strong IBOutlet
+  - conditional_returns_on_newline # Conditional Returns on Newline
+  - explicit_type_interface # Explicit Type Interface
+  - fallthrough # Fallthrough
+  - self_binding # Self Binding
+  - unavailable_function # Unavailable Function
+  - indentation_width # Indentation Width
+  - reduce_into # Reduce into
+  - sorted_enum_cases # Sorted Enum Cases
+  - unused_capture_list # Unused Capture List ### Deprecated
+  - inert_defer # Inert Defer ### Deprecated
+  - fatal_error_message # Fatal Error Message ### No fatal errors in the project
+  - implicit_return # Implicit Return ### ???
+  - superfluous_else # Superfluous Else ### ???
+  - empty_xctest_method # Empty XCTest Method ### Test
+  - balanced_xctest_lifecycle # Balanced XCTest Life Cycle ### Test
+  - prefer_nimble # Prefer Nimble ### Test
+  - xct_specific_matcher # XCTest Specific Matcher ### Test
+  - quick_discouraged_focused_test # Quick Discouraged Focused Test ### Test
+  - quick_discouraged_pending_test # Quick Discouraged Pending Test ### Test
+  - single_test_class # Single Test Class ### Test
+  - test_case_accessibility # Test Case Accessibility ### Test
+  
+## New disables
+  - identifier_name
+  - no_magic_numbers
+  - trailing_closure
+  - file_name
+  
+  - private_action
+  - private_outlet
+  - weak_delegate
+
+## Customization of rules
+attributes:
+  always_on_same_line:
+    - "@IBAction"
+#    - "@objc" ### Uncomment if there is no CoreData in the project
+  always_on_line_above:
+    - "@ConfigurationElement"
+    - "@OptionGroup"
+    - "@RuleConfigurationDescriptionBuilder"
+    
+identifier_name:
+  excluded:
+    - id
+    - x
+    - y
+    
+line_length:
+  warning: 120
+  ignores_function_declarations: true
+  ignores_comments: true
+  ignores_interpolated_strings: true
+  ignores_urls: true
+    
+number_separator:
+  minimum_length: 5
+
+force_cast:
+  severity: warning
+  
+force_try:
+  severity: warning
+
+## Custom rules
