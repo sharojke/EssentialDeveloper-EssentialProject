@@ -1,3 +1,4 @@
+import EssentialApp
 import EssentialFeed
 import XCTest
 
@@ -12,28 +13,6 @@ private class LoaderStub: FeedLoader {
     
     func load(completion: @escaping (FeedLoader.Result) -> Void) {
         completion(result)
-    }
-}
-
-private class FeedLoaderWithFallbackComposite: FeedLoader {
-    private let primaryLoader: FeedLoader
-    private let fallbackLoader: FeedLoader
-    
-    init(primaryLoader: FeedLoader, fallbackLoader: FeedLoader) {
-        self.primaryLoader = primaryLoader
-        self.fallbackLoader = fallbackLoader
-    }
-    
-    func load(completion: @escaping (FeedLoader.Result) -> Void) {
-        primaryLoader.load { [weak self] result in
-            switch result {
-            case .success(let feed):
-                completion(.success(feed))
-                
-            case .failure:
-                self?.fallbackLoader.load(completion: completion)
-            }
-        }
     }
 }
 
