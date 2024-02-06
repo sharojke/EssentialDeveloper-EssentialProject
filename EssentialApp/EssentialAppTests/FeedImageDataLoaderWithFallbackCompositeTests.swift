@@ -2,7 +2,6 @@ import EssentialApp
 import EssentialFeed
 import XCTest
 
-// swiftlint:disable force_unwrapping
 // swiftlint:disable large_tuple
 
 private class LoaderSpy: FeedImageDataLoader {
@@ -220,19 +219,6 @@ private extension FeedImageDataLoaderWithFallbackCompositeTests {
         
         wait(for: [exp], timeout: 1)
     }
-    
-    func anyURL() -> URL {
-        return URL(string: "http://any-url.com")!
-    }
-    
-    func anyNSError() -> NSError {
-        return NSError(domain: "any error", code: 0)
-    }
-    
-    func anyData() -> Data {
-        return Data("any data".utf8)
-    }
 }
 
-// swiftlint:enable force_unwrapping
 // swiftlint:enable large_tuple
