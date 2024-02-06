@@ -51,6 +51,26 @@ private class LoaderSpy: FeedImageDataLoader {
 
 // swiftlint:disable:next type_name
 final class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
+    func test_init_doestNotLoad() {
+        let primaryLoader = LoaderSpy()
+        let fallbackLoader = LoaderSpy()
+        _ = FeedImageDataLoaderWithFallbackComposite(
+            primaryLoader: primaryLoader,
+            fallbackLoader: fallbackLoader
+        )
+        trackForMemoryLeaks(primaryLoader)
+        trackForMemoryLeaks(fallbackLoader)
+        
+        XCTAssertTrue(
+            primaryLoader.loadedURLs.isEmpty,
+            "Expected no loaded URLs in the primary loader"
+        )
+        XCTAssertTrue(
+            fallbackLoader.loadedURLs.isEmpty,
+            "Expected no loaded URLs in the fallback loader"
+        )
+    }
+    
     func test_load_deliversPrimaryFeedImageDataOnPrimaryLoaderSuccess() {
         let url = anyURL()
         let primaryLoader = LoaderSpy()
