@@ -2,6 +2,7 @@ import EssentialFeed
 import XCTest
 
 // swiftlint:disable force_unwrapping
+// swiftlint:disable large_tuple
 
 final class FeedImageDataLoaderWithFallbackComposite: FeedImageDataLoader {
     private class Task: FeedImageDataLoaderTask {
@@ -52,14 +53,7 @@ private class LoaderSpy: FeedImageDataLoader {
 // swiftlint:disable:next type_name
 final class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
     func test_init_doestNotLoad() {
-        let primaryLoader = LoaderSpy()
-        let fallbackLoader = LoaderSpy()
-        _ = FeedImageDataLoaderWithFallbackComposite(
-            primaryLoader: primaryLoader,
-            fallbackLoader: fallbackLoader
-        )
-        trackForMemoryLeaks(primaryLoader)
-        trackForMemoryLeaks(fallbackLoader)
+        let (_, primaryLoader, fallbackLoader) = makeSUT()
         
         XCTAssertTrue(
             primaryLoader.loadedURLs.isEmpty,
@@ -73,15 +67,7 @@ final class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
     
     func test_load_deliversPrimaryFeedImageDataOnPrimaryLoaderSuccess() {
         let url = anyURL()
-        let primaryLoader = LoaderSpy()
-        let fallbackLoader = LoaderSpy()
-        let sut = FeedImageDataLoaderWithFallbackComposite(
-            primaryLoader: primaryLoader,
-            fallbackLoader: fallbackLoader
-        )
-        trackForMemoryLeaks(primaryLoader)
-        trackForMemoryLeaks(fallbackLoader)
-        trackForMemoryLeaks(sut)
+        let (sut, primaryLoader, fallbackLoader) = makeSUT()
         
         _ = sut.loadImageData(from: url) { _ in }
         
@@ -101,6 +87,27 @@ final class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
 // MARK: - Helpers
 
 private extension FeedImageDataLoaderWithFallbackCompositeTests {
+    func makeSUT(
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) -> (
+        sut: FeedImageDataLoaderWithFallbackComposite,
+        primaryLoader: LoaderSpy,
+        fallbackLoader: LoaderSpy
+        
+    ) {
+        let primaryLoader = LoaderSpy()
+        let fallbackLoader = LoaderSpy()
+        let sut = FeedImageDataLoaderWithFallbackComposite(
+            primaryLoader: primaryLoader,
+            fallbackLoader: fallbackLoader
+        )
+        trackForMemoryLeaks(primaryLoader)
+        trackForMemoryLeaks(fallbackLoader)
+        trackForMemoryLeaks(sut)
+        return (sut, primaryLoader, fallbackLoader)
+    }
+    
     func trackForMemoryLeaks(
         _ instance: AnyObject,
         file: StaticString = #file,
@@ -122,3 +129,4 @@ private extension FeedImageDataLoaderWithFallbackCompositeTests {
 }
 
 // swiftlint:enable force_unwrapping
+// swiftlint:enable large_tuple
