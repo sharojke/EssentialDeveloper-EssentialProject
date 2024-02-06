@@ -22,7 +22,16 @@ final class FeedImageDataLoaderWithFallbackComposite: FeedImageDataLoader {
         from url: URL,
         completion: @escaping (FeedImageDataLoader.Result) -> Void
     ) -> EssentialFeed.FeedImageDataLoaderTask {
-        _ = primaryLoader.loadImageData(from: url, completion: completion)
+        _ = primaryLoader.loadImageData(from: url) { [weak self] receivedResult in
+            switch receivedResult {
+            case .success:
+                break
+                
+            case .failure:
+                _ = self?.fallbackLoader.loadImageData(from: url) { _ in }
+            }
+        }
+        
         return Task()
     }
 }
@@ -48,6 +57,10 @@ private class LoaderSpy: FeedImageDataLoader {
         messages.append((url, completion))
         return Task()
     }
+    
+    func complete(with error: Error, at index: Int = 0) {
+        messages[index].completion(.failure(error))
+    }
 }
 
 // swiftlint:disable:next type_name
@@ -65,7 +78,7 @@ final class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
         )
     }
     
-    func test_load_deliversPrimaryFeedImageDataOnPrimaryLoaderSuccess() {
+    func test_loadImageData_loadsFromPrimaryLoaderFirst() {
         let url = anyURL()
         let (sut, primaryLoader, fallbackLoader) = makeSUT()
         
@@ -82,6 +95,25 @@ final class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
             "Expected no loaded URLs in the fallback loader"
         )
     }
+    
+    func test_loadImageData_loadsFromFallbackOnPrimaryLoaderFailure() {
+        let url = anyURL()
+        let (sut, primaryLoader, fallbackLoader) = makeSUT()
+        
+        _ = sut.loadImageData(from: url) { _ in }
+        primaryLoader.complete(with: anyNSError())
+        
+        XCTAssertEqual(
+            primaryLoader.loadedURLs,
+            [url],
+            "Expected to load URL from primary loader"
+        )
+        XCTAssertEqual(
+            fallbackLoader.loadedURLs,
+            [url],
+            "Expected to load URL from fallback loader"
+        )
+    }
 }
 
 // MARK: - Helpers
@@ -94,7 +126,6 @@ private extension FeedImageDataLoaderWithFallbackCompositeTests {
         sut: FeedImageDataLoaderWithFallbackComposite,
         primaryLoader: LoaderSpy,
         fallbackLoader: LoaderSpy
-        
     ) {
         let primaryLoader = LoaderSpy()
         let fallbackLoader = LoaderSpy()
@@ -125,6 +156,10 @@ private extension FeedImageDataLoaderWithFallbackCompositeTests {
     
     func anyURL() -> URL {
         return URL(string: "http://any-url.com")!
+    }
+    
+    private func anyNSError() -> NSError {
+        return NSError(domain: "any error", code: 0)
     }
 }
 
