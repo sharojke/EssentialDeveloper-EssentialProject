@@ -21,6 +21,7 @@
 		BB4707F22B6C1C69005AE87D /* EssentialFeediOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB4707EE2B6C1C69005AE87D /* EssentialFeediOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BB4707FB2B6C2C1E005AE87D /* FeedLoaderWithFallbackCompositeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4707FA2B6C2C1E005AE87D /* FeedLoaderWithFallbackCompositeTests.swift */; };
 		BBA4BB2D2B72ACD600EC09E6 /* FeedImageDataLoaderWithFallbackCompositeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA4BB2C2B72ACD600EC09E6 /* FeedImageDataLoaderWithFallbackCompositeTests.swift */; };
+		BBA4BB2F2B72D51400EC09E6 /* FeedImageDataLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA4BB2E2B72D51400EC09E6 /* FeedImageDataLoaderWithFallbackComposite.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		BB4707F82B6C2C1E005AE87D /* EssentialAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB4707FA2B6C2C1E005AE87D /* FeedLoaderWithFallbackCompositeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderWithFallbackCompositeTests.swift; sourceTree = "<group>"; };
 		BBA4BB2C2B72ACD600EC09E6 /* FeedImageDataLoaderWithFallbackCompositeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderWithFallbackCompositeTests.swift; sourceTree = "<group>"; };
+		BBA4BB2E2B72D51400EC09E6 /* FeedImageDataLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				BB4707C32B6C1A31005AE87D /* SceneDelegate.swift */,
 				BB4707C52B6C1A31005AE87D /* ViewController.swift */,
 				BB41736E2B717C4000C8C0C8 /* FeedLoaderWithFallbackComposite.swift */,
+				BBA4BB2E2B72D51400EC09E6 /* FeedImageDataLoaderWithFallbackComposite.swift */,
 				BB4707C72B6C1A31005AE87D /* Main.storyboard */,
 				BB4707CA2B6C1A33005AE87D /* Assets.xcassets */,
 				BB4707CC2B6C1A33005AE87D /* LaunchScreen.storyboard */,
@@ -277,6 +280,7 @@
 				BB4707C22B6C1A31005AE87D /* AppDelegate.swift in Sources */,
 				BB41736F2B717C4000C8C0C8 /* FeedLoaderWithFallbackComposite.swift in Sources */,
 				BB4707C42B6C1A31005AE87D /* SceneDelegate.swift in Sources */,
+				BBA4BB2F2B72D51400EC09E6 /* FeedImageDataLoaderWithFallbackComposite.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

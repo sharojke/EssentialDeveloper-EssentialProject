@@ -1,44 +1,9 @@
+import EssentialApp
 import EssentialFeed
 import XCTest
 
 // swiftlint:disable force_unwrapping
 // swiftlint:disable large_tuple
-
-final class FeedImageDataLoaderWithFallbackComposite: FeedImageDataLoader {
-    private class Task: FeedImageDataLoaderTask {
-        var wrapped: FeedImageDataLoaderTask?
-        
-        func cancel() {
-            wrapped?.cancel()
-        }
-    }
-    
-    private let primaryLoader: FeedImageDataLoader
-    private let fallbackLoader: FeedImageDataLoader
-    
-    init(primaryLoader: FeedImageDataLoader, fallbackLoader: FeedImageDataLoader) {
-        self.primaryLoader = primaryLoader
-        self.fallbackLoader = fallbackLoader
-    }
-    
-    func loadImageData(
-        from url: URL,
-        completion: @escaping (FeedImageDataLoader.Result) -> Void
-    ) -> EssentialFeed.FeedImageDataLoaderTask {
-        var task = Task()
-        task.wrapped = primaryLoader.loadImageData(from: url) { [weak self] receivedResult in
-            switch receivedResult {
-            case .success:
-                completion(receivedResult)
-                
-            case .failure:
-                task.wrapped = self?.fallbackLoader.loadImageData(from: url, completion: completion)
-            }
-        }
-        
-        return task
-    }
-}
 
 private class LoaderSpy: FeedImageDataLoader {
     private struct Task: FeedImageDataLoaderTask {
@@ -188,7 +153,6 @@ final class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
     }
     
     func test_loadImageData_deliversErrorOnBothPrimaryAndFallbackLoaderFailure() {
-        let fallbackData = anyData()
         let (sut, primaryLoader, fallbackLoader) = makeSUT()
         
         expect(sut, toCompleteWith: .failure(anyNSError())) {
