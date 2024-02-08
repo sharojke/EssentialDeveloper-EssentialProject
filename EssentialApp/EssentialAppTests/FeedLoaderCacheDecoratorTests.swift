@@ -13,18 +13,18 @@ final class FeedLoaderCacheDecorator: FeedLoader {
     }
 }
 
-final class FeedLoaderCacheDecoratorTests: XCTestCase {
+final class FeedLoaderCacheDecoratorTests: XCTestCase, FeedLoaderTestCase {
     func test_load_deliversFeedOnLoaderSuccess() {
         let feed = uniqueFeed()
         let sut = makeSUT(loaderResult: .success(feed))
         
-        expect(sut, toCompleteWithResult: .success(feed))
+        expect(sut, toCompleteWith: .success(feed))
     }
     
     func test_load_deliversErrorOnLoaderFailure() {
         let sut = makeSUT(loaderResult: .failure(anyNSError()))
         
-        expect(sut, toCompleteWithResult: .failure(anyNSError()))
+        expect(sut, toCompleteWith: .failure(anyNSError()))
     }
 }
 
@@ -41,39 +41,5 @@ private extension FeedLoaderCacheDecoratorTests {
         trackForMemoryLeaks(loader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
-    }
-    
-    func expect(
-        _ sut: FeedLoader,
-        toCompleteWithResult expectedResult: FeedLoader.Result,
-        file: StaticString = #file,
-        line: UInt = #line
-    ) {
-        let exp = expectation(description: "Wait for load completion")
-        sut.load { receivedResult in
-            switch (receivedResult, expectedResult) {
-            case let (.success(receivedFeed), .success(expectedFeed)):
-                XCTAssertEqual(
-                    receivedFeed,
-                    expectedFeed,
-                    "Expected \(expectedResult), got \(receivedResult) instead",
-                    file: file,
-                    line: line
-                )
-                
-            case (.failure, .failure):
-                break
-                
-            default:
-                XCTFail(
-                    "Expected \(expectedResult), got \(receivedResult) instead",
-                    file: file,
-                    line: line
-                )
-            }
-            exp.fulfill()
-        }
-        
-        wait(for: [exp], timeout: 1)
     }
 }
