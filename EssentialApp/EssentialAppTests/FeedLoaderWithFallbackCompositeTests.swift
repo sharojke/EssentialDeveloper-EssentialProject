@@ -88,15 +88,4 @@ private extension FeedLoaderWithFallbackCompositeTests {
         
         wait(for: [exp], timeout: 1)
     }
-    
-    func uniqueFeed() -> [FeedImage] {
-        return [
-            FeedImage(
-                id: UUID(),
-                url: anyURL(),
-                description: "any",
-                location: "any"
-            )
-        ]
-    }
 }

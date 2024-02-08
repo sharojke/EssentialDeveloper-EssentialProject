@@ -22,7 +22,6 @@ final class FeedLoaderCacheDecoratorTests: XCTestCase {
     }
     
     func test_load_deliversErrorOnLoaderFailure() {
-        let feed = uniqueFeed()
         let sut = makeSUT(loaderResult: .failure(anyNSError()))
         
         expect(sut, toCompleteWithResult: .failure(anyNSError()))
@@ -76,16 +75,5 @@ private extension FeedLoaderCacheDecoratorTests {
         }
         
         wait(for: [exp], timeout: 1)
-    }
-    
-    func uniqueFeed() -> [FeedImage] {
-        return [
-            FeedImage(
-                id: UUID(),
-                url: anyURL(),
-                description: "any",
-                location: "any"
-            )
-        ]
     }
 }
