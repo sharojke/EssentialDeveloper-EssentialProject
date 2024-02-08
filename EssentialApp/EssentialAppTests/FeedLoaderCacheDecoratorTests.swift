@@ -1,15 +1,6 @@
 import EssentialFeed
 import XCTest
 
-protocol FeedCache {
-    typealias Result = Swift.Result<Void, Error>
-    
-    func save(
-        _ feed: [FeedImage],
-        completion: @escaping (Result) -> Void
-    )
-}
-
 private final class FeedCacheSpy: FeedCache {
     enum Message: Equatable {
         case save([FeedImage])
