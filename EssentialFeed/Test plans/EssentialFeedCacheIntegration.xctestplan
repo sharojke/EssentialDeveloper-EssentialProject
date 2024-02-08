@@ -22,7 +22,13 @@
     "testTimeoutsEnabled" : true
   },
   "testTargets" : [
-
+    {
+      "target" : {
+        "containerPath" : "container:..\/EssentialFeed\/EssentialFeed.xcodeproj",
+        "identifier" : "BB7DFFC52B3A0196000B1293",
+        "name" : "EssentialFeedCacheIntegrationTests"
+      }
+    }
   ],
   "version" : 1
 }
