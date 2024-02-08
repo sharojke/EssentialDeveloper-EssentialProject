@@ -2,18 +2,6 @@ import EssentialApp
 import EssentialFeed
 import XCTest
 
-private class LoaderStub: FeedLoader {
-    private let result: FeedLoader.Result
-    
-    init(result: FeedLoader.Result) {
-        self.result = result
-    }
-    
-    func load(completion: @escaping (FeedLoader.Result) -> Void) {
-        completion(result)
-    }
-}
-
 final class FeedLoaderWithFallbackCompositeTests: XCTestCase {
     func test_load_deliversPrimaryFeedOnPrimaryLoaderSuccess() {
         let primaryFeed = uniqueFeed()
@@ -55,8 +43,8 @@ private extension FeedLoaderWithFallbackCompositeTests {
         file: StaticString = #filePath,
         line: UInt = #line
     ) -> FeedLoader {
-        let primaryLoader = LoaderStub(result: primaryResult)
-        let fallbackLoader = LoaderStub(result: fallbackResult)
+        let primaryLoader = FeedLoaderStub(result: primaryResult)
+        let fallbackLoader = FeedLoaderStub(result: fallbackResult)
         let sut = FeedLoaderWithFallbackComposite(
             primaryLoader: primaryLoader,
             fallbackLoader: fallbackLoader

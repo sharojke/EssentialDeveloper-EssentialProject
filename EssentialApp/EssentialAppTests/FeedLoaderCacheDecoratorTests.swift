@@ -1,18 +1,6 @@
 import EssentialFeed
 import XCTest
 
-private class LoaderStub: FeedLoader {
-    private let result: FeedLoader.Result
-    
-    init(result: FeedLoader.Result) {
-        self.result = result
-    }
-    
-    func load(completion: @escaping (FeedLoader.Result) -> Void) {
-        completion(result)
-    }
-}
-
 final class FeedLoaderCacheDecorator: FeedLoader {
     private let decoratee: FeedLoader
     
@@ -49,7 +37,7 @@ private extension FeedLoaderCacheDecoratorTests {
         file: StaticString = #file,
         line: UInt = #line
     ) -> FeedLoader {
-        let loader = LoaderStub(result: loaderResult)
+        let loader = FeedLoaderStub(result: loaderResult)
         let sut = FeedLoaderCacheDecorator(decoratee: loader)
         trackForMemoryLeaks(loader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
