@@ -23,16 +23,6 @@ final class FeedImageDataLoaderCacheDecorator: FeedImageDataLoader {
     }
 }
 
-protocol FeedImageDataCache {
-    typealias Result = Swift.Result<Void, Swift.Error>
-    
-    func save(
-        _ data: Data,
-        for url: URL,
-        completion: @escaping (Result) -> Void
-    )
-}
-
 private final class FeedImageDataCacheSpy: FeedImageDataCache {
     enum Message: Equatable {
         case save(Data, URL)
