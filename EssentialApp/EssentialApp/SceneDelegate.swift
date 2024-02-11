@@ -3,6 +3,7 @@ import EssentialFeed
 import EssentialFeediOS
 import UIKit
 
+#if DEBUG
 private final class AlwaysFailingHTTPClient: HTTPClient {
     private class Task: HTTPClientTask {
         func cancel() {
@@ -17,6 +18,7 @@ private final class AlwaysFailingHTTPClient: HTTPClient {
         return Task()
     }
 }
+#endif
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
@@ -35,9 +37,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .defaultDirectoryURL()
             .appendingPathComponent("feed-store.sqlite")
         
+        #if DEBUG
         if CommandLine.arguments.contains("-reset") {
             try? FileManager.default.removeItem(at: localStoreURL)
         }
+        #endif
         
         // swiftlint:disable:next force_try
         let localStore = try! CoreDataFeedStore(storeURL: localStoreURL)
@@ -63,12 +67,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func makeRemoteClient() -> HTTPClient {
-        return switch UserDefaults.standard.string(forKey: "connectivity") {
-        case "offline":
-            AlwaysFailingHTTPClient()
-            
-        default:
-            URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
+        #if DEBUG
+        if UserDefaults.standard.string(forKey: "connectivity") == "offline" {
+            return AlwaysFailingHTTPClient()
         }
+        #endif
+        
+        return URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
     }
 }
