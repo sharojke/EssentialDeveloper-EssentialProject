@@ -1,4 +1,5 @@
 import EssentialFeed
+import EssentialFeediOS
 import UIKit
 
 // swiftlint:disable force_cast

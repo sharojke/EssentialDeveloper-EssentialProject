@@ -1,4 +1,5 @@
 import EssentialFeed
+import EssentialFeediOS
 import UIKit
 
 final class FeedViewAdapter: FeedView {
@@ -14,7 +15,7 @@ final class FeedViewAdapter: FeedView {
     }
     
     func display(_ viewModel: FeedViewModel) {
-        controller?.tableModel = viewModel.feed.map { feedImage in
+        controller?.display(viewModel.feed.map { feedImage in
             let adapter = PresentationAdapter(
                 model: feedImage,
                 imageLoader: loader
@@ -27,6 +28,6 @@ final class FeedViewAdapter: FeedView {
             )
 
             return view
-        }
+        })
     }
 }

@@ -1,3 +1,4 @@
+import EssentialApp
 import EssentialFeed
 import EssentialFeediOS
 import UIKit
