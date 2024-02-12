@@ -12,7 +12,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard (scene as? UIWindowScene) != nil else { return }
+     
+        configureWindow()
+    }
         
+    func configureWindow() {
         // swiftlint:disable:next force_unwrapping
         let remoteURL = URL(string: "https://ile-api.essentialdeveloper.com/essential-feed/v1/feed")!
         
@@ -25,19 +29,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let localFeedLoader = LocalFeedLoader(store: localStore, currentDate: Date.init)
         let localImageLoader = LocalFeedImageDataLoader(store: localStore)
         
-        window?.rootViewController = FeedUIComposer.feedComposedWith(
-            feedLoader: FeedLoaderWithFallbackComposite(
-                primaryLoader: FeedLoaderCacheDecorator(
-                    decoratee: remoteFeedLoader,
-                    cache: localFeedLoader
+        window?.rootViewController = UINavigationController(
+            rootViewController: FeedUIComposer.feedComposedWith(
+                feedLoader: FeedLoaderWithFallbackComposite(
+                    primaryLoader: FeedLoaderCacheDecorator(
+                        decoratee: remoteFeedLoader,
+                        cache: localFeedLoader
+                    ),
+                    fallbackLoader: localFeedLoader
                 ),
-                fallbackLoader: localFeedLoader
-            ),
-            imageLoader: FeedImageDataLoaderWithFallbackComposite(
-                primaryLoader: localImageLoader,
-                fallbackLoader: FeedImageDataLoaderCacheDecorator(
-                    decoratee: remoteImageLoader,
-                    cache: localImageLoader
+                imageLoader: FeedImageDataLoaderWithFallbackComposite(
+                    primaryLoader: localImageLoader,
+                    fallbackLoader: FeedImageDataLoaderCacheDecorator(
+                        decoratee: remoteImageLoader,
+                        cache: localImageLoader
+                    )
                 )
             )
         )
