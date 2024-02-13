@@ -48,6 +48,7 @@
 		BBBB19682B7AADFA006C5AC2 /* UIKit+Simulations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB195E2B7AADFA006C5AC2 /* UIKit+Simulations.swift */; };
 		BBBB196A2B7AAE2D006C5AC2 /* FeedUIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB19692B7AAE2D006C5AC2 /* FeedUIIntegrationTests.swift */; };
 		BBBB196C2B7AB0BD006C5AC2 /* FeedAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB196B2B7AB0BD006C5AC2 /* FeedAcceptanceTests.swift */; };
+		BBFADC782B7C062300692CFC /* HTTPClientStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFADC772B7C062300692CFC /* HTTPClientStub.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 		BBBB19602B7AADFA006C5AC2 /* FeedViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedViewController+Extensions.swift"; sourceTree = "<group>"; };
 		BBBB19692B7AAE2D006C5AC2 /* FeedUIIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUIIntegrationTests.swift; sourceTree = "<group>"; };
 		BBBB196B2B7AB0BD006C5AC2 /* FeedAcceptanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedAcceptanceTests.swift; sourceTree = "<group>"; };
+		BBFADC772B7C062300692CFC /* HTTPClientStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientStub.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +236,7 @@
 				BBA4BB332B72D66A00EC09E6 /* SharedTestHelpers.swift */,
 				BB124D3C2B755EFE00568504 /* FeedLoaderStub.swift */,
 				BB007F6E2B77C8D30096EB68 /* FeedImageDataLoaderSpy.swift */,
+				BBFADC772B7C062300692CFC /* HTTPClientStub.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 			files = (
 				BBBB19662B7AADFA006C5AC2 /* FeedUIIntegrationTests+LoaderSpy.swift in Sources */,
 				BBBB19642B7AADFA006C5AC2 /* FeedViewController+Extensions.swift in Sources */,
+				BBFADC782B7C062300692CFC /* HTTPClientStub.swift in Sources */,
 				BBA4BB342B72D66A00EC09E6 /* SharedTestHelpers.swift in Sources */,
 				BBBB19652B7AADFA006C5AC2 /* FeedUIIntegrationTests+CustomAssertions.swift in Sources */,
 				BBBB196A2B7AAE2D006C5AC2 /* FeedUIIntegrationTests.swift in Sources */,
