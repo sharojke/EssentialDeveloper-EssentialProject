@@ -30,7 +30,7 @@ extension CoreDataFeedStore: FeedStore {
         perform { context in
             completion(Result {
                 try ManagedCache.find(in: context).map { cache in
-                    CacheFeed(
+                    CachedFeed(
                         feed: cache.localFeed,
                         timestamp: cache.timestamp
                     )
