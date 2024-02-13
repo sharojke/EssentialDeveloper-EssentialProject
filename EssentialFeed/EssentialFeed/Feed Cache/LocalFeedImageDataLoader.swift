@@ -60,7 +60,7 @@ extension LocalFeedImageDataLoader: FeedImageDataLoader {
 extension LocalFeedImageDataLoader: FeedImageDataCache {
     public typealias SaveResult = FeedImageDataCache.Result
     
-    enum SaveError: Swift.Error {
+    public enum SaveError: Swift.Error {
         case failed
     }
     

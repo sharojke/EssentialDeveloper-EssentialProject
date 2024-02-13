@@ -35,7 +35,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
         
         expect(
             sut,
-            toCompleteWithResult: .success(CacheFeed(feed: feed, timestamp: timestamp)),
+            toCompleteWithResult: .success(CachedFeed(feed: feed, timestamp: timestamp)),
             file: file,
             line: line
         )
@@ -53,7 +53,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
         
         expect(
             sut,
-            toRetrieveTwice: .success(CacheFeed(feed: feed, timestamp: timestamp)),
+            toRetrieveTwice: .success(CachedFeed(feed: feed, timestamp: timestamp)),
             file: file,
             line: line
         )
@@ -111,7 +111,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
         expect(
             sut,
             toCompleteWithResult: .success(
-                CacheFeed(
+                CachedFeed(
                     feed: latestFeed,
                     timestamp: latestTimestamp
                 )

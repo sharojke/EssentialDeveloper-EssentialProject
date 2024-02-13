@@ -62,7 +62,7 @@ class FeedStoreSpy: FeedStore {
     ) {
         retrievalCompletions[index](
             .success(
-                CacheFeed(feed: feed, timestamp: timestamp)
+                CachedFeed(feed: feed, timestamp: timestamp)
             )
         )
     }
