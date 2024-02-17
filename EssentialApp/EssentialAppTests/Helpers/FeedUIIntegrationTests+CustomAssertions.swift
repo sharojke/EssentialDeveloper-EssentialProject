@@ -28,6 +28,8 @@ extension FeedUIIntegrationTests {
                 line: line
             )
         }
+        
+        executeRunLoopToCleanUpReferences()
     }
     
     func assertThat(
@@ -68,5 +70,9 @@ extension FeedUIIntegrationTests {
             file: file,
             line: line
         )
+    }
+    
+    private func executeRunLoopToCleanUpReferences() {
+        RunLoop.current.run(until: Date())
     }
 }
