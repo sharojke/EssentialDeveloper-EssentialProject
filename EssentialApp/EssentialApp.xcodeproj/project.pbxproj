@@ -27,6 +27,13 @@
 		BB4707F12B6C1C69005AE87D /* EssentialFeediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4707EE2B6C1C69005AE87D /* EssentialFeediOS.framework */; };
 		BB4707F22B6C1C69005AE87D /* EssentialFeediOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB4707EE2B6C1C69005AE87D /* EssentialFeediOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BB4707FB2B6C2C1E005AE87D /* FeedLoaderWithFallbackCompositeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4707FA2B6C2C1E005AE87D /* FeedLoaderWithFallbackCompositeTests.swift */; };
+		BB4B5BE62B82A0E200BEF356 /* current.onion.and.horizontal.slicing.png in Resources */ = {isa = PBXBuildFile; fileRef = BB4B5BDF2B82A0E100BEF356 /* current.onion.and.horizontal.slicing.png */; };
+		BB4B5BE72B82A0E200BEF356 /* modules.horizontal.slicing.png in Resources */ = {isa = PBXBuildFile; fileRef = BB4B5BE02B82A0E100BEF356 /* modules.horizontal.slicing.png */; };
+		BB4B5BE82B82A0E200BEF356 /* onion.slicing.png in Resources */ = {isa = PBXBuildFile; fileRef = BB4B5BE12B82A0E100BEF356 /* onion.slicing.png */; };
+		BB4B5BE92B82A0E200BEF356 /* diagram.with.separated.components.png in Resources */ = {isa = PBXBuildFile; fileRef = BB4B5BE22B82A0E200BEF356 /* diagram.with.separated.components.png */; };
+		BB4B5BEA2B82A0E200BEF356 /* diagram.abstracted.not.separated.on.different.modules.png in Resources */ = {isa = PBXBuildFile; fileRef = BB4B5BE32B82A0E200BEF356 /* diagram.abstracted.not.separated.on.different.modules.png */; };
+		BB4B5BEB2B82A0E200BEF356 /* current.onion.slicing.png in Resources */ = {isa = PBXBuildFile; fileRef = BB4B5BE42B82A0E200BEF356 /* current.onion.slicing.png */; };
+		BB4B5BEC2B82A0E200BEF356 /* diagram.abstracted.with.ideal.separation.png in Resources */ = {isa = PBXBuildFile; fileRef = BB4B5BE52B82A0E200BEF356 /* diagram.abstracted.with.ideal.separation.png */; };
 		BB5F64A42B80C3AF00392E36 /* UIView+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5F64A32B80C3AF00392E36 /* UIView+TestHelpers.swift */; };
 		BBA4BB2D2B72ACD600EC09E6 /* FeedImageDataLoaderWithFallbackCompositeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA4BB2C2B72ACD600EC09E6 /* FeedImageDataLoaderWithFallbackCompositeTests.swift */; };
 		BBA4BB2F2B72D51400EC09E6 /* FeedImageDataLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA4BB2E2B72D51400EC09E6 /* FeedImageDataLoaderWithFallbackComposite.swift */; };
@@ -101,6 +108,13 @@
 		BB4707EE2B6C1C69005AE87D /* EssentialFeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EssentialFeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB4707F82B6C2C1E005AE87D /* EssentialAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB4707FA2B6C2C1E005AE87D /* FeedLoaderWithFallbackCompositeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderWithFallbackCompositeTests.swift; sourceTree = "<group>"; };
+		BB4B5BDF2B82A0E100BEF356 /* current.onion.and.horizontal.slicing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = current.onion.and.horizontal.slicing.png; sourceTree = "<group>"; };
+		BB4B5BE02B82A0E100BEF356 /* modules.horizontal.slicing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modules.horizontal.slicing.png; sourceTree = "<group>"; };
+		BB4B5BE12B82A0E100BEF356 /* onion.slicing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onion.slicing.png; sourceTree = "<group>"; };
+		BB4B5BE22B82A0E200BEF356 /* diagram.with.separated.components.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diagram.with.separated.components.png; sourceTree = "<group>"; };
+		BB4B5BE32B82A0E200BEF356 /* diagram.abstracted.not.separated.on.different.modules.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diagram.abstracted.not.separated.on.different.modules.png; sourceTree = "<group>"; };
+		BB4B5BE42B82A0E200BEF356 /* current.onion.slicing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = current.onion.slicing.png; sourceTree = "<group>"; };
+		BB4B5BE52B82A0E200BEF356 /* diagram.abstracted.with.ideal.separation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diagram.abstracted.with.ideal.separation.png; sourceTree = "<group>"; };
 		BB5F64A32B80C3AF00392E36 /* UIView+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+TestHelpers.swift"; sourceTree = "<group>"; };
 		BBA4BB2C2B72ACD600EC09E6 /* FeedImageDataLoaderWithFallbackCompositeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderWithFallbackCompositeTests.swift; sourceTree = "<group>"; };
 		BBA4BB2E2B72D51400EC09E6 /* FeedImageDataLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
@@ -158,6 +172,7 @@
 		BB4707B52B6C1A31005AE87D = {
 			isa = PBXGroup;
 			children = (
+				BB4B5BDE2B82A0B100BEF356 /* Diagrams and Slices */,
 				BB41736B2B71734D00C8C0C8 /* Test plans */,
 				BB4707C02B6C1A31005AE87D /* EssentialApp */,
 				BB4707F92B6C2C1E005AE87D /* EssentialAppTests */,
@@ -221,6 +236,20 @@
 				BBBB196B2B7AB0BD006C5AC2 /* FeedAcceptanceTests.swift */,
 			);
 			path = EssentialAppTests;
+			sourceTree = "<group>";
+		};
+		BB4B5BDE2B82A0B100BEF356 /* Diagrams and Slices */ = {
+			isa = PBXGroup;
+			children = (
+				BB4B5BDF2B82A0E100BEF356 /* current.onion.and.horizontal.slicing.png */,
+				BB4B5BE42B82A0E200BEF356 /* current.onion.slicing.png */,
+				BB4B5BE32B82A0E200BEF356 /* diagram.abstracted.not.separated.on.different.modules.png */,
+				BB4B5BE52B82A0E200BEF356 /* diagram.abstracted.with.ideal.separation.png */,
+				BB4B5BE22B82A0E200BEF356 /* diagram.with.separated.components.png */,
+				BB4B5BE02B82A0E100BEF356 /* modules.horizontal.slicing.png */,
+				BB4B5BE12B82A0E100BEF356 /* onion.slicing.png */,
+			);
+			path = "Diagrams and Slices";
 			sourceTree = "<group>";
 		};
 		BBA4BB302B72D5EC00EC09E6 /* Helpers */ = {
@@ -330,9 +359,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB4B5BEC2B82A0E200BEF356 /* diagram.abstracted.with.ideal.separation.png in Resources */,
+				BB4B5BEB2B82A0E200BEF356 /* current.onion.slicing.png in Resources */,
 				BB4707CE2B6C1A33005AE87D /* LaunchScreen.storyboard in Resources */,
+				BB4B5BEA2B82A0E200BEF356 /* diagram.abstracted.not.separated.on.different.modules.png in Resources */,
+				BB4B5BE92B82A0E200BEF356 /* diagram.with.separated.components.png in Resources */,
 				BB4707CB2B6C1A33005AE87D /* Assets.xcassets in Resources */,
 				BB4707C92B6C1A31005AE87D /* Main.storyboard in Resources */,
+				BB4B5BE72B82A0E200BEF356 /* modules.horizontal.slicing.png in Resources */,
+				BB4B5BE82B82A0E200BEF356 /* onion.slicing.png in Resources */,
+				BB4B5BE62B82A0E200BEF356 /* current.onion.and.horizontal.slicing.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
