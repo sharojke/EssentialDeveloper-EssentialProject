@@ -1,5 +1,6 @@
 @testable import EssentialApp
 import EssentialFeed
+import EssentialFeedAPI
 import EssentialFeediOS
 import XCTest
 

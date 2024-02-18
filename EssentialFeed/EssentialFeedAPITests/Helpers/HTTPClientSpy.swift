@@ -1,4 +1,4 @@
-import EssentialFeed
+import EssentialFeedAPI
 
 // swiftlint:disable force_unwrapping
 

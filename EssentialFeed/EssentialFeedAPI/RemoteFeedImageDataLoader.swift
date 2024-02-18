@@ -1,3 +1,5 @@
+import EssentialFeed
+
 public final class RemoteFeedImageDataLoader: FeedImageDataLoader {
     private final class HTTPClientTaskWrapper: FeedImageDataLoaderTask {
         var wrapped: HTTPClientTask?

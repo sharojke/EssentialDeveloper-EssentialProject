@@ -1,4 +1,4 @@
-import Foundation
+import EssentialFeed
 
 public final class RemoteFeedLoader: FeedLoader {
     public typealias Result = FeedLoader.Result

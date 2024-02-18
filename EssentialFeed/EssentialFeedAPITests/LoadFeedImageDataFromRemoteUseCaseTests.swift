@@ -1,4 +1,5 @@
 import EssentialFeed
+import EssentialFeedAPI
 import XCTest
 
 final class LoadFeedImageDataFromRemoteUseCaseTests: XCTestCase {

@@ -1,4 +1,4 @@
-import EssentialFeed
+import EssentialFeedAPI
 
 private class Task: HTTPClientTask {
     func cancel() {}

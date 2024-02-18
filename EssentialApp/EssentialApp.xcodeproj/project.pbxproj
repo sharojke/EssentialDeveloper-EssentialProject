@@ -34,6 +34,8 @@
 		BB4B5BEA2B82A0E200BEF356 /* diagram.abstracted.not.separated.on.different.modules.png in Resources */ = {isa = PBXBuildFile; fileRef = BB4B5BE32B82A0E200BEF356 /* diagram.abstracted.not.separated.on.different.modules.png */; };
 		BB4B5BEB2B82A0E200BEF356 /* current.onion.slicing.png in Resources */ = {isa = PBXBuildFile; fileRef = BB4B5BE42B82A0E200BEF356 /* current.onion.slicing.png */; };
 		BB4B5BEC2B82A0E200BEF356 /* diagram.abstracted.with.ideal.separation.png in Resources */ = {isa = PBXBuildFile; fileRef = BB4B5BE52B82A0E200BEF356 /* diagram.abstracted.with.ideal.separation.png */; };
+		BB4B5C1F2B82A4FF00BEF356 /* EssentialFeedAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4B5C1E2B82A4FF00BEF356 /* EssentialFeedAPI.framework */; };
+		BB4B5C202B82A4FF00BEF356 /* EssentialFeedAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB4B5C1E2B82A4FF00BEF356 /* EssentialFeedAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BB5F64A42B80C3AF00392E36 /* UIView+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5F64A32B80C3AF00392E36 /* UIView+TestHelpers.swift */; };
 		BBA4BB2D2B72ACD600EC09E6 /* FeedImageDataLoaderWithFallbackCompositeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA4BB2C2B72ACD600EC09E6 /* FeedImageDataLoaderWithFallbackCompositeTests.swift */; };
 		BBA4BB2F2B72D51400EC09E6 /* FeedImageDataLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA4BB2E2B72D51400EC09E6 /* FeedImageDataLoaderWithFallbackComposite.swift */; };
@@ -77,6 +79,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				BB4B5C202B82A4FF00BEF356 /* EssentialFeedAPI.framework in Embed Frameworks */,
 				BB4707F02B6C1C69005AE87D /* EssentialFeed.framework in Embed Frameworks */,
 				BB4707F22B6C1C69005AE87D /* EssentialFeediOS.framework in Embed Frameworks */,
 			);
@@ -115,6 +118,7 @@
 		BB4B5BE32B82A0E200BEF356 /* diagram.abstracted.not.separated.on.different.modules.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diagram.abstracted.not.separated.on.different.modules.png; sourceTree = "<group>"; };
 		BB4B5BE42B82A0E200BEF356 /* current.onion.slicing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = current.onion.slicing.png; sourceTree = "<group>"; };
 		BB4B5BE52B82A0E200BEF356 /* diagram.abstracted.with.ideal.separation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diagram.abstracted.with.ideal.separation.png; sourceTree = "<group>"; };
+		BB4B5C1E2B82A4FF00BEF356 /* EssentialFeedAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EssentialFeedAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5F64A32B80C3AF00392E36 /* UIView+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+TestHelpers.swift"; sourceTree = "<group>"; };
 		BBA4BB2C2B72ACD600EC09E6 /* FeedImageDataLoaderWithFallbackCompositeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderWithFallbackCompositeTests.swift; sourceTree = "<group>"; };
 		BBA4BB2E2B72D51400EC09E6 /* FeedImageDataLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB4B5C1F2B82A4FF00BEF356 /* EssentialFeedAPI.framework in Frameworks */,
 				BB4707EF2B6C1C69005AE87D /* EssentialFeed.framework in Frameworks */,
 				BB4707F12B6C1C69005AE87D /* EssentialFeediOS.framework in Frameworks */,
 			);
@@ -217,6 +222,7 @@
 		BB4707EC2B6C1C69005AE87D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BB4B5C1E2B82A4FF00BEF356 /* EssentialFeedAPI.framework */,
 				BB4707ED2B6C1C69005AE87D /* EssentialFeed.framework */,
 				BB4707EE2B6C1C69005AE87D /* EssentialFeediOS.framework */,
 			);
