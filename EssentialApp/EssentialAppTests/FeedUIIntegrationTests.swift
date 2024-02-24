@@ -551,7 +551,7 @@ private extension FeedUIIntegrationTests {
     ) {
         let loader = LoaderSpy()
         let sut = FeedUIComposer.feedComposedWith(
-            feedLoader: loader,
+            feedLoader: loader.loadPublisher,
             imageLoader: loader
         )
         trackForMemoryLeaks(loader, file: file, line: line)
