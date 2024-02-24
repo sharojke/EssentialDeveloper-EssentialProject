@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BB007F6F2B77C8D30096EB68 /* FeedImageDataLoaderSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB007F6E2B77C8D30096EB68 /* FeedImageDataLoaderSpy.swift */; };
 		BB007F712B77C9D10096EB68 /* XCTestCase+FeedImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB007F702B77C9D10096EB68 /* XCTestCase+FeedImageDataLoader.swift */; };
+		BB0A6D002B8A917600483377 /* CombineHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0A6CFF2B8A917600483377 /* CombineHelpers.swift */; };
 		BB124D3D2B755EFE00568504 /* FeedLoaderStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB124D3C2B755EFE00568504 /* FeedLoaderStub.swift */; };
 		BB124D3F2B75601A00568504 /* XCTestCase+FeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB124D3E2B75601A00568504 /* XCTestCase+FeedLoader.swift */; };
 		BB4707C22B6C1A31005AE87D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4707C12B6C1A31005AE87D /* AppDelegate.swift */; };
@@ -72,6 +73,7 @@
 		BB007F6E2B77C8D30096EB68 /* FeedImageDataLoaderSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderSpy.swift; sourceTree = "<group>"; };
 		BB007F702B77C9D10096EB68 /* XCTestCase+FeedImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FeedImageDataLoader.swift"; sourceTree = "<group>"; };
 		BB007F852B7811530096EB68 /* EssentialApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = EssentialApp.xctestplan; sourceTree = "<group>"; };
+		BB0A6CFF2B8A917600483377 /* CombineHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineHelpers.swift; sourceTree = "<group>"; };
 		BB124D3C2B755EFE00568504 /* FeedLoaderStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderStub.swift; sourceTree = "<group>"; };
 		BB124D3E2B75601A00568504 /* XCTestCase+FeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FeedLoader.swift"; sourceTree = "<group>"; };
 		BB4707BE2B6C1A31005AE87D /* EssentialApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EssentialApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +162,7 @@
 			children = (
 				BB4707C12B6C1A31005AE87D /* AppDelegate.swift */,
 				BB4707C32B6C1A31005AE87D /* SceneDelegate.swift */,
+				BB0A6CFF2B8A917600483377 /* CombineHelpers.swift */,
 				BBBB194F2B7AADC2006C5AC2 /* FeedUIComposer.swift */,
 				BBBB194E2B7AADC2006C5AC2 /* WeakRefVirtualProxy.swift */,
 				BBBB19512B7AADC2006C5AC2 /* FeedPresentationAdapter.swift */,
@@ -343,6 +346,7 @@
 			files = (
 				BB4707C62B6C1A31005AE87D /* ViewController.swift in Sources */,
 				BBBB19582B7AADC2006C5AC2 /* FeedImageDataLoaderPresentationAdapter.swift in Sources */,
+				BB0A6D002B8A917600483377 /* CombineHelpers.swift in Sources */,
 				BB4707C22B6C1A31005AE87D /* AppDelegate.swift in Sources */,
 				BBBB19542B7AADC2006C5AC2 /* FeedViewAdapter.swift in Sources */,
 				BBBB19572B7AADC2006C5AC2 /* FeedUIComposer.swift in Sources */,
