@@ -8,7 +8,7 @@ import UIKit
 public enum FeedUIComposer {
     public static func feedComposedWith(
         feedLoader: @escaping () -> FeedLoader.Publisher,
-        imageLoader: FeedImageDataLoader
+        imageLoader: @escaping (URL) -> FeedImageDataLoader.Publisher
     ) -> FeedViewController {
         let presentationAdapter = FeedPresentationAdapter(
             feedLoader: { feedLoader().dispatchOnMainQueue() }
@@ -17,12 +17,9 @@ public enum FeedUIComposer {
             delegate: presentationAdapter,
             title: FeedPresenter.title
         )
-        let imageLoader = MainQueueDispatchDecorator(
-            decoratee: imageLoader
-        )
         let feedViewAdapter = FeedViewAdapter(
             controller: feedController,
-            loader: imageLoader
+            loader: { imageLoader($0).dispatchOnMainQueue() }
         )
         let presenter = FeedPresenter(
             loadingView: WeakRefVirtualProxy(feedController),

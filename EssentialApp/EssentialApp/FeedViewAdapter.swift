@@ -7,9 +7,9 @@ final class FeedViewAdapter: FeedView {
     typealias PresentationAdapter = FeedImageDataLoaderPresentationAdapter<WeakCellController, UIImage>
     
     private weak var controller: FeedViewController?
-    private let loader: FeedImageDataLoader
+    private let loader: (URL) -> FeedImageDataLoader.Publisher
     
-    init(controller: FeedViewController?, loader: FeedImageDataLoader) {
+    init(controller: FeedViewController?, loader: @escaping (URL) -> FeedImageDataLoader.Publisher) {
         self.controller = controller
         self.loader = loader
     }
