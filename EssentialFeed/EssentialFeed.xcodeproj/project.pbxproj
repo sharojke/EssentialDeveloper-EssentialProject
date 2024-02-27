@@ -387,6 +387,23 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		BB2133BC2B8E5A640097B9F5 /* Image Comments API */ = {
+			isa = PBXGroup;
+			children = (
+				BB2133932B8D17AB0097B9F5 /* RemoteImageCommentsLoader.swift */,
+				BB2133952B8D189C0097B9F5 /* ImageCommentsMapper.swift */,
+			);
+			path = "Image Comments API";
+			sourceTree = "<group>";
+		};
+		BB2133BD2B8E5ABC0097B9F5 /* Image Comments API */ = {
+			isa = PBXGroup;
+			children = (
+				BB2133912B8D16D40097B9F5 /* LoadImageCommentsFromRemoteUseCase.swift */,
+			);
+			path = "Image Comments API";
+			sourceTree = "<group>";
+		};
 		BB24A1492B321B4D00251E48 /* Feed Cache */ = {
 			isa = PBXGroup;
 			children = (
@@ -485,8 +502,9 @@
 				BB2133B72B8E59A20097B9F5 /* Shared API */,
 				BB2133B82B8E59A90097B9F5 /* Shared API Infra */,
 				BB2133992B8D23480097B9F5 /* Image Comments Feature */,
-				BB5CA5F52B28F3FD00AF0D66 /* Feed Feature */,
+				BB2133BC2B8E5A640097B9F5 /* Image Comments API */,
 				BBE21D052B2A2FA800552177 /* Feed API */,
+				BB5CA5F52B28F3FD00AF0D66 /* Feed Feature */,
 				BB24A1492B321B4D00251E48 /* Feed Cache */,
 				BBE2F3CE2B5C05B100117DF2 /* Feed Presentation */,
 				BB5CA5E02B28EA7900AF0D66 /* EssentialFeed.h */,
@@ -500,6 +518,7 @@
 				BB2849FF2B2E48EF00E0CBD7 /* Helpers */,
 				BB2133B92B8E59D70097B9F5 /* Shared API */,
 				BB2133BA2B8E59DF0097B9F5 /* Shared API Infra */,
+				BB2133BD2B8E5ABC0097B9F5 /* Image Comments API */,
 				BB4A9D6B2B30BFC80049D178 /* Feed Cache */,
 				BB7F39262B2CF19800BB37BE /* Feed API */,
 				BBE2F3BE2B5BE46E00117DF2 /* Feed Presentation */,
@@ -576,7 +595,6 @@
 			children = (
 				BB5CA5EA2B28EA7900AF0D66 /* LoadFeedFromRemoteUseCaseTests.swift */,
 				BB38DB922B642BAF00B8CC67 /* LoadFeedImageDataFromRemoteUseCaseTests.swift */,
-				BB2133912B8D16D40097B9F5 /* LoadImageCommentsFromRemoteUseCase.swift */,
 			);
 			path = "Feed API";
 			sourceTree = "<group>";
@@ -607,8 +625,6 @@
 				BBE21D062B2A2FB700552177 /* RemoteFeedLoader.swift */,
 				BB7F39242B2CE8BE00BB37BE /* FeedItemsMapper.swift */,
 				BB24A1502B322A3E00251E48 /* RemoteFeedItem.swift */,
-				BB2133932B8D17AB0097B9F5 /* RemoteImageCommentsLoader.swift */,
-				BB2133952B8D189C0097B9F5 /* ImageCommentsMapper.swift */,
 				BB38DB972B653BEB00B8CC67 /* RemoteFeedImageDataLoader.swift */,
 			);
 			path = "Feed API";
