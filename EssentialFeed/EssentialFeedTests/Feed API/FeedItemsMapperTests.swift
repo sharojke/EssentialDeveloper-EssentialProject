@@ -2,7 +2,6 @@ import EssentialFeed
 import XCTest
 
 // swiftlint:disable force_unwrapping
-// swiftlint:disable force_try
 
 final class FeedItemsMapperTests: XCTestCase {
     func test_map_throwsErrorOnNon200HTTPResponse() throws {
@@ -72,23 +71,6 @@ extension FeedItemsMapperTests {
         
         return (model, json)
     }
-    
-    private func makeItemsJSON(_ items: [[String: Any]]) -> Data {
-        let json = ["items": items]
-        return try! JSONSerialization.data(withJSONObject: json)
-    }
-}
-
-private extension HTTPURLResponse {
-    convenience init(statusCode: Int) {
-        self.init(
-            url: anyURL(),
-            statusCode: statusCode,
-            httpVersion: nil,
-            headerFields: nil
-        )!
-    }
 }
 
 // swiftlint:enable force_unwrapping
-// swiftlint:enable force_try
