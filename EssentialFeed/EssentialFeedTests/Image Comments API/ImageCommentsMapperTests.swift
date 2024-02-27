@@ -34,7 +34,7 @@ final class ImageCommentsMapperTests: XCTestCase {
         }
     }
     
-    func test_load_deliversItemsOn2xxHTTPResponseWithNotEmptyJSONList() throws {
+    func test_map_deliversItemsOn2xxHTTPResponseWithNotEmptyJSONList() throws {
         let item1 = makeItem(
             id: UUID(),
             message: "a message",
