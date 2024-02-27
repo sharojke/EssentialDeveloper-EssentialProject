@@ -1,7 +1,7 @@
 import Foundation
 
-internal enum ImageCommentsMapper {
-    internal static func map(
+public enum ImageCommentsMapper {
+    public static func map(
         _ data: Data,
         from response: HTTPURLResponse
     ) throws -> [ImageComment] {
