@@ -1,7 +1,7 @@
 import Foundation
 
-internal enum FeedItemsMapper {
-    internal static func map(
+public enum FeedItemsMapper {
+    public static func map(
         _ data: Data,
         from response: HTTPURLResponse
     ) throws -> [FeedImage] {
