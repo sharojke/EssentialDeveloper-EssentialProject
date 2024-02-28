@@ -54,9 +54,10 @@ private extension EssentialFeedAPIEndToEndTests {
         file: StaticString = #filePath,
         line: UInt = #line
     ) -> FeedLoader.Result? {
-        let loader = RemoteFeedLoader(
+        let loader = RemoteLoader(
             url: feedTestServerURL,
-            client: ephemeralClient()
+            client: ephemeralClient(),
+            mapper: FeedItemsMapper.map
         )
         trackForMemoryLeaks(loader, file: file, line: line)
         
