@@ -1,3 +1,4 @@
+import Combine
 import CoreData
 import EssentialFeed
 import EssentialFeediOS
@@ -53,7 +54,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         localFeedLoader.validateCache { _ in }
     }
     
-    private func makeRemoteFeedLoaderWithLocalFallback() -> FeedLoader.Publisher {
+    private func makeRemoteFeedLoaderWithLocalFallback() -> AnyPublisher<[FeedImage], Error> {
         return httpClient
             .getPublisher(url: remoteURL)
             .tryMap(FeedItemsMapper.map)
@@ -73,5 +74,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             })
     }
 }
-
-extension RemoteLoader: FeedLoader where Resource == [FeedImage] {}

@@ -1,10 +1,11 @@
+import Combine
 import EssentialFeed
 import EssentialFeediOS
 import UIKit
 
 extension FeedUIIntegrationTests {
     class LoaderSpy {
-        private var _feedRequests = [(FeedLoader.Result) -> Void]()
+        private var _feedRequests = [PassthroughSubject<[FeedImage], Error>]()
         private var _cancelledImageURLs = [URL]()
         private var _imageRequests = [(url: URL, completion: (FeedImageDataLoader.Result) -> Void)]()
     }
@@ -20,24 +21,26 @@ extension FeedUIIntegrationTests.LoaderSpy {
     }
 }
 
-extension FeedUIIntegrationTests.LoaderSpy: FeedLoader {
-    var feedRequests: [(FeedLoader.Result) -> Void] {
+extension FeedUIIntegrationTests.LoaderSpy {
+    var feedRequests: [PassthroughSubject<[FeedImage], Error>] {
         return _feedRequests
     }
-    
-    func load(completion: @escaping (FeedLoader.Result) -> Void) {
-        _feedRequests.append(completion)
+        
+    func loadPublisher() -> AnyPublisher<[FeedImage], Error> {
+        let publisher = PassthroughSubject<[FeedImage], Error>()
+        _feedRequests.append(publisher)
+        return publisher.eraseToAnyPublisher()
     }
     
     func completeFeedLoading(
         with feed: [FeedImage] = [],
         at index: Int = 0
     ) {
-        feedRequests[index](.success(feed))
+        feedRequests[index].send(feed)
     }
     
     func completeFeedLoadingWithError(at index: Int = 0) {
-        feedRequests[index](.failure(anyNSError()))
+        feedRequests[index].send(completion: .failure(anyNSError()))
     }
 }
 
