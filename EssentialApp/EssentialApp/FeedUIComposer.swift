@@ -10,7 +10,7 @@ public enum FeedUIComposer {
         feedLoader: @escaping () -> AnyPublisher<[FeedImage], Error>,
         imageLoader: @escaping (URL) -> FeedImageDataLoader.Publisher
     ) -> FeedViewController {
-        let presentationAdapter = FeedPresentationAdapter(feedLoader: feedLoader)
+        let presentationAdapter = LoadResourcePresentationAdapter<[FeedImage], FeedViewAdapter>(loader: feedLoader)
         let feedController = Self.makeFeedViewController(
             delegate: presentationAdapter,
             title: FeedPresenter.title
