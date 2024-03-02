@@ -107,8 +107,8 @@ private extension LoadResourcePresenterTests {
         file: StaticString = #filePath,
         line: UInt = #line
     ) -> String {
-        let bundle = Bundle(for: LoadResourcePresenter<String, ViewSpy>.self)
-        let table = "Feed"
+        let bundle = Bundle(for: SUT.self)
+        let table = "Shared"
         let value = bundle.localizedString(
             forKey: key,
             value: nil,
