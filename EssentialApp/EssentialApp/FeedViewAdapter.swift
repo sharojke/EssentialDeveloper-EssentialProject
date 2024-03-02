@@ -2,7 +2,7 @@ import EssentialFeed
 import EssentialFeediOS
 import UIKit
 
-final class FeedViewAdapter: FeedView {
+final class FeedViewAdapter: ResourceView {
     typealias WeakCellController = WeakRefVirtualProxy<FeedImageCellController>
     typealias PresentationAdapter = FeedImageDataLoaderPresentationAdapter<WeakCellController, UIImage>
     
