@@ -1,4 +1,4 @@
-public struct FeedErrorViewModel {
+public struct ResourceErrorViewModel {
     static var noError: Self {
         return Self(message: nil)
     }
