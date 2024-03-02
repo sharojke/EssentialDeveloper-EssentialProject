@@ -1,7 +1,7 @@
 import EssentialFeed
 import XCTest
 
-private final class ViewSpy: FeedLoadingView, ResourceView, FeedErrorView {
+private final class ViewSpy: ResourceLoadingView, ResourceView, FeedErrorView {
     typealias ResourceViewModel = String
     
     enum Message: Hashable {
@@ -12,7 +12,7 @@ private final class ViewSpy: FeedLoadingView, ResourceView, FeedErrorView {
     
     private(set) var messages = Set<Message>()
     
-    func display(_ viewModel: FeedLoadingViewModel) {
+    func display(_ viewModel: ResourceLoadingViewModel) {
         messages.insert(.displayLoading(isLoading: viewModel.isLoading))
     }
     
