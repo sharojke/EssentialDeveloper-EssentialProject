@@ -27,7 +27,7 @@ final class FeedPresenterTests: XCTestCase {
     func test_title_isLocalized() {
         XCTAssertEqual(
             FeedPresenter.title,
-            localized("FEED_VIEW_CONNECTION_ERROR")
+            localized("GENERIC_CONNECTION_ERROR")
         )
     }
     
@@ -77,7 +77,7 @@ final class FeedPresenterTests: XCTestCase {
         XCTAssertEqual(
             view.messages,
             [
-                .displayError(message: localized("FEED_VIEW_CONNECTION_ERROR")),
+                .displayError(message: localized("GENERIC_CONNECTION_ERROR")),
                 .displayLoading(isLoading: false)
             ]
         )
