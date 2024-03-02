@@ -2,6 +2,8 @@ import EssentialFeed
 import XCTest
 
 private final class ViewSpy: FeedLoadingView, ResourceView, FeedErrorView {
+    typealias ResourceViewModel = String
+    
     enum Message: Hashable {
         case displayError(message: String?)
         case displayLoading(isLoading: Bool)
@@ -81,11 +83,13 @@ final class LoadResourcePresenterTests: XCTestCase {
 // MARK: - Helpers
 
 private extension LoadResourcePresenterTests {
+    typealias SUT = LoadResourcePresenter<String, ViewSpy>
+    
     func makeSUT(
-        mapper: @escaping LoadResourcePresenter.Mapper = { _ in "any" },
+        mapper: @escaping SUT.Mapper = { _ in "any" },
         file: StaticString = #filePath,
         line: UInt = #line
-    ) -> (sut: LoadResourcePresenter, view: ViewSpy) {
+    ) -> (sut: SUT, view: ViewSpy) {
         let view = ViewSpy()
         let sut = LoadResourcePresenter(
             loadingView: view,
@@ -103,7 +107,7 @@ private extension LoadResourcePresenterTests {
         file: StaticString = #filePath,
         line: UInt = #line
     ) -> String {
-        let bundle = Bundle(for: LoadResourcePresenter.self)
+        let bundle = Bundle(for: LoadResourcePresenter<String, ViewSpy>.self)
         let table = "Feed"
         let value = bundle.localizedString(
             forKey: key,
