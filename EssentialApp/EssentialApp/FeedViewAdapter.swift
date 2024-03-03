@@ -2,6 +2,8 @@ import EssentialFeed
 import EssentialFeediOS
 import UIKit
 
+private struct InvalidImageData: Error {}
+
 final class FeedViewAdapter: ResourceView {
     typealias WeakCellController = WeakRefVirtualProxy<FeedImageCellController>
     typealias PresentationAdapter = FeedImageDataLoaderPresentationAdapter<WeakCellController, UIImage>
@@ -16,17 +18,27 @@ final class FeedViewAdapter: ResourceView {
     
     func display(_ viewModel: FeedViewModel) {
         controller?.display(viewModel.feed.map { feedImage in
-            let adapter = PresentationAdapter(
-                model: feedImage,
-                imageLoader: loader
+            let adapter = LoadResourcePresentationAdapter<Data, WeakRefVirtualProxy<FeedImageCellController>>(
+                loader: { [loader] in
+                    loader(feedImage.url)
+                }
             )
-            let view = FeedImageCellController(delegate: adapter)
-
-            adapter.presenter = FeedImagePresenter(
-                view: WeakRefVirtualProxy(view),
-                imageTransformer: UIImage.init
+            let view = FeedImageCellController(
+                viewModel: FeedImagePresenter<FeedImageCellController, UIImage>.map(feedImage),
+                delegate: adapter
             )
-
+            
+            adapter.presenter = LoadResourcePresenter(
+                loadingView: WeakRefVirtualProxy(view),
+                resourceView: WeakRefVirtualProxy(view),
+                errorView: WeakRefVirtualProxy(view),
+                mapper: { data in
+                    guard let image = UIImage(data: data) else {
+                        throw InvalidImageData()
+                    }
+                    return image
+                }
+            )
             return view
         })
     }
