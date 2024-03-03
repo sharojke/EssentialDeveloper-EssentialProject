@@ -1,13 +1,10 @@
 import EssentialFeed
-import EssentialFeediOS
+@testable import EssentialFeediOS
 import UIKit
 
 private struct InvalidImageData: Error {}
 
-final class FeedViewAdapter: ResourceView {
-    typealias WeakCellController = WeakRefVirtualProxy<FeedImageCellController>
-    typealias PresentationAdapter = FeedImageDataLoaderPresentationAdapter<WeakCellController, UIImage>
-    
+final class FeedViewAdapter: ResourceView {    
     private weak var controller: FeedViewController?
     private let loader: (URL) -> FeedImageDataLoader.Publisher
     
@@ -24,7 +21,7 @@ final class FeedViewAdapter: ResourceView {
                 }
             )
             let view = FeedImageCellController(
-                viewModel: FeedImagePresenter<FeedImageCellController, UIImage>.map(feedImage),
+                viewModel: FeedImagePresenter.map(feedImage),
                 delegate: adapter
             )
             

@@ -28,7 +28,6 @@
 		BBBB19552B7AADC2006C5AC2 /* LoadResourcePresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB19512B7AADC2006C5AC2 /* LoadResourcePresentationAdapter.swift */; };
 		BBBB19562B7AADC2006C5AC2 /* WeakRefVirtualProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB194E2B7AADC2006C5AC2 /* WeakRefVirtualProxy.swift */; };
 		BBBB19572B7AADC2006C5AC2 /* FeedUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB194F2B7AADC2006C5AC2 /* FeedUIComposer.swift */; };
-		BBBB19582B7AADC2006C5AC2 /* FeedImageDataLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB19522B7AADC2006C5AC2 /* FeedImageDataLoaderPresentationAdapter.swift */; };
 		BBBB19612B7AADFA006C5AC2 /* UIImage+Make.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB195F2B7AADFA006C5AC2 /* UIImage+Make.swift */; };
 		BBBB19622B7AADFA006C5AC2 /* SharediOSTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB195A2B7AADF9006C5AC2 /* SharediOSTestHelpers.swift */; };
 		BBBB19632B7AADFA006C5AC2 /* FeedImageCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB195B2B7AADF9006C5AC2 /* FeedImageCell+Extensions.swift */; };
@@ -92,7 +91,6 @@
 		BBBB194F2B7AADC2006C5AC2 /* FeedUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUIComposer.swift; sourceTree = "<group>"; };
 		BBBB19502B7AADC2006C5AC2 /* FeedViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewAdapter.swift; sourceTree = "<group>"; };
 		BBBB19512B7AADC2006C5AC2 /* LoadResourcePresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadResourcePresentationAdapter.swift; sourceTree = "<group>"; };
-		BBBB19522B7AADC2006C5AC2 /* FeedImageDataLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
 		BBBB19592B7AADF9006C5AC2 /* FeedUIIntegrationTests+LoaderSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedUIIntegrationTests+LoaderSpy.swift"; sourceTree = "<group>"; };
 		BBBB195A2B7AADF9006C5AC2 /* SharediOSTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharediOSTestHelpers.swift; sourceTree = "<group>"; };
 		BBBB195B2B7AADF9006C5AC2 /* FeedImageCell+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedImageCell+Extensions.swift"; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 				BBBB194F2B7AADC2006C5AC2 /* FeedUIComposer.swift */,
 				BBBB194E2B7AADC2006C5AC2 /* WeakRefVirtualProxy.swift */,
 				BBBB19512B7AADC2006C5AC2 /* LoadResourcePresentationAdapter.swift */,
-				BBBB19522B7AADC2006C5AC2 /* FeedImageDataLoaderPresentationAdapter.swift */,
 				BBBB19502B7AADC2006C5AC2 /* FeedViewAdapter.swift */,
 				BB4707C52B6C1A31005AE87D /* ViewController.swift */,
 				BB4707CA2B6C1A33005AE87D /* Assets.xcassets */,
@@ -342,7 +339,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB4707C62B6C1A31005AE87D /* ViewController.swift in Sources */,
-				BBBB19582B7AADC2006C5AC2 /* FeedImageDataLoaderPresentationAdapter.swift in Sources */,
 				BB0A6D002B8A917600483377 /* CombineHelpers.swift in Sources */,
 				BB4707C22B6C1A31005AE87D /* AppDelegate.swift in Sources */,
 				BBBB19542B7AADC2006C5AC2 /* FeedViewAdapter.swift in Sources */,
