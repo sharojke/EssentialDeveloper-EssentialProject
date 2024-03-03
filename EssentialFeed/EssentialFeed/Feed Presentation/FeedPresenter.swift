@@ -6,8 +6,8 @@ public final class FeedPresenter {
         return NSLocalizedString(
             "FEED_VIEW_TITLE",
             tableName: "Feed",
-            bundle: Bundle(for: FeedPresenter.self),
-            comment: "Error message displayed when we can't load the image feed from the server"
+            bundle: Bundle(for: Self.self),
+            comment: "Title for the feed view"
         )
     }
     
