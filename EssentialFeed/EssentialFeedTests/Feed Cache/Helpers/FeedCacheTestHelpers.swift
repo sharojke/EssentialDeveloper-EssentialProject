@@ -1,8 +1,6 @@
 import EssentialFeed
 import Foundation
 
-// swiftlint:disable force_unwrapping
-
 func uniqueImage() -> FeedImage {
     return FeedImage(
         id: UUID(),
@@ -33,18 +31,4 @@ extension Date {
     func minusFeedCacheMaxAge() -> Self {
         return self.adding(days: -feedCacheMaxAgeInDays)
     }
-    
-    private func adding(days: Int) -> Self {
-        return Calendar(identifier: .gregorian).date(byAdding: .day, value: days, to: self)!
-    }
 }
-
-// MARK: - Just a reusable helper method
-
-extension Date {
-    func adding(seconds: TimeInterval) -> Self {
-        return self + seconds
-    }
-}
-
-// swiftlint:enable force_unwrapping

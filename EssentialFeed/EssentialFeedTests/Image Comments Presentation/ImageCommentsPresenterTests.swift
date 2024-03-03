@@ -8,6 +8,40 @@ final class ImageCommentsPresenterTests: XCTestCase {
             localized("IMAGE_COMMENTS_VIEW_TITLE")
         )
     }
+    
+    func test_map_createsViewModel() {
+        let now = Date()
+        
+        let comments = [
+            ImageComment(
+                id: UUID(),
+                message: "a message 1",
+                createdAt: now.adding(minutes: -20),
+                username: "a username 1"
+            ),
+            ImageComment(
+                id: UUID(),
+                message: "a message 2",
+                createdAt: now.adding(days: -5),
+                username: "a username 2"
+            )
+        ]
+        
+        let viewModel = ImageCommentsPresenter.map(comments)
+        
+        XCTAssertEqual(viewModel.comments, [
+            ImageCommentViewModel(
+                message: "a message 1",
+                date: "20 minutes ago",
+                username: "a username 1"
+            ),
+            ImageCommentViewModel(
+                message: "a message 2",
+                date: "5 days ago",
+                username: "a username 2"
+            )
+        ])
+    }
 }
 
 // MARK: - Helpers

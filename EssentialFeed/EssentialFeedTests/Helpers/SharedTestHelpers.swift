@@ -31,5 +31,19 @@ extension HTTPURLResponse {
     }
 }
 
+extension Date {
+    func adding(seconds: TimeInterval) -> Self {
+        return self + seconds
+    }
+    
+    func adding(minutes: Int) -> Self {
+        return Calendar(identifier: .gregorian).date(byAdding: .minute, value: minutes, to: self)!
+    }
+    
+    func adding(days: Int) -> Self {
+        return Calendar(identifier: .gregorian).date(byAdding: .day, value: days, to: self)!
+    }
+}
+
 // swiftlint:enable force_unwrapping
 // swiftlint:enable force_try
