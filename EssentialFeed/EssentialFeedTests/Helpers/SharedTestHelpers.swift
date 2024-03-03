@@ -36,12 +36,18 @@ extension Date {
         return self + seconds
     }
     
-    func adding(minutes: Int) -> Self {
-        return Calendar(identifier: .gregorian).date(byAdding: .minute, value: minutes, to: self)!
+    func adding(
+        minutes: Int,
+        calendar: Calendar = Calendar(identifier: .gregorian)
+    ) -> Self {
+        return calendar.date(byAdding: .minute, value: minutes, to: self)!
     }
     
-    func adding(days: Int) -> Self {
-        return Calendar(identifier: .gregorian).date(byAdding: .day, value: days, to: self)!
+    func adding(
+        days: Int,
+        calendar: Calendar = Calendar(identifier: .gregorian)
+    ) -> Self {
+        return calendar.date(byAdding: .day, value: days, to: self)!
     }
 }
 
