@@ -546,7 +546,7 @@ private extension FeedUIIntegrationTests {
         file: StaticString = #filePath,
         line: UInt = #line
     ) -> (
-        sut: FeedViewController,
+        sut: ListViewController,
         loader: LoaderSpy
     ) {
         let loader = LoaderSpy()

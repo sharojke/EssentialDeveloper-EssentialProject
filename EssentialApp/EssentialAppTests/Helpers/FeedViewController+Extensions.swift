@@ -3,7 +3,7 @@ import UIKit
 
 // swiftlint:disable force_unwrapping
 
-extension FeedViewController {
+extension ListViewController {
     var isShowingReloadingIndicator: Bool {
         return refreshControl?.isRefreshing == true
     }

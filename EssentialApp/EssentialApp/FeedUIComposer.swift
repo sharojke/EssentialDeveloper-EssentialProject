@@ -11,7 +11,7 @@ public enum FeedUIComposer {
     public static func feedComposedWith(
         feedLoader: @escaping () -> AnyPublisher<[FeedImage], Error>,
         imageLoader: @escaping (URL) -> FeedImageDataLoader.Publisher
-    ) -> FeedViewController {
+    ) -> ListViewController {
         let presentationAdapter = FeedPresentationAdapter(loader: feedLoader)
         let feedController = Self.makeFeedViewController(
             delegate: presentationAdapter,
@@ -38,11 +38,11 @@ private extension FeedUIComposer {
     static func makeFeedViewController(
         delegate: FeedViewControllerDelegate,
         title: String
-    ) -> FeedViewController {
-        let bundle = Bundle(for: FeedViewController.self)
+    ) -> ListViewController {
+        let bundle = Bundle(for: ListViewController.self)
         let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
         let viewController = storyboard.instantiateInitialViewController()
-        let feedController = viewController as! FeedViewController
+        let feedController = viewController as! ListViewController
         feedController.delegate = delegate
         feedController.title = title
         return feedController
