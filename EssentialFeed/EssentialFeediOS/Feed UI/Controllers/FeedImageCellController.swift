@@ -21,28 +21,6 @@ public final class FeedImageCellController {
         self.viewModel = viewModel
         self.delegate = delegate
     }
-    
-    func view(in tableView: UITableView) -> UITableViewCell {
-        cell = tableView.dequeueReusableCell()
-        cell?.locationContainer.isHidden = !viewModel.hasLocation
-        cell?.locationLabel.text = viewModel.location
-        cell?.descriptionLabel.text = viewModel.description
-        cell?.onRetry = delegate.didRequestImage
-        cell?.onReuse = { [weak self] in
-            self?.releaseCellForReuse()
-        }
-        delegate.didRequestImage()
-        return cell!
-    }
-    
-    func preload() {
-        delegate.didRequestImage()
-    }
-    
-    func cancelLoad() {
-        releaseCellForReuse()
-        delegate.didCancelImageRequest()
-    }
         
     func releaseCellForReuse() {
         cell?.onReuse = nil
@@ -70,6 +48,30 @@ extension FeedImageCellController: ResourceLoadingView {
 extension FeedImageCellController: ResourceErrorView {
     public func display(_ viewModel: EssentialFeed.ResourceErrorViewModel) {
         cell?.feedImageRetryButton.isHidden = viewModel.message == nil
+    }
+}
+
+extension FeedImageCellController: CellController {
+    public func view(in tableView: UITableView) -> UITableViewCell {
+        cell = tableView.dequeueReusableCell()
+        cell?.locationContainer.isHidden = !viewModel.hasLocation
+        cell?.locationLabel.text = viewModel.location
+        cell?.descriptionLabel.text = viewModel.description
+        cell?.onRetry = delegate.didRequestImage
+        cell?.onReuse = { [weak self] in
+            self?.releaseCellForReuse()
+        }
+        delegate.didRequestImage()
+        return cell!
+    }
+    
+    public func preload() {
+        delegate.didRequestImage()
+    }
+    
+    public func cancelLoad() {
+        releaseCellForReuse()
+        delegate.didCancelImageRequest()
     }
 }
 

@@ -3,7 +3,8 @@ import EssentialFeed
 import UIKit
 
 final class FeedViewAdapter: ResourceView {   
-    private typealias ImageDataPresentationAdapter = LoadResourcePresentationAdapter<Data, WeakRefVirtualProxy<FeedImageCellController>>
+    private typealias ImageDataPresentationAdapter = 
+    LoadResourcePresentationAdapter<Data, WeakRefVirtualProxy<FeedImageCellController>>
     
     private weak var controller: FeedViewController?
     private let loader: (URL) -> FeedImageDataLoader.Publisher
