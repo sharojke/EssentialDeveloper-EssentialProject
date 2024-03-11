@@ -31,6 +31,10 @@ private extension ImageCommentsSnapshotTests {
     }
     
     func comments() -> [CellController] {
+        return commentControllers().map { CellController($0) }
+    }
+    
+    func commentControllers() -> [ImageCommentCellController] {
         return [
             ImageCommentCellController(
                 model: ImageCommentViewModel(

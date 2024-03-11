@@ -51,7 +51,9 @@ extension FeedImageCellController: ResourceErrorView {
     }
 }
 
-extension FeedImageCellController: CellController {
+extension FeedImageCellController: UITableViewDataSource,
+                                   UITableViewDelegate,
+                                   UITableViewDataSourcePrefetching {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }

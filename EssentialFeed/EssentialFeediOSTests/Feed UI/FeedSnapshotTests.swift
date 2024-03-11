@@ -117,7 +117,7 @@ private extension ListViewController {
                 delegate: stub
             )
             stub.controller = cellController
-            return cellController
+            return CellController(cellController)
         }
         display(cells)
     }
