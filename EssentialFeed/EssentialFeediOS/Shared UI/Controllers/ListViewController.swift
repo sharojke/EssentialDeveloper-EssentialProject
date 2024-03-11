@@ -98,3 +98,8 @@ extension ListViewController: ResourceErrorView {
         errorView?.message = viewModel.message
     }
 }
+
+public extension CellController {
+    func preload() {}
+    func cancelLoad() {}
+}
