@@ -18,6 +18,7 @@ public final class ListViewController: UITableViewController {
         super.viewDidLoad()
         
         configureTableView()
+        configureTraitCollectionObservers()
         onViewIsAppearing = { viewController in
             viewController.refresh()
             viewController.onViewIsAppearing = nil
@@ -40,17 +41,14 @@ public final class ListViewController: UITableViewController {
         onViewIsAppearing?(self)
     }
     
+    override public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let delegate = cellController(at: indexPath)?.delegate
+        delegate?.tableView?(tableView, willDisplay: cell, forRowAt: indexPath)
+    }
+    
     override public func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let delegate = cellController(at: indexPath)?.delegate
         delegate?.tableView?(tableView, didEndDisplaying: cell, forRowAt: indexPath)
-    }
-    
-    override public func traitCollectionDidChange(_ previous: UITraitCollection?) {
-        guard previous?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory else {
-            return
-        }
-        
-        tableView.reloadData()
     }
     
     public func display(_ cellControllers: [CellController]) {
@@ -78,6 +76,14 @@ public final class ListViewController: UITableViewController {
             self?.tableView.beginUpdates()
             self?.tableView.sizeTableHeaderToFit()
             self?.tableView.endUpdates()
+        }
+    }
+    
+    private func configureTraitCollectionObservers() {
+        registerForTraitChanges(
+            [UITraitPreferredContentSizeCategory.self]
+        ) { (self: Self, _) in
+            self.tableView.reloadData()
         }
     }
 }

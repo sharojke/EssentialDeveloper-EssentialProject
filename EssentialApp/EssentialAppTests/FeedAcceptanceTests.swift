@@ -76,9 +76,9 @@ private extension FeedAcceptanceTests {
         sut.configureWindow()
         
         let nav = sut.window?.rootViewController as? UINavigationController
-        let feed = nav?.topViewController as! ListViewController
-        feed.simulateAppearance()
-        return feed
+        let vc = nav?.topViewController as! ListViewController
+        vc.simulateAppearance()
+        return vc
     }
     
     func enterBackground(with store: InMemoryFeedStore) {

@@ -75,6 +75,8 @@ extension FeedUIIntegrationTests.LoaderSpy: FeedImageDataLoader {
         with imageData: Data = anyImageData(),
         at index: Int = 0
     ) {
+        guard index < imageRequests.count else { return }
+        
         imageRequests[index].completion(.success(imageData))
     }
     
