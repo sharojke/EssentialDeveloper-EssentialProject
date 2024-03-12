@@ -9,7 +9,8 @@ extension ListViewController {
     }
     
     var numberOfRenderedFeedImageViews: Int {
-        return tableView.numberOfRows(inSection: feedImagesSection)
+        let isSectionsEmpty = tableView.numberOfSections == 0
+        return isSectionsEmpty ? 0 : tableView.numberOfRows(inSection: feedImagesSection)
     }
     
     var errorMessage: String? {
@@ -18,6 +19,13 @@ extension ListViewController {
     
     private var feedImagesSection: Int {
         return 0
+    }
+    
+    // swiftlint:disable:next override_in_extension
+    override public func loadViewIfNeeded() {
+        super.loadViewIfNeeded()
+        
+        tableView.frame = CGRect(x: .zero, y: .zero, width: 1, height: 1)
     }
     
     func simulateUserInitiatedFeedReload() {
