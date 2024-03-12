@@ -20,6 +20,7 @@
 		BB24A14B2B321B5F00251E48 /* LocalFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB24A14A2B321B5F00251E48 /* LocalFeedLoader.swift */; };
 		BB24A14D2B321C0A00251E48 /* FeedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB24A14C2B321C0A00251E48 /* FeedStore.swift */; };
 		BB24A14F2B32243500251E48 /* LocalFeedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB24A14E2B32243500251E48 /* LocalFeedImage.swift */; };
+		BB24F4292BA0EBC800628C59 /* UIView+Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB24F4282BA0EBC800628C59 /* UIView+Container.swift */; };
 		BB2849FE2B2E1EA400E0CBD7 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2849FD2B2E1EA400E0CBD7 /* URLSessionHTTPClientTests.swift */; };
 		BB284A022B2E491D00E0CBD7 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB284A002B2E491D00E0CBD7 /* XCTestCase+MemoryLeakTracking.swift */; };
 		BB284A052B2E4D7C00E0CBD7 /* XCTestCase+ErrorComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB284A032B2E4D7C00E0CBD7 /* XCTestCase+ErrorComparison.swift */; };
@@ -193,6 +194,7 @@
 		BB24A14A2B321B5F00251E48 /* LocalFeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFeedLoader.swift; sourceTree = "<group>"; };
 		BB24A14C2B321C0A00251E48 /* FeedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedStore.swift; sourceTree = "<group>"; };
 		BB24A14E2B32243500251E48 /* LocalFeedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFeedImage.swift; sourceTree = "<group>"; };
+		BB24F4282BA0EBC800628C59 /* UIView+Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Container.swift"; sourceTree = "<group>"; };
 		BB2849FD2B2E1EA400E0CBD7 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		BB284A002B2E491D00E0CBD7 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		BB284A032B2E4D7C00E0CBD7 /* XCTestCase+ErrorComparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+ErrorComparison.swift"; sourceTree = "<group>"; };
@@ -839,6 +841,7 @@
 			children = (
 				BB0F2BD62B47458100EF301F /* UIView+Shimmering.swift */,
 				BBC0C7322B5471E400CFF729 /* UIImageView+Animations.swift */,
+				BB24F4282BA0EBC800628C59 /* UIView+Container.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1156,6 +1159,7 @@
 				BB7541562B7D53F600649504 /* UITableView+HeaderSizing.swift in Sources */,
 				BBE2F3C72B5BF60F00117DF2 /* UIRefreshControl+Helpers.swift in Sources */,
 				BB0F2BD72B47458100EF301F /* UIView+Shimmering.swift in Sources */,
+				BB24F4292BA0EBC800628C59 /* UIView+Container.swift in Sources */,
 				BBA708282B9F89F7000C5617 /* CellController.swift in Sources */,
 				BBC0C7312B546FFC00CFF729 /* UITableView+Dequeueing.swift in Sources */,
 				BBC0C7332B5471E400CFF729 /* UIImageView+Animations.swift in Sources */,
