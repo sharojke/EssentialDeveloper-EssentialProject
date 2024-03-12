@@ -2,8 +2,6 @@
 @testable import EssentialFeediOS
 import XCTest
 
-// swiftlint:disable force_cast
-
 final class ListSnapshotTests: XCTestCase {
     func test_emptyList() {
         let sut = makeSUT()
@@ -32,10 +30,9 @@ final class ListSnapshotTests: XCTestCase {
 
 private extension ListSnapshotTests {
     func makeSUT() -> ListViewController {
-        let bundle = Bundle(for: ListViewController.self)
-        let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
-        let controller = storyboard.instantiateInitialViewController() as! ListViewController
+        let controller = ListViewController()
         controller.loadViewIfNeeded()
+        controller.tableView.separatorStyle = .none
         controller.tableView.showsVerticalScrollIndicator = false
         controller.tableView.showsHorizontalScrollIndicator = false
         return controller
@@ -45,5 +42,3 @@ private extension ListSnapshotTests {
         return []
     }
 }
-
-// swiftlint:enable force_cast
