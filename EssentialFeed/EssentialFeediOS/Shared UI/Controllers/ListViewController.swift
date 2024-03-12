@@ -17,6 +17,7 @@ public final class ListViewController: UITableViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
+        dataSource.defaultRowAnimation = .fade
         tableView.dataSource = dataSource
         configureErrorView()
         onViewIsAppearing = { viewController in
