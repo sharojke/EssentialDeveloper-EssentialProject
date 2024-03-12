@@ -1,7 +1,7 @@
 import UIKit
 
-extension UIView {
-    public func makeContainer() -> UIView {
+public extension UIView {
+    func makeContainer() -> UIView {
         let container = UIView()
         container.backgroundColor = .clear
         container.addSubview(self)
@@ -11,7 +11,7 @@ extension UIView {
             leadingAnchor.constraint(equalTo: container.leadingAnchor),
             container.trailingAnchor.constraint(equalTo: trailingAnchor),
             topAnchor.constraint(equalTo: container.topAnchor),
-            container.bottomAnchor.constraint(equalTo: bottomAnchor),
+            container.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
         return container
