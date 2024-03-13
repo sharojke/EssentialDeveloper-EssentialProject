@@ -28,7 +28,7 @@ extension ListViewController {
         tableView.frame = CGRect(x: .zero, y: .zero, width: 1, height: 1)
     }
     
-    func simulateUserInitiatedFeedReload() {
+    func simulateUserInitiatedReload() {
         refreshControl?.simulatePullToRefresh()
     }
     
