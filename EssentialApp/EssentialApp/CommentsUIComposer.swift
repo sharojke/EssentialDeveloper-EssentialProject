@@ -5,40 +5,54 @@ import UIKit
 
 // swiftlint:disable force_cast
 
+final class CommentsViewAdapter: ResourceView {
+    private weak var controller: ListViewController?
+    
+    init(controller: ListViewController?) {
+        self.controller = controller
+    }
+    
+    func display(_ viewModel: ImageCommentsViewModel) {
+        controller?.display(viewModel.comments.map { viewModel in
+            CellController(
+                id: viewModel,
+                ImageCommentCellController(model: viewModel)
+            )
+        })
+    }
+}
+
 public enum CommentsUIComposer {
-    private typealias FeedPresentationAdapter = LoadResourcePresentationAdapter<[FeedImage], FeedViewAdapter>
+    private typealias CommentsPresentationAdapter = LoadResourcePresentationAdapter<[ImageComment], CommentsViewAdapter>
     
     public static func commentsComposedWith(
-        commentsLoader: @escaping () -> AnyPublisher<[FeedImage], Error>
+        commentsLoader: @escaping () -> AnyPublisher<[ImageComment], Error>
     ) -> ListViewController {
-        let presentationAdapter = FeedPresentationAdapter(loader: commentsLoader)
-        let feedController = makeFeedViewController(title: ImageCommentsPresenter.title)
-        feedController.onRefresh = presentationAdapter.loadResource
-        let feedViewAdapter = FeedViewAdapter(
-            controller: feedController,
-            loader: { _ in Empty<Data, Error>().eraseToAnyPublisher() }
-        )
+        let presentationAdapter = CommentsPresentationAdapter(loader: commentsLoader)
+        let commentsController = makeCommentsViewController(title: ImageCommentsPresenter.title)
+        commentsController.onRefresh = presentationAdapter.loadResource
+        let commentsViewAdapter = CommentsViewAdapter(controller: commentsController)
         let presenter = LoadResourcePresenter(
-            loadingView: WeakRefVirtualProxy(feedController),
-            resourceView: feedViewAdapter,
-            errorView: WeakRefVirtualProxy(feedController),
-            mapper: FeedPresenter.map
+            loadingView: WeakRefVirtualProxy(commentsController),
+            resourceView: commentsViewAdapter,
+            errorView: WeakRefVirtualProxy(commentsController),
+            mapper: { ImageCommentsPresenter.map($0) }
         )
         presentationAdapter.presenter = presenter
-        return feedController
+        return commentsController
     }
 }
 
 // MARK: - Helpers
 
 private extension CommentsUIComposer {
-    static func makeFeedViewController(title: String) -> ListViewController {
+    static func makeCommentsViewController(title: String) -> ListViewController {
         let bundle = Bundle(for: ListViewController.self)
-        let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
-        let viewController = storyboard.instantiateInitialViewController()
-        let feedController = viewController as! ListViewController
-        feedController.title = title
-        return feedController
+        let storyboard = UIStoryboard(name: "ImageComments", bundle: bundle)
+        let storyboardViewController = storyboard.instantiateInitialViewController()
+        let controller = storyboardViewController as! ListViewController
+        controller.title = title
+        return controller
     }
 }
 
