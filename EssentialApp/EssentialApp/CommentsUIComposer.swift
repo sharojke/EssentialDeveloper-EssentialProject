@@ -12,7 +12,7 @@ public enum CommentsUIComposer {
         commentsLoader: @escaping () -> AnyPublisher<[FeedImage], Error>
     ) -> ListViewController {
         let presentationAdapter = FeedPresentationAdapter(loader: commentsLoader)
-        let feedController = makeFeedViewController(title: FeedPresenter.title)
+        let feedController = makeFeedViewController(title: ImageCommentsPresenter.title)
         feedController.onRefresh = presentationAdapter.loadResource
         let feedViewAdapter = FeedViewAdapter(
             controller: feedController,
