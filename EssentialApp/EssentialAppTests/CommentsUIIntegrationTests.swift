@@ -95,7 +95,7 @@ final class CommentsUIIntegrationTests: XCTestCase {
         )
     }
     
-    func test_loadingCommentsIndicator_isVisibleWhileLoadingFeed() {
+    func test_loadingCommentsIndicator_isVisibleWhileLoadingComments() {
         let (sut, loader) = makeSUT()
         
         sut.simulateAppearance()
