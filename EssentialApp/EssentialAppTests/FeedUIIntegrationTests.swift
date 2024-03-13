@@ -9,7 +9,7 @@ import XCTest
 // swiftlint:disable force_unwrapping
 // swiftlint:disable file_length
 
-final class FeedUIIntegrationTests: XCTestCase {
+class FeedUIIntegrationTests: XCTestCase {
     func test_feedView_hasTitle() {
         let (sut, _) = makeSUT()
         
