@@ -72,7 +72,7 @@ final class CommentsUIIntegrationTests: FeedUIIntegrationTests {
         )
     }
     
-    override func test_loadFeedActions_runsAutomaticallyOnlyOnFirstAppearance() {
+    func test_loadCommentsActions_runsAutomaticallyOnlyOnFirstAppearance() {
         let (sut, loader) = makeSUT()
         XCTAssertEqual(
             loader.loadCommentsCallCount,
