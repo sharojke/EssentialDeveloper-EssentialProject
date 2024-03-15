@@ -10,14 +10,16 @@ public enum FeedUIComposer {
     
     public static func feedComposedWith(
         feedLoader: @escaping () -> AnyPublisher<[FeedImage], Error>,
-        imageLoader: @escaping (URL) -> FeedImageDataLoader.Publisher
+        imageLoader: @escaping (URL) -> FeedImageDataLoader.Publisher,
+        selection: @escaping (FeedImage) -> Void
     ) -> ListViewController {
         let presentationAdapter = FeedPresentationAdapter(loader: feedLoader)
         let feedController = makeFeedViewController(title: FeedPresenter.title)
         feedController.onRefresh = presentationAdapter.loadResource
         let feedViewAdapter = FeedViewAdapter(
             controller: feedController,
-            loader: imageLoader
+            loader: imageLoader,
+            selection: selection
         )
         let presenter = LoadResourcePresenter(
             loadingView: WeakRefVirtualProxy(feedController),

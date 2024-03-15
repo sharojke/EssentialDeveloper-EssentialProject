@@ -18,6 +18,23 @@ class FeedUIIntegrationTests: XCTestCase {
         XCTAssertEqual(sut.title, feedTitle)
     }
     
+    func test_imageSelection_notifiesHandler() {
+        let image0 = makeImage()
+        let image1 = makeImage()
+        var selectedImages = [FeedImage]()
+        let (sut, loader) = makeSUT { selectedImages.append($0) }
+        
+        sut.simulateAppearance()
+        loader.completeFeedLoading(with: [image0, image1], at: 0)
+        assertThat(sut, isRendering: [image0, image1])
+        
+        sut.simulateTapOnFeedImage(at: 0)
+        XCTAssertEqual(selectedImages, [image0])
+        
+        sut.simulateTapOnFeedImage(at: 1)
+        XCTAssertEqual(selectedImages, [image0, image1])
+    }
+    
     func test_loadFeedActions_requestsFeedFromLoader() {
         let (sut, loader) = makeSUT()
         XCTAssertTrue(loader.feedRequests.isEmpty)
@@ -658,7 +675,8 @@ class FeedUIIntegrationTests: XCTestCase {
 private extension FeedUIIntegrationTests {
     func makeSUT(
         file: StaticString = #filePath,
-        line: UInt = #line
+        line: UInt = #line,
+        selection: @escaping (FeedImage) -> Void = { _ in }
     ) -> (
         sut: ListViewController,
         loader: LoaderSpy
@@ -666,7 +684,8 @@ private extension FeedUIIntegrationTests {
         let loader = LoaderSpy()
         let sut = FeedUIComposer.feedComposedWith(
             feedLoader: loader.loadPublisher,
-            imageLoader: loader.loadImageDataPublisher
+            imageLoader: loader.loadImageDataPublisher,
+            selection: selection
         )
         trackForMemoryLeaks(loader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)

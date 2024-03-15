@@ -12,14 +12,17 @@ public protocol FeedImageCellControllerDelegate {
 public final class FeedImageCellController: NSObject {
     private let viewModel: FeedImageViewModel
     private let delegate: FeedImageCellControllerDelegate
+    private let selection: () -> Void
     private var cell: FeedImageCell?
     
     public init(
         viewModel: FeedImageViewModel,
-        delegate: FeedImageCellControllerDelegate
+        delegate: FeedImageCellControllerDelegate,
+        selection: @escaping () -> Void
     ) {
         self.viewModel = viewModel
         self.delegate = delegate
+        self.selection = selection
     }
         
     func releaseCellForReuse() {
@@ -71,6 +74,10 @@ extension FeedImageCellController: UITableViewDataSource,
         }
         delegate.didRequestImage()
         return cell!
+    }
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selection()
     }
     
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
