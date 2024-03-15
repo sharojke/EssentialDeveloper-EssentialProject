@@ -26,12 +26,23 @@ extension ListViewController {
     func simulateErrorViewTap() {
         errorView.simulateTap()
     }
+    
+    func numberOfRows(in section: Int) -> Int {
+        tableView.numberOfSections > section ? tableView.numberOfRows(inSection: section) : 0
+    }
+    
+    func cell(row: Int, section: Int) -> UITableViewCell? {
+        guard numberOfRows(in: section) > row else { return nil }
+        
+        let dataSource = tableView.dataSource
+        let index = IndexPath(row: row, section: section)
+        return dataSource?.tableView(tableView, cellForRowAt: index)
+    }
 }
 
 extension ListViewController {
     var numberOfRenderedFeedImageViews: Int {
-        let isSectionsEmpty = tableView.numberOfSections == 0
-        return isSectionsEmpty ? 0 : tableView.numberOfRows(inSection: feedImagesSection)
+        return numberOfRows(in: feedImagesSection)
     }
     
     private var feedImagesSection: Int {
@@ -93,17 +104,13 @@ extension ListViewController {
     }
     
     func feedImageView(at row: Int) -> UITableViewCell? {
-        guard numberOfRenderedFeedImageViews > row else { return nil }
-        
-        let ds = tableView.dataSource
-        let index = IndexPath(row: row, section: feedImagesSection)
-        return ds?.tableView(tableView, cellForRowAt: index)
+        return cell(row: row, section: feedImagesSection)
     }
 }
 
 extension ListViewController {
     var numberOfRenderedComments: Int {
-        tableView.numberOfSections == 0 ? 0 : tableView.numberOfRows(inSection: commentsSection)
+        return numberOfRows(in: commentsSection)
     }
     
     private var commentsSection: Int {
@@ -123,11 +130,7 @@ extension ListViewController {
     }
     
     private func commentView(at row: Int) -> ImageCommentCell? {
-        guard numberOfRenderedComments > row else { return nil }
-        
-        let dataSource = tableView.dataSource
-        let index = IndexPath(row: row, section: commentsSection)
-        return dataSource?.tableView(tableView, cellForRowAt: index) as? ImageCommentCell
+        return cell(row: row, section: commentsSection) as? ImageCommentCell
     }
 }
 

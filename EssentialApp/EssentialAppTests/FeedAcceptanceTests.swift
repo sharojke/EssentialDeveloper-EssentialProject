@@ -83,9 +83,7 @@ private extension FeedAcceptanceTests {
         sut.configureWindow()
         
         let nav = sut.window?.rootViewController as? UINavigationController
-        let vc = nav?.topViewController as! ListViewController
-        vc.simulateAppearance()
-        return vc
+        return getTopViewControllerAsList(from: nav)
     }
     
     func enterBackground(with store: InMemoryFeedStore) {
@@ -169,13 +167,17 @@ private extension FeedAcceptanceTests {
         RunLoop.current.run(until: Date())
         
         let nav = feed.navigationController
-        let vc = nav?.topViewController as! ListViewController
-        vc.simulateAppearance()
-        return vc
+        return getTopViewControllerAsList(from: nav)
     }
     
     func makeCommentMessage() -> String {
         return "a message"
+    }
+    
+    func getTopViewControllerAsList(from navigation: UINavigationController?) -> ListViewController {
+        let vc = navigation?.topViewController as! ListViewController
+        vc.simulateAppearance()
+        return vc
     }
 }
 
