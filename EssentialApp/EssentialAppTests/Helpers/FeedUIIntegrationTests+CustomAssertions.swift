@@ -71,8 +71,4 @@ extension FeedUIIntegrationTests {
             line: line
         )
     }
-    
-    private func executeRunLoopToCleanUpReferences() {
-        RunLoop.current.run(until: Date())
-    }
 }

@@ -23,4 +23,8 @@ func anyImageData() -> Data {
     return UIImage.make(withColor: .red).pngData()!
 }
 
+func executeRunLoopToCleanUpReferences() {
+    RunLoop.current.run(until: Date())
+}
+
 // swiftlint:enable force_unwrapping

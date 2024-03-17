@@ -277,10 +277,12 @@ private extension CommentsUIIntegrationTests {
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
+        sut.view.enforceLayoutCycle()
+        
         XCTAssertEqual(
             sut.numberOfRenderedComments,
             comments.count,
-            "comments count",
+            "Comments count is wrong. Expected \(comments.count), got \(sut.numberOfRenderedComments) instead",
             file: file,
             line: line
         )
@@ -313,5 +315,7 @@ private extension CommentsUIIntegrationTests {
                 line: line
             )
         }
+        
+        executeRunLoopToCleanUpReferences()
     }
 }

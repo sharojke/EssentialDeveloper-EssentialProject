@@ -110,11 +110,9 @@ private extension FeedAcceptanceTests {
             return makeFeedData()
             
         case "/essential-feed/v1/image/2AB2AE66-A4B7-4A16-B374-51BBAC8DB086/comments":
-            print("qwe")
             return makeCommentsData()
             
         default:
-            print("qwe")
             return Data()
         }
     }
@@ -140,7 +138,7 @@ private extension FeedAcceptanceTests {
         )
     }
     
-    private func makeCommentsData() -> Data {
+    func makeCommentsData() -> Data {
         return try! JSONSerialization.data(
             withJSONObject: [
                 "items": [
@@ -164,7 +162,7 @@ private extension FeedAcceptanceTests {
         )
         
         feed.simulateTapOnFeedImage(at: 0)
-        RunLoop.current.run(until: Date())
+        executeRunLoopToCleanUpReferences()
         
         let nav = feed.navigationController
         return getTopViewControllerAsList(from: nav)
