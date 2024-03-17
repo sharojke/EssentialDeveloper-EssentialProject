@@ -112,6 +112,8 @@
 		BBC5FB352B447537000A8612 /* EssentialFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB5CA5DD2B28EA7900AF0D66 /* EssentialFeed.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BBC5FB3A2B4488D2000A8612 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC5FB392B4488D2000A8612 /* ListViewController.swift */; };
 		BBC9002B2B45E23900E441FF /* FeedImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC9002A2B45E23900E441FF /* FeedImageCell.swift */; };
+		BBCBCF542BA72732005E1A3A /* FeedEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCBCF532BA72732005E1A3A /* FeedEndpoint.swift */; };
+		BBCBCF562BA72763005E1A3A /* FeedEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCBCF552BA72763005E1A3A /* FeedEndpointTests.swift */; };
 		BBE2F3C02B5BE48700117DF2 /* FeedPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2F3BF2B5BE48700117DF2 /* FeedPresenterTests.swift */; };
 		BBE2F3C42B5BEC8800117DF2 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2F3C32B5BEC8800117DF2 /* ErrorView.swift */; };
 		BBE2F3C72B5BF60F00117DF2 /* UIRefreshControl+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2F3C62B5BF60F00117DF2 /* UIRefreshControl+Helpers.swift */; };
@@ -288,6 +290,8 @@
 		BBC0C7322B5471E400CFF729 /* UIImageView+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Animations.swift"; sourceTree = "<group>"; };
 		BBC5FB392B4488D2000A8612 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		BBC9002A2B45E23900E441FF /* FeedImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageCell.swift; sourceTree = "<group>"; };
+		BBCBCF532BA72732005E1A3A /* FeedEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedEndpoint.swift; sourceTree = "<group>"; };
+		BBCBCF552BA72763005E1A3A /* FeedEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedEndpointTests.swift; sourceTree = "<group>"; };
 		BBE2F3BF2B5BE48700117DF2 /* FeedPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresenterTests.swift; sourceTree = "<group>"; };
 		BBE2F3C32B5BEC8800117DF2 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		BBE2F3C62B5BF60F00117DF2 /* UIRefreshControl+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+Helpers.swift"; sourceTree = "<group>"; };
@@ -799,6 +803,7 @@
 			children = (
 				BB5CA5EA2B28EA7900AF0D66 /* FeedItemsMapperTests.swift */,
 				BB4FD0D82B8FD09C00FA1045 /* FeedImageDataMapperTests.swift */,
+				BBCBCF552BA72763005E1A3A /* FeedEndpointTests.swift */,
 			);
 			path = "Feed API";
 			sourceTree = "<group>";
@@ -828,6 +833,7 @@
 				BB38DB992B654B9000B8CC67 /* Helpers */,
 				BB7F39242B2CE8BE00BB37BE /* FeedItemsMapper.swift */,
 				BB4FD0DA2B8FD24800FA1045 /* FeedImageDataMapper.swift */,
+				BBCBCF532BA72732005E1A3A /* FeedEndpoint.swift */,
 			);
 			path = "Feed API";
 			sourceTree = "<group>";
@@ -1197,6 +1203,7 @@
 				BB7F39252B2CE8BE00BB37BE /* FeedItemsMapper.swift in Sources */,
 				BB5CA5F92B28F44100AF0D66 /* FeedLoader.swift in Sources */,
 				BBA8FE8A2BA4CE52003F7807 /* ImageCommentsEndpoint.swift in Sources */,
+				BBCBCF542BA72732005E1A3A /* FeedEndpoint.swift in Sources */,
 				BB9C46E42B5F008F00052D7D /* FeedImageViewModel.swift in Sources */,
 				BB2133982B8D22F20097B9F5 /* ImageComment.swift in Sources */,
 				BB7DFFBF2B39C8C1000B1293 /* ManagedFeedImage.swift in Sources */,
@@ -1239,6 +1246,7 @@
 				BB4FD1032B93CA1200FA1045 /* SharedLocalizationTestHelpers.swift in Sources */,
 				BB72A9EF2B6975050070D304 /* CoreDataFeedImageDataStoreTests.swift in Sources */,
 				BB284A052B2E4D7C00E0CBD7 /* XCTestCase+ErrorComparison.swift in Sources */,
+				BBCBCF562BA72763005E1A3A /* FeedEndpointTests.swift in Sources */,
 				BB6C28F72B94D24D00537EBB /* ImageCommentsLocalizationTests.swift in Sources */,
 				BB9C46E02B5EEFD200052D7D /* FeedImagePresenterTests.swift in Sources */,
 				BB1ADD5B2B40A79F00D67CD9 /* NSEntityDescription+Assertions.swift in Sources */,
@@ -1594,6 +1602,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1619,6 +1629,7 @@
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.essentialdeveloper.EssentialFeed;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "macosx iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1631,6 +1642,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1656,6 +1669,7 @@
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.essentialdeveloper.EssentialFeed;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "macosx iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1667,6 +1681,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KN3UG3D7KC;
@@ -1687,6 +1702,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KN3UG3D7KC;
