@@ -3,6 +3,7 @@
 import XCTest
 
 // swiftlint:disable force_cast
+// swiftlint:disable force_unwrapping
 
 private final class ImageStub: FeedImageCellControllerDelegate {
     let viewModel: FeedImageViewModel
@@ -96,6 +97,39 @@ final class FeedSnapshotTests: XCTestCase {
             named: "FEED_WITH_FAILED_IMAGE_LOADING_dark_extraExtraExtraLarge"
         )
     }
+    
+    func test_feedWithLoadMoreIndicator() {
+        let sut = makeSUT()
+        
+        sut.display(feedWithLoadMoreIndicator())
+        
+        assert(
+            snapshot: sut.snapshot(for: .iPhone(style: .light)),
+            named: "FEED_WITH_LOAD_MORE_INDICATOR_light"
+        )
+        assert(
+            snapshot: sut.snapshot(for: .iPhone(style: .dark)),
+            named: "FEED_WITH_LOAD_MORE_INDICATOR_dark"
+        )
+        assert(
+            snapshot: sut.snapshot(
+                for: .iPhone(
+                    style: .light,
+                    contentSize: .extraExtraExtraLarge
+                )
+            ),
+            named: "FEED_WITH_LOAD_MORE_INDICATOR_light_extraExtraExtraLarge"
+        )
+        assert(
+            snapshot: sut.snapshot(
+                for: .iPhone(
+                    style: .dark,
+                    contentSize: .extraExtraExtraLarge
+                )
+            ),
+            named: "FEED_WITH_LOAD_MORE_INDICATOR_dark_extraExtraExtraLarge"
+        )
+    }
 }
 
 private extension FeedSnapshotTests {
@@ -143,6 +177,23 @@ private extension FeedSnapshotTests {
             )
         ]
     }
+    
+    func feedWithLoadMoreIndicator() -> [CellController] {
+        let stub = feedWithContent().last!
+        let cellController = FeedImageCellController(
+            viewModel: stub.viewModel,
+            delegate: stub,
+            selection: {}
+        )
+        stub.controller = cellController
+        
+        let loadMore = LoadMoreCellController()
+        loadMore.display(ResourceLoadingViewModel(isLoading: true))
+        return [
+            CellController(id: UUID(), cellController),
+            CellController(id: UUID(), loadMore)
+        ]
+    }
 }
 
 private extension ListViewController {
@@ -161,3 +212,4 @@ private extension ListViewController {
 }
 
 // swiftlint:enable force_cast
+// swiftlint:enable force_unwrapping
