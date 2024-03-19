@@ -675,23 +675,47 @@ class FeedUIIntegrationTests: XCTestCase {
         loader.completeFeedLoading()
         
         XCTAssertEqual(
-            loader.loadMoreRequestsCount,
+            loader.loadMoreRequests.count,
             0,
             "Expected no requests until load more action"
         )
         
         sut.simulateLoadMoreFeedAction()
         XCTAssertEqual(
-            loader.loadMoreRequestsCount,
+            loader.loadMoreRequests.count,
             1,
             "Expected a load more requests"
         )
         
         sut.simulateLoadMoreFeedAction()
         XCTAssertEqual(
-            loader.loadMoreRequestsCount,
+            loader.loadMoreRequests.count,
             1,
             "Expected no additional requests while loading more"
+        )
+        
+        loader.completeLoadMore(with: [], lastPage: false, at: 0)
+        sut.simulateLoadMoreFeedAction()
+        XCTAssertEqual(
+            loader.loadMoreRequests.count,
+            2,
+            "Expected request after load more completed with more pages"
+        )
+
+        loader.completeLoadMoreWithError(at: 1)
+        sut.simulateLoadMoreFeedAction()
+        XCTAssertEqual(
+            loader.loadMoreRequests.count,
+            3,
+            "Expected request after load more failure"
+        )
+
+        loader.completeLoadMore(with: [], lastPage: true, at: 2)
+        sut.simulateLoadMoreFeedAction()
+        XCTAssertEqual(
+            loader.loadMoreRequests.count,
+            3,
+            "Expected no request after loading all pages"
         )
     }
 }

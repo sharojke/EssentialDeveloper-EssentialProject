@@ -10,6 +10,35 @@ public extension Paginated {
                 .eraseToAnyPublisher()
         }
     }
+    
+    init(
+        items: [Item],
+        loadMorePublisher: (() -> AnyPublisher<Self, Error>)?
+    ) {
+        let loadMore: ((@escaping LoadMoreCompletion) -> Void)? = loadMorePublisher
+            .map { publisher in
+                return { completion in
+                    publisher()
+                        .subscribe(
+                            Subscribers.Sink(
+                                receiveCompletion: { result in
+                                    if case let .failure(error) = result {
+                                        completion(.failure(error))
+                                    }
+                                },
+                                receiveValue: { result in
+                                    completion(.success(result))
+                                }
+                            )
+                        )
+                }
+            }
+        
+        self.init(
+            items: items,
+            loadMore: loadMore
+        )
+    }
 }
 
 public extension HTTPClient {

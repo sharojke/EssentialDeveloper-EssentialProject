@@ -8,7 +8,7 @@ extension FeedUIIntegrationTests {
         private var _feedRequests = [PassthroughSubject<Paginated<FeedImage>, Error>]()
         private var _cancelledImageURLs = [URL]()
         private var _imageRequests = [(url: URL, completion: (FeedImageDataLoader.Result) -> Void)]()
-        private var _loadMoreRequestsCount = 0
+        private var _loadMoreRequests = [PassthroughSubject<Paginated<FeedImage>, Error>]()
     }
 }
 
@@ -37,8 +37,10 @@ extension FeedUIIntegrationTests.LoaderSpy {
         with feed: [FeedImage] = [],
         at index: Int = 0
     ) {
-        feedRequests[index].send(Paginated(items: feed, loadMore: { [weak self] _ in
-            self?._loadMoreRequestsCount += 1
+        feedRequests[index].send(Paginated(items: feed, loadMorePublisher: { [weak self] in
+            let publisher = PassthroughSubject<Paginated<FeedImage>, Error>()
+            self?._loadMoreRequests.append(publisher)
+            return publisher.eraseToAnyPublisher()
         }))
     }
     
@@ -89,7 +91,28 @@ extension FeedUIIntegrationTests.LoaderSpy: FeedImageDataLoader {
 }
 
 extension FeedUIIntegrationTests.LoaderSpy {
-    var loadMoreRequestsCount: Int {
-        return _loadMoreRequestsCount
+    var loadMoreRequests: [PassthroughSubject<Paginated<FeedImage>, Error>] {
+        return _loadMoreRequests
+    }
+    
+    func completeLoadMore(
+        with feed: [FeedImage],
+        lastPage: Bool = false,
+        at index: Int = 0
+    ) {
+        loadMoreRequests[index].send(
+            Paginated(
+                items: feed,
+                loadMorePublisher: lastPage ? nil : { [weak self] in
+                    let publisher = PassthroughSubject<Paginated<FeedImage>, Error>()
+                    self?._loadMoreRequests.append(publisher)
+                    return publisher.eraseToAnyPublisher()
+                }
+            )
+        )
+    }
+    
+    func completeLoadMoreWithError(at index: Int) {
+        loadMoreRequests[index].send(completion: .failure(anyNSError()))
     }
 }
