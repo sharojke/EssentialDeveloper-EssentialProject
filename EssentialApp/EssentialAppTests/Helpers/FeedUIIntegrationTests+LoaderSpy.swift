@@ -8,6 +8,7 @@ extension FeedUIIntegrationTests {
         private var _feedRequests = [PassthroughSubject<Paginated<FeedImage>, Error>]()
         private var _cancelledImageURLs = [URL]()
         private var _imageRequests = [(url: URL, completion: (FeedImageDataLoader.Result) -> Void)]()
+        private var _loadMoreRequestsCount = 0
     }
 }
 
@@ -36,7 +37,9 @@ extension FeedUIIntegrationTests.LoaderSpy {
         with feed: [FeedImage] = [],
         at index: Int = 0
     ) {
-        feedRequests[index].send(Paginated(items: feed))
+        feedRequests[index].send(Paginated(items: feed, loadMore: { [weak self] _ in
+            self?._loadMoreRequestsCount += 1
+        }))
     }
     
     func completeFeedLoadingWithError(at index: Int = 0) {
@@ -82,5 +85,11 @@ extension FeedUIIntegrationTests.LoaderSpy: FeedImageDataLoader {
     
     func completeImageLoadingWithError(at index: Int) {
         imageRequests[index].completion(.failure(anyNSError()))
+    }
+}
+
+extension FeedUIIntegrationTests.LoaderSpy {
+    var loadMoreRequestsCount: Int {
+        return _loadMoreRequestsCount
     }
 }
