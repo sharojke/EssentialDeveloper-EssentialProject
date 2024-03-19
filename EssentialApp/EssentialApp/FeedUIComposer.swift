@@ -6,10 +6,11 @@ import UIKit
 // swiftlint:disable force_cast
 
 public enum FeedUIComposer {
-    private typealias FeedPresentationAdapter = LoadResourcePresentationAdapter<[FeedImage], FeedViewAdapter>
+    private typealias FeedPresentationAdapter = 
+    LoadResourcePresentationAdapter<Paginated<FeedImage>, FeedViewAdapter>
     
     public static func feedComposedWith(
-        feedLoader: @escaping () -> AnyPublisher<[FeedImage], Error>,
+        feedLoader: @escaping () -> AnyPublisher<Paginated<FeedImage>, Error>,
         imageLoader: @escaping (URL) -> FeedImageDataLoader.Publisher,
         selection: @escaping (FeedImage) -> Void
     ) -> ListViewController {
@@ -25,7 +26,7 @@ public enum FeedUIComposer {
             loadingView: WeakRefVirtualProxy(feedController),
             resourceView: feedViewAdapter,
             errorView: WeakRefVirtualProxy(feedController), 
-            mapper: FeedPresenter.map
+            mapper: { $0 }
         )
         presentationAdapter.presenter = presenter
         return feedController

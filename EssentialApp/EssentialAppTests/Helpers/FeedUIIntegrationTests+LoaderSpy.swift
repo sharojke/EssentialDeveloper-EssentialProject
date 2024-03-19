@@ -5,7 +5,7 @@ import UIKit
 
 extension FeedUIIntegrationTests {
     class LoaderSpy {
-        private var _feedRequests = [PassthroughSubject<[FeedImage], Error>]()
+        private var _feedRequests = [PassthroughSubject<Paginated<FeedImage>, Error>]()
         private var _cancelledImageURLs = [URL]()
         private var _imageRequests = [(url: URL, completion: (FeedImageDataLoader.Result) -> Void)]()
     }
@@ -22,12 +22,12 @@ extension FeedUIIntegrationTests.LoaderSpy {
 }
 
 extension FeedUIIntegrationTests.LoaderSpy {
-    var feedRequests: [PassthroughSubject<[FeedImage], Error>] {
+    var feedRequests: [PassthroughSubject<Paginated<FeedImage>, Error>] {
         return _feedRequests
     }
         
-    func loadPublisher() -> AnyPublisher<[FeedImage], Error> {
-        let publisher = PassthroughSubject<[FeedImage], Error>()
+    func loadPublisher() -> AnyPublisher<Paginated<FeedImage>, Error> {
+        let publisher = PassthroughSubject<Paginated<FeedImage>, Error>()
         _feedRequests.append(publisher)
         return publisher.eraseToAnyPublisher()
     }
@@ -36,7 +36,7 @@ extension FeedUIIntegrationTests.LoaderSpy {
         with feed: [FeedImage] = [],
         at index: Int = 0
     ) {
-        feedRequests[index].send(feed)
+        feedRequests[index].send(Paginated(items: feed))
     }
     
     func completeFeedLoadingWithError(at index: Int = 0) {
