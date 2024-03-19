@@ -686,6 +686,13 @@ class FeedUIIntegrationTests: XCTestCase {
             1,
             "Expected a load more requests"
         )
+        
+        sut.simulateLoadMoreFeedAction()
+        XCTAssertEqual(
+            loader.loadMoreRequestsCount,
+            1,
+            "Expected no additional requests while loading more"
+        )
     }
 }
 
