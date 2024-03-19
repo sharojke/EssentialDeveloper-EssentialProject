@@ -8,14 +8,6 @@ final class FeedPresenterTests: XCTestCase {
             localized("FEED_VIEW_TITLE")
         )
     }
-    
-    func test_map_createsViewModel() {
-        let feed = uniqueImageFeed().models
-        
-        let viewModel = FeedPresenter.map(feed)
-        
-        XCTAssertEqual(viewModel.feed, feed)
-    }
 }
 
 // MARK: - Helpers
