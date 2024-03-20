@@ -49,6 +49,10 @@ extension ListViewController {
         return loadMoreFeedCell()?.isLoading == true
     }
     
+    var loadMoreFeedErrorMessage: String? {
+        return loadMoreFeedCell()?.message
+    }
+    
     private var feedImagesSection: Int {
         return 0
     }
