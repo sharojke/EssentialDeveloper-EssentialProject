@@ -218,7 +218,6 @@ class FeedUIIntegrationTests: XCTestCase {
             description: "a description",
             location: "a location"
         )
-        let image1 = makeImage()
         
         sut.simulateAppearance()
         loader.completeFeedLoading(with: [image0])
