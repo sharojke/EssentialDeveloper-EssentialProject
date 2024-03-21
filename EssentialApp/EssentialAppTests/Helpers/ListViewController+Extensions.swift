@@ -53,6 +53,10 @@ extension ListViewController {
         return loadMoreFeedCell()?.message
     }
     
+    var canLoadMoreFeed: Bool {
+        return loadMoreFeedCell() != nil
+    }
+    
     private var feedImagesSection: Int {
         return 0
     }
