@@ -72,7 +72,7 @@
 		BB6F44752B7EA38A00D22BFF /* XCTestCase+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6F44742B7EA38A00D22BFF /* XCTestCase+Snapshot.swift */; };
 		BB72A9ED2B696C9F0070D304 /* CacheFeedImageDataUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB72A9EC2B696C9F0070D304 /* CacheFeedImageDataUseCaseTests.swift */; };
 		BB72A9EF2B6975050070D304 /* CoreDataFeedImageDataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB72A9EE2B6975050070D304 /* CoreDataFeedImageDataStoreTests.swift */; };
-		BB72A9F12B69845C0070D304 /* CoreDataFeedStore+FeedImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB72A9F02B69845C0070D304 /* CoreDataFeedStore+FeedImageDataLoader.swift */; };
+		BB72A9F12B69845C0070D304 /* CoreDataFeedStore+FeedImageDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB72A9F02B69845C0070D304 /* CoreDataFeedStore+FeedImageDataStore.swift */; };
 		BB72A9F32B698C710070D304 /* CoreDataFeedStore+FeedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB72A9F22B698C710070D304 /* CoreDataFeedStore+FeedStore.swift */; };
 		BB7541542B7D519B00649504 /* UIImage+Make.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7541532B7D519B00649504 /* UIImage+Make.swift */; };
 		BB7541562B7D53F600649504 /* UITableView+HeaderSizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7541552B7D53F600649504 /* UITableView+HeaderSizing.swift */; };
@@ -267,7 +267,7 @@
 		BB6F44742B7EA38A00D22BFF /* XCTestCase+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Snapshot.swift"; sourceTree = "<group>"; };
 		BB72A9EC2B696C9F0070D304 /* CacheFeedImageDataUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFeedImageDataUseCaseTests.swift; sourceTree = "<group>"; };
 		BB72A9EE2B6975050070D304 /* CoreDataFeedImageDataStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFeedImageDataStoreTests.swift; sourceTree = "<group>"; };
-		BB72A9F02B69845C0070D304 /* CoreDataFeedStore+FeedImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataFeedStore+FeedImageDataLoader.swift"; sourceTree = "<group>"; };
+		BB72A9F02B69845C0070D304 /* CoreDataFeedStore+FeedImageDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataFeedStore+FeedImageDataStore.swift"; sourceTree = "<group>"; };
 		BB72A9F22B698C710070D304 /* CoreDataFeedStore+FeedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataFeedStore+FeedStore.swift"; sourceTree = "<group>"; };
 		BB7541532B7D519B00649504 /* UIImage+Make.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Make.swift"; sourceTree = "<group>"; };
 		BB7541552B7D53F600649504 /* UITableView+HeaderSizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+HeaderSizing.swift"; sourceTree = "<group>"; };
@@ -823,7 +823,7 @@
 			isa = PBXGroup;
 			children = (
 				BB7DFFB42B39A0E6000B1293 /* CoreDataFeedStore.swift */,
-				BB72A9F02B69845C0070D304 /* CoreDataFeedStore+FeedImageDataLoader.swift */,
+				BB72A9F02B69845C0070D304 /* CoreDataFeedStore+FeedImageDataStore.swift */,
 				BB72A9F22B698C710070D304 /* CoreDataFeedStore+FeedStore.swift */,
 				BB7DFFC02B39C8F6000B1293 /* ManagedCache.swift */,
 				BB7DFFBC2B39C812000B1293 /* CoreDataHelpers.swift */,
@@ -1287,7 +1287,7 @@
 				BB4FD1052B93D17D00FA1045 /* ResourceLoadingView.swift in Sources */,
 				BBE2F3D52B5C072300117DF2 /* ResourceLoadingViewModel.swift in Sources */,
 				BB6C28EF2B94CF9300537EBB /* ImageCommentsPresenter.swift in Sources */,
-				BB72A9F12B69845C0070D304 /* CoreDataFeedStore+FeedImageDataLoader.swift in Sources */,
+				BB72A9F12B69845C0070D304 /* CoreDataFeedStore+FeedImageDataStore.swift in Sources */,
 				BB9C46E22B5EFFB400052D7D /* FeedImagePresenter.swift in Sources */,
 				BB124D412B75677400568504 /* FeedCache.swift in Sources */,
 				BB7DFFB52B39A0E6000B1293 /* CoreDataFeedStore.swift in Sources */,
