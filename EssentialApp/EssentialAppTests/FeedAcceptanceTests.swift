@@ -100,7 +100,7 @@ private extension FeedAcceptanceTests {
         store: FeedStore & FeedImageDataStore = InMemoryFeedStore.empty
     ) -> ListViewController {
         let sut = SceneDelegate(httpClient: httpClient, store: store)
-        sut.window = UIWindow()
+        sut.window = UIWindow(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
         sut.configureWindow()
         
         let nav = sut.window?.rootViewController as? UINavigationController
