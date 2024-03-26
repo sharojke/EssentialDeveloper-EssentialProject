@@ -56,10 +56,19 @@ class FeedUIIntegrationTests: XCTestCase {
         sut.simulateUserInitiatedReload()
         XCTAssertEqual(
             loader.feedRequests.count,
+            1,
+            "Expected no request until the prev completes"
+        )
+        
+        loader.completeFeedLoading(at: 0)
+        sut.simulateUserInitiatedReload()
+        XCTAssertEqual(
+            loader.feedRequests.count,
             2,
             "Expected another loading request once the the user initiates a load"
         )
         
+        loader.completeFeedLoading(at: 1)
         sut.simulateUserInitiatedReload()
         XCTAssertEqual(
             loader.feedRequests.count,
@@ -576,6 +585,43 @@ class FeedUIIntegrationTests: XCTestCase {
             loader.cancelledImageURLs,
             [image0.url, image1.url],
             "Expected the second url request is cancelled once the second image view is not near visible"
+        )
+    }
+    
+    func test_feedImageView_doesNotLoadImageAgainUntilPreviousRequestCompletes() {
+        let (sut, loader) = makeSUT()
+        let image = makeImage()
+        sut.simulateAppearance()
+        loader.completeFeedLoading(with: [image])
+        
+        sut.simulateFeedImageViewNearVisible(at: 0)
+        XCTAssertEqual(
+            loader.loadedImageURLs,
+            [image.url],
+            "Expected first request when near visible"
+        )
+        
+        sut.simulateFeedImageViewVisible(at: 0)
+        XCTAssertEqual(
+            loader.loadedImageURLs,
+            [image.url],
+            "Expected no request until the prev completes"
+        )
+        
+        loader.completeImageLoading(at: 0)
+        sut.simulateFeedImageViewVisible(at: 0)
+        XCTAssertEqual(
+            loader.loadedImageURLs,
+            [image.url, image.url],
+            "Expected the second request when visible after the previous completes"
+        )
+        
+        sut.simulateFeedImageViewNotVisible(at: 0)
+        sut.simulateFeedImageViewVisible(at: 0)
+        XCTAssertEqual(
+            loader.loadedImageURLs,
+            [image.url, image.url, image.url],
+            "Expected the third url request is cancelled once the second image view is not near visible"
         )
     }
     

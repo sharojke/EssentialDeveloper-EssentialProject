@@ -23,10 +23,12 @@ private class ThisLoaderSpy {
         at index: Int = 0
     ) {
         requests[index].send(comments)
+        requests[index].send(completion: .finished)
     }
     
     func completeCommentsLoadingWithError(at index: Int = 0) {
         requests[index].send(completion: .failure(anyNSError()))
+        requests[index].send(completion: .finished)
     }
 }
 
@@ -60,10 +62,19 @@ final class CommentsUIIntegrationTests: XCTestCase {
         sut.simulateUserInitiatedReload()
         XCTAssertEqual(
             loader.loadCommentsCallCount,
+            1,
+            "Expected no requests until the prev completes"
+        )
+        
+        loader.completeCommentsLoading(at: 0)
+        sut.simulateUserInitiatedReload()
+        XCTAssertEqual(
+            loader.loadCommentsCallCount,
             2,
             "Expected another loading request once the the user initiates a load"
         )
         
+        loader.completeCommentsLoading(at: 1)
         sut.simulateUserInitiatedReload()
         XCTAssertEqual(
             loader.loadCommentsCallCount,
