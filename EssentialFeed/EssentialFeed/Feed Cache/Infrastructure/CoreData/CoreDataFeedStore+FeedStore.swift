@@ -1,6 +1,6 @@
 extension CoreDataFeedStore: FeedStore {
     public func deleteCachedFeed(completion: @escaping DeletionCompletion) {
-        perform { context in
+        performAsync { context in
             completion(Result {
                 try ManagedCache.deleteCache(in: context)
             })
@@ -12,7 +12,7 @@ extension CoreDataFeedStore: FeedStore {
         timestamp: Date,
         completion: @escaping InsertionCompletion
     ) {
-        perform { context in
+        performAsync { context in
             completion(Result {
                 let managedCache = try ManagedCache.newUniqueInstance(in: context)
                 
@@ -25,7 +25,7 @@ extension CoreDataFeedStore: FeedStore {
     }
     
     public func retrieve(completion: @escaping RetrievalCompletion) {
-        perform { context in
+        performAsync { context in
             completion(Result {
                 try ManagedCache.find(in: context).map { cache in
                     CachedFeed(

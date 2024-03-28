@@ -48,7 +48,7 @@ public final class CoreDataFeedStore {
 // MARK: - Helpers
 
 extension CoreDataFeedStore {
-    func perform(_ action: @escaping (NSManagedObjectContext) -> Void) {
+    func performAsync(_ action: @escaping (NSManagedObjectContext) -> Void) {
         let context = context
         context.perform { action(context) }
     }
