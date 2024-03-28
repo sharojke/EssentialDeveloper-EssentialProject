@@ -86,28 +86,24 @@ private extension CoreDataFeedImageDataStoreTests {
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
-        let exp = expectation(description: "Wait for completion")
+        let receivedResult = Result { try sut.retrieve(dataForURL: url) }
         
-        sut.retrieve(dataForURL: url) { receivedResult in
-            switch (receivedResult, expectedResult) {
-            case let (.success(receivedData), .success(expectedData)):
-                XCTAssertEqual(
-                    receivedData,
-                    expectedData,
-                    file: file,
-                    line: line
-                )
-                
-            default:
-                XCTFail(
-                    "Expected to complete with \(expectedResult), got \(receivedResult) instead",
-                    file: file,
-                    line: line
-                )
-            }
-            exp.fulfill()
+        switch (receivedResult, expectedResult) {
+        case let (.success(receivedData), .success(expectedData)):
+            XCTAssertEqual(
+                receivedData,
+                expectedData,
+                file: file,
+                line: line
+            )
+            
+        default:
+            XCTFail(
+                "Expected to complete with \(expectedResult), got \(receivedResult) instead",
+                file: file,
+                line: line
+            )
         }
-        wait(for: [exp], timeout: 1)
     }
     
     func insert(
