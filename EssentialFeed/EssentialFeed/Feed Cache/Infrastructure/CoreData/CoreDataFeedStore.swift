@@ -52,4 +52,11 @@ extension CoreDataFeedStore {
         let context = context
         context.perform { action(context) }
     }
+    
+    func performSync<R>(_ action: (NSManagedObjectContext) -> Result<R, Error>) throws -> R {
+        let context = context
+        var result: Result<R, Error>!
+        context.performAndWait { result = action(context) }
+        return try result.get()
+    }
 }
