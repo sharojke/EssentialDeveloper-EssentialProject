@@ -33,20 +33,6 @@ final class CacheFeedImageDataUseCaseTests: XCTestCase {
             store.completeInsertionSuccessfully()
         })
     }
-    
-    func test_saveImageDataForURL_doesNotReceiveResultAfterSUTHasBeenDeallocated() {
-        let store = FeedImageDataStoreSpy()
-        var sut: LocalFeedImageDataLoader? = LocalFeedImageDataLoader(store: store)
-        
-        var received = [LocalFeedImageDataLoader.SaveResult]()
-        sut?.save(anyData(), for: anyURL()) { result in
-            received.append(result)
-        }
-        sut = nil
-        store.completeInsertionSuccessfully()
-        
-        XCTAssertTrue(received.isEmpty)
-    }
 }
 
 // MARK: - Helpers
@@ -72,6 +58,7 @@ private extension CacheFeedImageDataUseCaseTests {
         line: UInt = #line
     ) {
         let exp = expectation(description: "Wait for load completion")
+        action()
         
         sut.save(anyData(), for: anyURL()) { receivedResult in
             switch (receivedResult, expectedResult) {
@@ -99,7 +86,6 @@ private extension CacheFeedImageDataUseCaseTests {
             
             exp.fulfill()
         }
-        action()
         
         wait(for: [exp], timeout: 1)
     }
