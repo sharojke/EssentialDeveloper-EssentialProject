@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BB007F6F2B77C8D30096EB68 /* FeedImageDataLoaderSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB007F6E2B77C8D30096EB68 /* FeedImageDataLoaderSpy.swift */; };
 		BB007F712B77C9D10096EB68 /* XCTestCase+FeedImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB007F702B77C9D10096EB68 /* XCTestCase+FeedImageDataLoader.swift */; };
 		BB0A6D002B8A917600483377 /* CombineHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0A6CFF2B8A917600483377 /* CombineHelpers.swift */; };
 		BB124D3D2B755EFE00568504 /* FeedLoaderStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB124D3C2B755EFE00568504 /* FeedLoaderStub.swift */; };
@@ -70,7 +69,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		BB007F6E2B77C8D30096EB68 /* FeedImageDataLoaderSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderSpy.swift; sourceTree = "<group>"; };
 		BB007F702B77C9D10096EB68 /* XCTestCase+FeedImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FeedImageDataLoader.swift"; sourceTree = "<group>"; };
 		BB007F852B7811530096EB68 /* EssentialApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = EssentialApp.xctestplan; sourceTree = "<group>"; };
 		BB0A6CFF2B8A917600483377 /* CombineHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineHelpers.swift; sourceTree = "<group>"; };
@@ -212,7 +210,6 @@
 				BB007F702B77C9D10096EB68 /* XCTestCase+FeedImageDataLoader.swift */,
 				BBA4BB332B72D66A00EC09E6 /* SharedTestHelpers.swift */,
 				BB124D3C2B755EFE00568504 /* FeedLoaderStub.swift */,
-				BB007F6E2B77C8D30096EB68 /* FeedImageDataLoaderSpy.swift */,
 				BBFADC772B7C062300692CFC /* HTTPClientStub.swift */,
 				BBFADC792B7C068E00692CFC /* InMemoryFeedStore.swift */,
 				BB5F64A32B80C3AF00392E36 /* UIView+TestHelpers.swift */,
@@ -375,7 +372,6 @@
 				BBBB19632B7AADFA006C5AC2 /* FeedImageCell+Extensions.swift in Sources */,
 				BB007F712B77C9D10096EB68 /* XCTestCase+FeedImageDataLoader.swift in Sources */,
 				BBBB19402B7AAAC8006C5AC2 /* SceneDelegateTests.swift in Sources */,
-				BB007F6F2B77C8D30096EB68 /* FeedImageDataLoaderSpy.swift in Sources */,
 				BBFADC7A2B7C068E00692CFC /* InMemoryFeedStore.swift in Sources */,
 				BBBB196C2B7AB0BD006C5AC2 /* FeedAcceptanceTests.swift in Sources */,
 				BB124D3D2B755EFE00568504 /* FeedLoaderStub.swift in Sources */,
