@@ -12,6 +12,7 @@
 		BB124D3D2B755EFE00568504 /* FeedLoaderStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB124D3C2B755EFE00568504 /* FeedLoaderStub.swift */; };
 		BB24F4352BA22A8900628C59 /* CommentsUIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB24F4342BA22A8900628C59 /* CommentsUIIntegrationTests.swift */; };
 		BB24F4372BA22C1E00628C59 /* CommentsUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB24F4362BA22C1E00628C59 /* CommentsUIComposer.swift */; };
+		BB3779FC2BB7547F000C456F /* AnyScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3779FB2BB7547F000C456F /* AnyScheduler.swift */; };
 		BB4707C22B6C1A31005AE87D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4707C12B6C1A31005AE87D /* AppDelegate.swift */; };
 		BB4707C42B6C1A31005AE87D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4707C32B6C1A31005AE87D /* SceneDelegate.swift */; };
 		BB4707C62B6C1A31005AE87D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4707C52B6C1A31005AE87D /* ViewController.swift */; };
@@ -75,6 +76,7 @@
 		BB124D3C2B755EFE00568504 /* FeedLoaderStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderStub.swift; sourceTree = "<group>"; };
 		BB24F4342BA22A8900628C59 /* CommentsUIIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsUIIntegrationTests.swift; sourceTree = "<group>"; };
 		BB24F4362BA22C1E00628C59 /* CommentsUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsUIComposer.swift; sourceTree = "<group>"; };
+		BB3779FB2BB7547F000C456F /* AnyScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyScheduler.swift; sourceTree = "<group>"; };
 		BB4707BE2B6C1A31005AE87D /* EssentialApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EssentialApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB4707C12B6C1A31005AE87D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB4707C32B6C1A31005AE87D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				BB4707C12B6C1A31005AE87D /* AppDelegate.swift */,
 				BB4707C32B6C1A31005AE87D /* SceneDelegate.swift */,
 				BB0A6CFF2B8A917600483377 /* CombineHelpers.swift */,
+				BB3779FB2BB7547F000C456F /* AnyScheduler.swift */,
 				BBBB194F2B7AADC2006C5AC2 /* FeedUIComposer.swift */,
 				BB24F4362BA22C1E00628C59 /* CommentsUIComposer.swift */,
 				BBBB194E2B7AADC2006C5AC2 /* WeakRefVirtualProxy.swift */,
@@ -341,6 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB3779FC2BB7547F000C456F /* AnyScheduler.swift in Sources */,
 				BB4707C62B6C1A31005AE87D /* ViewController.swift in Sources */,
 				BB0A6D002B8A917600483377 /* CombineHelpers.swift in Sources */,
 				BBD756F42BB2048800E2887A /* NullStore.swift in Sources */,
