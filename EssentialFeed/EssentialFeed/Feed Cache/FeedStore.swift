@@ -75,7 +75,7 @@ public extension FeedStore {
         // swiftlint:disable:next implicitly_unwrapped_optional
         var result: RetrievalResult!
         dispatchGroup.enter()
-        retrieve() { receivedResult in
+        retrieve { receivedResult in
             result = receivedResult
             dispatchGroup.leave()
         }

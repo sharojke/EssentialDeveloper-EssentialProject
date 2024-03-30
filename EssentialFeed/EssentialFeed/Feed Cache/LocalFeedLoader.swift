@@ -11,37 +11,9 @@ public final class LocalFeedLoader {
 }
     
 extension LocalFeedLoader: FeedCache {
-    public typealias SaveResult = FeedCache.Result
-    
-    public func save(
-        _ feed: [FeedImage],
-        completion: @escaping (SaveResult) -> Void
-    ) {
-        store.deleteCachedFeed { [weak self] deletionResult in
-            guard let strongSelf = self else { return }
-            
-            switch deletionResult {
-            case .success:
-                strongSelf.cache(feed, with: completion)
-                
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-    
-    private func cache(
-        _ items: [FeedImage],
-        with completion: @escaping (SaveResult) -> Void
-    ) {
-        store.insert(
-            feed: items.toLocal(),
-            timestamp: currentDate()
-        ) { [weak self] insertionResult in
-            guard self != nil else { return }
-            
-            completion(insertionResult)
-        }
+    public func save(_ feed: [FeedImage]) throws {
+        try store.deleteCachedFeed()
+        try store.insert(feed: feed.toLocal(), timestamp: currentDate())
     }
 }
     

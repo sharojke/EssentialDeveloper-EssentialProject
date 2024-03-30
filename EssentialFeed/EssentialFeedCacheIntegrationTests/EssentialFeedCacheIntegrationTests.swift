@@ -162,27 +162,21 @@ private extension EssentialFeedCacheIntegrationTests {
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
-        let exp = expectation(description: "Wait for load completion")
-        _ = sut.loadImageData(from: url) { receivedResult in
-            switch receivedResult {
-            case .success(let receivedData):
-                XCTAssertEqual(
-                    receivedData,
-                    expectedData,
-                    file: file,
-                    line: line
-                )
-                
-            case .failure(let error):
-                XCTFail(
-                    "Expected successful image data result, got \(error) instead",
-                    file: file,
-                    line: line
-                )
-            }
-            exp.fulfill()
+        do {
+            let receivedData = try sut.loadImageData(from: url)
+            XCTAssertEqual(
+                receivedData,
+                expectedData,
+                file: file,
+                line: line
+            )
+        } catch {
+            XCTFail(
+                "Expected successful image data result, got \(error) instead",
+                file: file,
+                line: line
+            )
         }
-        wait(for: [exp], timeout: 1)
     }
     
     func save(
@@ -191,18 +185,15 @@ private extension EssentialFeedCacheIntegrationTests {
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
-        let exp = expectation(description: "Wait for completion")
-        sut.save(feed) { result in
-            if case let .failure(error) = result {
-                XCTFail(
-                    "Expected to save feed successfully, got error: \(error)",
-                    file: file,
-                    line: line
-                )
-            }
-            exp.fulfill()
+        do {
+            try sut.save(feed)
+        } catch {
+            XCTFail(
+                "Expected to save feed successfully, got error: \(error)",
+                file: file,
+                line: line
+            )
         }
-        wait(for: [exp], timeout: 1)
     }
     
     func save(
@@ -212,18 +203,15 @@ private extension EssentialFeedCacheIntegrationTests {
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
-        let exp = expectation(description: "Wait for completion")
-        loader.save(data, for: url) { result in
-            if case let .failure(error) = result {
-                XCTFail(
-                    "Expected to save image data successfully, got error: \(error)",
-                    file: file,
-                    line: line
-                )
-            }
-            exp.fulfill()
+        do {
+            _ = try loader.save(data, for: url)
+        } catch {
+            XCTFail(
+                "Expected to save image data successfully, got error: \(error)",
+                file: file,
+                line: line
+            )
         }
-        wait(for: [exp], timeout: 1)
     }
     
     func validateCache(
