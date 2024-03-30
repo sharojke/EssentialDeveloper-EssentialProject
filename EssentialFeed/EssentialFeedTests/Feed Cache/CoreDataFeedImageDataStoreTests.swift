@@ -91,25 +91,10 @@ private extension CoreDataFeedImageDataStoreTests {
         file: StaticString = #file,
         line: UInt = #line
     ) {
-        let exp = expectation(description: "Wait for cache insertion")
         let image = localImage(url: url)
         
-        sut.insert(
-            feed: [image],
-            timestamp: Date()
-        ) { result in
-            if case .failure(let error) = result {
-                XCTFail(
-                    "Failed to save \(image) with error \(error)",
-                    file: file,
-                    line: line
-                )
-            }
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 1)
-        
         do {
+            try sut.insert(feed: [image], timestamp: Date())
             try sut.insert(data, for: url)
         } catch {
             XCTFail(

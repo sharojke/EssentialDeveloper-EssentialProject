@@ -70,12 +70,6 @@ final class CoreDataFeedStoreTests: XCTestCase, FeedStoreSpecs {
         assertThatDeleteEmptiesPreviouslyInsertedCache(on: sut)
     }
     
-    func test_storeSideEffects_runSerially() {
-        let sut = makeSUT()
-        
-        assertThatSideEffectsRunSerially(on: sut)
-    }
-    
     func test_imageEntity_properties() throws {
         let entity = try XCTUnwrap(
             CoreDataFeedStore.model?.entitiesByName["ManagedFeedImage"]
