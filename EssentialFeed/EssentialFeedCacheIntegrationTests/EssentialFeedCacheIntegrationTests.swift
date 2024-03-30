@@ -111,7 +111,7 @@ private extension EssentialFeedCacheIntegrationTests {
         line: UInt = #line
     ) -> LocalFeedLoader {
         let storeURL = testSpecificStoreURL()
-        let store = try! CoreDataFeedStore(storeURL: storeURL)
+        let store = try! CoreDataFeedStore(storeURL: storeURL, contextQueue: .main)
         let sut = LocalFeedLoader(store: store, currentDate: { currentDate })
         trackForMemoryLeaks(store, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
@@ -123,7 +123,7 @@ private extension EssentialFeedCacheIntegrationTests {
         line: UInt = #line
     ) -> LocalFeedImageDataLoader {
         let storeURL = testSpecificStoreURL()
-        let store = try! CoreDataFeedStore(storeURL: storeURL)
+        let store = try! CoreDataFeedStore(storeURL: storeURL, contextQueue: .main)
         let sut = LocalFeedImageDataLoader(store: store)
         trackForMemoryLeaks(store, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
@@ -212,18 +212,15 @@ private extension EssentialFeedCacheIntegrationTests {
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
-        let exp = expectation(description: "Wait for save completion")
-        loader.validateCache { result in
-            if case let .failure(error) = result {
-                XCTFail(
-                    "Expected to validate feed successfully, got error: \(error)",
-                    file: file,
-                    line: line
-                )
-            }
-            exp.fulfill()
+        do {
+            try loader.validateCache()
+        } catch {
+            XCTFail(
+                "Expected to validate feed successfully, got error: \(error)",
+                file: file,
+                line: line
+            )
         }
-        wait(for: [exp], timeout: 1)
     }
     
     func testSpecificStoreURL() -> URL {

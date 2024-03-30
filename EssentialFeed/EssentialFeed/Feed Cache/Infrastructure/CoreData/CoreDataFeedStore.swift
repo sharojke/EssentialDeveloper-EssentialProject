@@ -7,6 +7,11 @@ public final class CoreDataFeedStore {
         case performSyncResultNotReached
     }
     
+    public enum ContextQueue {
+        case main
+        case background
+    }
+    
     private static let modelName = "FeedStore"
     
     public static let model = NSManagedObjectModel.with(
@@ -17,7 +22,7 @@ public final class CoreDataFeedStore {
     private let container: NSPersistentContainer
     private let context: NSManagedObjectContext
     
-    public init(storeURL: URL) throws {
+    public init(storeURL: URL, contextQueue: ContextQueue = .background) throws {
         guard let model = Self.model else {
             throw StoreError.modelNotFound
         }
@@ -28,7 +33,7 @@ public final class CoreDataFeedStore {
                 model: model,
                 url: storeURL
             )
-            context = container.newBackgroundContext()
+            context = contextQueue == .main ? container.viewContext : container.newBackgroundContext()
         } catch {
             throw StoreError.failedToLoadPersistentContainer(error)
         }
