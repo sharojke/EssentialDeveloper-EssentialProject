@@ -86,16 +86,19 @@ private extension CacheFeedUseCaseTests {
         line: UInt = #line
     ) {
         action()
+        var receivedError: NSError?
         
         do {
             try sut.save(uniqueImageFeed().models)
         } catch {
-            compare(
-                error: error as NSError,
-                with: expectedError,
-                file: file,
-                line: line
-            )
+            receivedError = error as NSError
         }
+        
+        compare(
+            error: receivedError,
+            with: expectedError,
+            file: file,
+            line: line
+        )
     }
 }
