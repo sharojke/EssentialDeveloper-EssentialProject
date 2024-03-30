@@ -38,7 +38,7 @@ public protocol FeedStore {
 
 public extension FeedStore {
     func deleteCachedFeed(completion: @escaping DeletionCompletion) {}
-    func insert(_ feed: [LocalFeedImage], timestamp: Date, completion: @escaping InsertionCompletion) {}
+    func insert(feed: [LocalFeedImage], timestamp: Date, completion: @escaping InsertionCompletion) {}
     func retrieve(completion: @escaping RetrievalCompletion) {}
     
     func deleteCachedFeed() throws {

@@ -8,20 +8,12 @@ final class CacheFeedUseCaseTests: XCTestCase {
         XCTAssertEqual(store.receivedMessages, [])
     }
     
-    func test_save_requestsCacheDeletion() {
-        let (sut, store) = makeSUT()
-        
-        try? sut.save(uniqueImageFeed().models)
-        
-        XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed])
-    }
-    
     func test_save_doesNotRequestCacheInsertionOnDeletionError() {
         let (sut, store) = makeSUT()
         let deletionError = anyNSError()
+        store.completeDeletion(with: deletionError)
         
         try? sut.save(uniqueImageFeed().models)
-        store.completeDeletion(with: deletionError)
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed])
     }
@@ -30,45 +22,43 @@ final class CacheFeedUseCaseTests: XCTestCase {
         let timestamp = Date()
         let (sut, store) = makeSUT { timestamp }
         let feed = uniqueImageFeed()
+        store.completeDeletionSuccessfully()
         
         try? sut.save(feed.models)
-        store.completeDeletionSuccessfully()
         
         XCTAssertEqual(store.receivedMessages, [
             .deleteCachedFeed,
             .insert(feed.local, timestamp)
         ])
     }
+        
+    func test_save_failsOnDeletionError() {
+        let (sut, store) = makeSUT()
+        let deletionError = anyNSError()
+        
+        expect(sut, toCompleteWithError: deletionError) {
+            store.completeDeletion(with: deletionError)
+        }
+    }
     
-    // TODO: Uncomment the tests
+    func test_save_failsOnInsertionError() {
+        let (sut, store) = makeSUT()
+        let insertionError = anyNSError()
+        
+        expect(sut, toCompleteWithError: insertionError) {
+            store.completeDeletionSuccessfully()
+            store.completeInsertion(with: insertionError)
+        }
+    }
     
-//    func test_save_failsOnDeletionError() {
-//        let (sut, store) = makeSUT()
-//        let deletionError = anyNSError()
-//        
-//        expect(sut, toCompleteWithError: deletionError) {
-//            store.completeDeletion(with: deletionError)
-//        }
-//    }
-//    
-//    func test_save_failsOnInsertionError() {
-//        let (sut, store) = makeSUT()
-//        let insertionError = anyNSError()
-//        
-//        expect(sut, toCompleteWithError: insertionError) {
-//            store.completeDeletionSuccessfully()
-//            store.completeInsertion(with: insertionError)
-//        }
-//    }
-//    
-//    func test_save_successesOnSuccessfulCacheInsertion() {
-//        let (sut, store) = makeSUT()
-//        
-//        expect(sut, toCompleteWithError: nil) {
-//            store.completeDeletionSuccessfully()
-//            store.completeInsertionSuccessfully()
-//        }
-//    }
+    func test_save_successesOnSuccessfulCacheInsertion() {
+        let (sut, store) = makeSUT()
+        
+        expect(sut, toCompleteWithError: nil) {
+            store.completeDeletionSuccessfully()
+            store.completeInsertionSuccessfully()
+        }
+    }
 }
 
 // MARK: - Helpers
@@ -88,24 +78,24 @@ private extension CacheFeedUseCaseTests {
         return (sut, store)
     }
     
-//    func expect(
-//        _ sut: LocalFeedLoader,
-//        toCompleteWithError expectedError: NSError?,
-//        on action: () -> Void,
-//        file: StaticString = #filePath,
-//        line: UInt = #line
-//    ) {
-//        action()
-//        
-//        do {
-//            try sut.save(uniqueImageFeed().models)
-//        } catch {
-//            compare(
-//                error: error as NSError,
-//                with: expectedError,
-//                file: file,
-//                line: line
-//            )
-//        }
-//    }
+    func expect(
+        _ sut: LocalFeedLoader,
+        toCompleteWithError expectedError: NSError?,
+        on action: () -> Void,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        action()
+        
+        do {
+            try sut.save(uniqueImageFeed().models)
+        } catch {
+            compare(
+                error: error as NSError,
+                with: expectedError,
+                file: file,
+                line: line
+            )
+        }
+    }
 }

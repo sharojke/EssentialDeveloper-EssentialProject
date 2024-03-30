@@ -18,25 +18,12 @@ extension LocalFeedLoader: FeedCache {
 }
     
 public extension LocalFeedLoader {
-    typealias LoadResult = Result<[FeedImage], Error>
-    
-    func load(completion: @escaping (LoadResult) -> Void) {
-        store.retrieve { [weak self] result in
-            guard let strongSelf = self else { return }
-            
-            switch result {
-            case .failure(let error):
-                completion(.failure(error))
-                
-            case .success(let .some(cache)) where FeedCachePrivacy.validate(
-                cache.timestamp,
-                against: strongSelf.currentDate()
-            ):
-                completion(.success(cache.feed.toModels()))
-                
-            case .success:
-                completion(.success([]))
-            }
+    func load() throws -> [FeedImage] {
+        if let cache = try store.retrieve(),
+           FeedCachePrivacy.validate(cache.timestamp, against: currentDate()) {
+            return cache.feed.toModels()
+        } else {
+            return []
         }
     }
 }
@@ -44,8 +31,25 @@ public extension LocalFeedLoader {
 public extension LocalFeedLoader {
     typealias ValidationResult = Result<Void, Error>
     
+    private enum ValidationError: Error {
+        case invalidCache
+    }
+    
     func validateCache(completion: @escaping (ValidationResult) -> Void) {
-        store .retrieve { [weak self] result in
+        completion(
+            ValidationResult {
+                do {
+                    if let cache = try store.retrieve(),
+                       !FeedCachePrivacy.validate(cache.timestamp, against: currentDate()) {
+                        throw ValidationError.invalidCache
+                    }
+                } catch {
+                    try store.deleteCachedFeed()
+                }
+            }
+        )
+        
+        store.retrieve { [weak self] result in
             guard let strongSelf = self else { return }
             
             switch result {

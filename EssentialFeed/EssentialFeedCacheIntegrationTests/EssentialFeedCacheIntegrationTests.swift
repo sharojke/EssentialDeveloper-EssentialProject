@@ -136,23 +136,16 @@ private extension EssentialFeedCacheIntegrationTests {
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
-        let exp = expectation(description: "Wait for load completion")
-        sut.load { result in
-            switch result {
-            case .success(let imageFeed):
-                XCTAssertEqual(imageFeed, expectedFeed, file: file, line: line)
-                
-            case .failure(let error):
-                XCTFail(
-                    "Expected successful feed result, got \(error) instead",
-                    file: file,
-                    line: line
-                )
-            }
-            
-            exp.fulfill()
+        do {
+            let imageFeed = try sut.load()
+            XCTAssertEqual(imageFeed, expectedFeed, file: file, line: line)
+        } catch {
+            XCTFail(
+                "Expected successful feed result, got \(error) instead",
+                file: file,
+                line: line
+            )
         }
-        wait(for: [exp], timeout: 1.0)
     }
     
     func expect(
