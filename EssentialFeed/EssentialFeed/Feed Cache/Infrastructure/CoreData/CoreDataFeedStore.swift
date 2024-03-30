@@ -52,12 +52,6 @@ public final class CoreDataFeedStore {
 // MARK: - Helpers
 
 extension CoreDataFeedStore {
-    @available(*, deprecated)
-    func performAsync(_ action: @escaping (NSManagedObjectContext) -> Void) {
-        let context = context
-        context.perform { action(context) }
-    }
-    
     func performSync<R>(_ action: (NSManagedObjectContext) -> Result<R, Error>) throws -> R {
         let context = context
         var result: Result<R, Error>?
