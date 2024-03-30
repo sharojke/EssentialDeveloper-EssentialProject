@@ -1,5 +1,9 @@
 import CoreData
 
+private enum CoreDataFeedStoreError: Error {
+    case performSyncResultIsNotReached
+}
+
 public final class CoreDataFeedStore {
     enum StoreError: Error {
         case modelNotFound
@@ -55,8 +59,13 @@ extension CoreDataFeedStore {
     
     func performSync<R>(_ action: (NSManagedObjectContext) -> Result<R, Error>) throws -> R {
         let context = context
-        var result: Result<R, Error>!
+        var result: Result<R, Error>?
         context.performAndWait { result = action(context) }
+        
+        guard let result else {
+            throw CoreDataFeedStoreError.performSyncResultIsNotReached
+        }
+        
         return try result.get()
     }
 }
