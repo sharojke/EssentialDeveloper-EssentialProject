@@ -1,13 +1,10 @@
 import CoreData
 
-private enum CoreDataFeedStoreError: Error {
-    case performSyncResultIsNotReached
-}
-
 public final class CoreDataFeedStore {
     enum StoreError: Error {
         case modelNotFound
         case failedToLoadPersistentContainer(Error)
+        case performSyncResultNotReached
     }
     
     private static let modelName = "FeedStore"
@@ -37,6 +34,10 @@ public final class CoreDataFeedStore {
         }
     }
     
+    public func perform(_ action: @escaping () -> Void) {
+        context.perform(action)
+    }
+    
     private func cleanUpReferencesToPersistentStores() {
         context.performAndWait {
             let coordinator = container.persistentStoreCoordinator
@@ -58,7 +59,7 @@ extension CoreDataFeedStore {
         context.performAndWait { result = action(context) }
         
         guard let result else {
-            throw CoreDataFeedStoreError.performSyncResultIsNotReached
+            throw StoreError.performSyncResultNotReached
         }
         
         return try result.get()
