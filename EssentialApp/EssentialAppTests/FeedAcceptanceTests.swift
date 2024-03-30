@@ -10,8 +10,8 @@ import XCTest
 final class FeedAcceptanceTests: XCTestCase {
     func test_onLaunch_displaysRemoteFeedWhenCustomerHasConnectivity() throws {
         let feed = try launch(
-            httpClient: HTTPClientStub.online(response),
-            store: .empty
+            store: .empty,
+            httpClient: HTTPClientStub.online(response)
         )
         
         XCTAssertEqual(feed.numberOfRenderedFeedImageViews, 2)
@@ -40,8 +40,8 @@ final class FeedAcceptanceTests: XCTestCase {
         let sharedStore = try CoreDataFeedStore.empty
         
         let onlineFeed = launch(
-            httpClient: HTTPClientStub.online(response),
-            store: sharedStore
+            store: sharedStore,
+            httpClient: HTTPClientStub.online(response)
         )
         onlineFeed.simulateFeedImageViewVisible(at: 0)
         onlineFeed.simulateFeedImageViewVisible(at: 1)
@@ -49,8 +49,8 @@ final class FeedAcceptanceTests: XCTestCase {
         onlineFeed.simulateFeedImageViewVisible(at: 2)
         
         let offlineFeed = launch(
-            httpClient: HTTPClientStub.offline(),
-            store: sharedStore
+            store: sharedStore,
+            httpClient: HTTPClientStub.offline()
         )
         
         XCTAssertEqual(offlineFeed.numberOfRenderedFeedImageViews, 3)
@@ -61,8 +61,8 @@ final class FeedAcceptanceTests: XCTestCase {
     
     func test_onLaunch_displaysEmptyFeedWhenCustomerHasNoConnectivityAndCache() throws {
         let feed = try launch(
-            httpClient: HTTPClientStub.offline(),
-            store: .empty
+            store: .empty,
+            httpClient: HTTPClientStub.offline()
         )
         
         XCTAssertEqual(feed.numberOfRenderedFeedImageViews, 0)
@@ -95,10 +95,9 @@ final class FeedAcceptanceTests: XCTestCase {
 // MARK: - Helpers
 
 private extension FeedAcceptanceTests {
-    // swiftlint:disable:next function_default_parameter_at_end
     func launch(
-        httpClient: HTTPClient = HTTPClientStub.offline(),
-        store: CoreDataFeedStore
+        store: CoreDataFeedStore,
+        httpClient: HTTPClient = HTTPClientStub.offline()
     ) -> ListViewController {
         let sut = SceneDelegate(httpClient: httpClient, store: store)
         sut.window = UIWindow(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
@@ -217,7 +216,10 @@ private extension FeedAcceptanceTests {
     }
     
     func showCommentsForFirstImage() throws -> ListViewController {
-        let feed = try launch(httpClient: HTTPClientStub.online(response), store: .empty)
+        let feed = try launch(
+            store: .empty,
+            httpClient: HTTPClientStub.online(response)
+        )
         
         feed.simulateTapOnFeedImage(at: 0)
         executeRunLoopToCleanUpReferences()
