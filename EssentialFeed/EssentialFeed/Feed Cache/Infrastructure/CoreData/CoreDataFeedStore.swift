@@ -20,7 +20,7 @@ public final class CoreDataFeedStore {
     )
     
     private let container: NSPersistentContainer
-    private let context: NSManagedObjectContext
+    let context: NSManagedObjectContext
     
     public var contextQueue: ContextQueue {
         return context == container.viewContext ? .main : .background
@@ -56,21 +56,5 @@ public final class CoreDataFeedStore {
     
     deinit {
         cleanUpReferencesToPersistentStores()
-    }
-}
-
-// MARK: - Helpers
-
-extension CoreDataFeedStore {
-    func performSync<R>(_ action: (NSManagedObjectContext) -> Result<R, Error>) throws -> R {
-        let context = context
-        var result: Result<R, Error>?
-        context.performAndWait { result = action(context) }
-        
-        guard let result else {
-            throw StoreError.performSyncResultNotReached
-        }
-        
-        return try result.get()
     }
 }
