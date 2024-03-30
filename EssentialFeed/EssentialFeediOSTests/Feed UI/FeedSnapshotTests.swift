@@ -212,13 +212,13 @@ private extension FeedSnapshotTests {
     }
     
     private func feedWithLoadMoreIndicator() -> [CellController] {
-        let loadMore = LoadMoreCellController()
+        let loadMore = LoadMoreCellController {}
         loadMore.display(ResourceLoadingViewModel(isLoading: true))
         return feedWith(loadMore: loadMore)
     }
     
     private func feedWithLoadMoreError() -> [CellController] {
-        let loadMore = LoadMoreCellController()
+        let loadMore = LoadMoreCellController {}
         let errorViewModel = ResourceErrorViewModel(message: "This is a multiline\nerror message")
         loadMore.display(errorViewModel)
         return feedWith(loadMore: loadMore)
