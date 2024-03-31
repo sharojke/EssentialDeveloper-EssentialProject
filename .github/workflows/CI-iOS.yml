@@ -4,10 +4,10 @@ name: CI-iOS
 # Controls when the action will run.
 # Triggers the workflow on pull request events but only for the main branch.
 on:
-  push:
-    branches: [ main ]
-#  pull_request:
+#  push:
 #    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
