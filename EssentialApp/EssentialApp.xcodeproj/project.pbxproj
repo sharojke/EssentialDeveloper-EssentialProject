@@ -41,7 +41,6 @@
 		BBBB196C2B7AB0BD006C5AC2 /* FeedAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB196B2B7AB0BD006C5AC2 /* FeedAcceptanceTests.swift */; };
 		BBD756F42BB2048800E2887A /* NullStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD756F32BB2048800E2887A /* NullStore.swift */; };
 		BBFADC782B7C062300692CFC /* HTTPClientStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFADC772B7C062300692CFC /* HTTPClientStub.swift */; };
-		BBFADC7A2B7C068E00692CFC /* InMemoryFeedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFADC792B7C068E00692CFC /* InMemoryFeedStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,7 +105,6 @@
 		BBBB196B2B7AB0BD006C5AC2 /* FeedAcceptanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedAcceptanceTests.swift; sourceTree = "<group>"; };
 		BBD756F32BB2048800E2887A /* NullStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NullStore.swift; sourceTree = "<group>"; };
 		BBFADC772B7C062300692CFC /* HTTPClientStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientStub.swift; sourceTree = "<group>"; };
-		BBFADC792B7C068E00692CFC /* InMemoryFeedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryFeedStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,7 +212,6 @@
 				BBA4BB332B72D66A00EC09E6 /* SharedTestHelpers.swift */,
 				BB124D3C2B755EFE00568504 /* FeedLoaderStub.swift */,
 				BBFADC772B7C062300692CFC /* HTTPClientStub.swift */,
-				BBFADC792B7C068E00692CFC /* InMemoryFeedStore.swift */,
 				BB5F64A32B80C3AF00392E36 /* UIView+TestHelpers.swift */,
 			);
 			path = Helpers;
@@ -376,7 +373,6 @@
 				BBBB19632B7AADFA006C5AC2 /* FeedImageCell+Extensions.swift in Sources */,
 				BB007F712B77C9D10096EB68 /* XCTestCase+FeedImageDataLoader.swift in Sources */,
 				BBBB19402B7AAAC8006C5AC2 /* SceneDelegateTests.swift in Sources */,
-				BBFADC7A2B7C068E00692CFC /* InMemoryFeedStore.swift in Sources */,
 				BBBB196C2B7AB0BD006C5AC2 /* FeedAcceptanceTests.swift in Sources */,
 				BB124D3D2B755EFE00568504 /* FeedLoaderStub.swift in Sources */,
 				BBA4BB322B72D60800EC09E6 /* XCTestCase+MemoryLeakTracking.swift in Sources */,

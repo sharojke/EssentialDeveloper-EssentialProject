@@ -90,8 +90,6 @@ private extension FeedImageDataStoreSpecs where Self: XCTestCase {
         file: StaticString = #file,
         line: UInt = #line
     ) {
-        let image = localImage(url: url)
-        
         do {
             try sut.insert(data, for: url)
         } catch {
