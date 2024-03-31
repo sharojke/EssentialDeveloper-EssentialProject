@@ -39,7 +39,6 @@
 		BBBB19682B7AADFA006C5AC2 /* UIKit+Simulations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB195E2B7AADFA006C5AC2 /* UIKit+Simulations.swift */; };
 		BBBB196A2B7AAE2D006C5AC2 /* FeedUIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB19692B7AAE2D006C5AC2 /* FeedUIIntegrationTests.swift */; };
 		BBBB196C2B7AB0BD006C5AC2 /* FeedAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB196B2B7AB0BD006C5AC2 /* FeedAcceptanceTests.swift */; };
-		BBD756F42BB2048800E2887A /* NullStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD756F32BB2048800E2887A /* NullStore.swift */; };
 		BBFADC782B7C062300692CFC /* HTTPClientStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFADC772B7C062300692CFC /* HTTPClientStub.swift */; };
 /* End PBXBuildFile section */
 
@@ -103,7 +102,6 @@
 		BBBB19602B7AADFA006C5AC2 /* ListViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListViewController+Extensions.swift"; sourceTree = "<group>"; };
 		BBBB19692B7AAE2D006C5AC2 /* FeedUIIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUIIntegrationTests.swift; sourceTree = "<group>"; };
 		BBBB196B2B7AB0BD006C5AC2 /* FeedAcceptanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedAcceptanceTests.swift; sourceTree = "<group>"; };
-		BBD756F32BB2048800E2887A /* NullStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NullStore.swift; sourceTree = "<group>"; };
 		BBFADC772B7C062300692CFC /* HTTPClientStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientStub.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,7 +166,6 @@
 				BBBB19512B7AADC2006C5AC2 /* LoadResourcePresentationAdapter.swift */,
 				BBBB19502B7AADC2006C5AC2 /* FeedViewAdapter.swift */,
 				BB4707C52B6C1A31005AE87D /* ViewController.swift */,
-				BBD756F32BB2048800E2887A /* NullStore.swift */,
 				BB4707CA2B6C1A33005AE87D /* Assets.xcassets */,
 				BB4707CC2B6C1A33005AE87D /* LaunchScreen.storyboard */,
 				BB4707CF2B6C1A33005AE87D /* Info.plist */,
@@ -344,7 +341,6 @@
 				BB3779FC2BB7547F000C456F /* AnyScheduler.swift in Sources */,
 				BB4707C62B6C1A31005AE87D /* ViewController.swift in Sources */,
 				BB0A6D002B8A917600483377 /* CombineHelpers.swift in Sources */,
-				BBD756F42BB2048800E2887A /* NullStore.swift in Sources */,
 				BB4707C22B6C1A31005AE87D /* AppDelegate.swift in Sources */,
 				BBBB19542B7AADC2006C5AC2 /* FeedViewAdapter.swift in Sources */,
 				BB24F4372BA22C1E00628C59 /* CommentsUIComposer.swift in Sources */,
