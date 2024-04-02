@@ -1,6 +1,6 @@
 # Essential App Case Study
 
-![](https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject/workflows/CI-iOS/badge.svg) ![](https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject/workflows/CI-macOS/badge.svg) ![](https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject/workflows/Deploy/badge.svg)
+![](https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject/workflows/CI-macOS/badge.svg)
 
 ## Image Feed Feature Specs
 
