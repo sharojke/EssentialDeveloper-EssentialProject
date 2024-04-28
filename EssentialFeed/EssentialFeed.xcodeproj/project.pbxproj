@@ -291,6 +291,27 @@
 		BB7F39222B2CE84400BB37BE /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		BB7F39242B2CE8BE00BB37BE /* FeedItemsMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemsMapper.swift; sourceTree = "<group>"; };
 		BB7F5BCE2B518DBE00ADF859 /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
+		BB87D3B22BDE6BBD00499E6B /* EssentialFeed-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EssentialFeed-Debug.xcconfig"; sourceTree = "<group>"; };
+		BB87D3B32BDE6BBD00499E6B /* EssentialFeed-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EssentialFeed-Release.xcconfig"; sourceTree = "<group>"; };
+		BB87D3B42BDE6BBD00499E6B /* EssentialFeed-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EssentialFeed-Shared.xcconfig"; sourceTree = "<group>"; };
+		BB87D3B52BDE6BBD00499E6B /* EssentialFeedAPIEndToEndTests-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EssentialFeedAPIEndToEndTests-Debug.xcconfig"; sourceTree = "<group>"; };
+		BB87D3B62BDE6BBD00499E6B /* EssentialFeedAPIEndToEndTests-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EssentialFeedAPIEndToEndTests-Release.xcconfig"; sourceTree = "<group>"; };
+		BB87D3B72BDE6BBD00499E6B /* EssentialFeedAPIEndToEndTests-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EssentialFeedAPIEndToEndTests-Shared.xcconfig"; sourceTree = "<group>"; };
+		BB87D3B82BDE6BBD00499E6B /* EssentialFeedCacheIntegrationTests-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EssentialFeedCacheIntegrationTests-Debug.xcconfig"; sourceTree = "<group>"; };
+		BB87D3B92BDE6BBD00499E6B /* EssentialFeedCacheIntegrationTests-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EssentialFeedCacheIntegrationTests-Release.xcconfig"; sourceTree = "<group>"; };
+		BB87D3BA2BDE6BBD00499E6B /* EssentialFeedCacheIntegrationTests-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EssentialFeedCacheIntegrationTests-Shared.xcconfig"; sourceTree = "<group>"; };
+		BB87D3BB2BDE6BBD00499E6B /* EssentialFeediOS-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EssentialFeediOS-Debug.xcconfig"; sourceTree = "<group>"; };
+		BB87D3BC2BDE6BBD00499E6B /* EssentialFeediOS-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EssentialFeediOS-Release.xcconfig"; sourceTree = "<group>"; };
+		BB87D3BD2BDE6BBD00499E6B /* EssentialFeediOS-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EssentialFeediOS-Shared.xcconfig"; sourceTree = "<group>"; };
+		BB87D3BE2BDE6BBD00499E6B /* EssentialFeediOSTests-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EssentialFeediOSTests-Debug.xcconfig"; sourceTree = "<group>"; };
+		BB87D3BF2BDE6BBD00499E6B /* EssentialFeediOSTests-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EssentialFeediOSTests-Release.xcconfig"; sourceTree = "<group>"; };
+		BB87D3C02BDE6BBD00499E6B /* EssentialFeediOSTests-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EssentialFeediOSTests-Shared.xcconfig"; sourceTree = "<group>"; };
+		BB87D3C12BDE6BBD00499E6B /* EssentialFeedTests-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EssentialFeedTests-Debug.xcconfig"; sourceTree = "<group>"; };
+		BB87D3C22BDE6BBD00499E6B /* EssentialFeedTests-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EssentialFeedTests-Release.xcconfig"; sourceTree = "<group>"; };
+		BB87D3C32BDE6BBD00499E6B /* EssentialFeedTests-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "EssentialFeedTests-Shared.xcconfig"; sourceTree = "<group>"; };
+		BB87D3C42BDE6BBD00499E6B /* Project-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project-Debug.xcconfig"; sourceTree = "<group>"; };
+		BB87D3C52BDE6BBD00499E6B /* Project-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project-Release.xcconfig"; sourceTree = "<group>"; };
+		BB87D3C62BDE6BBD00499E6B /* Project-Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project-Shared.xcconfig"; sourceTree = "<group>"; };
 		BB9C46DF2B5EEFD200052D7D /* FeedImagePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImagePresenterTests.swift; sourceTree = "<group>"; };
 		BB9C46E12B5EFFB400052D7D /* FeedImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImagePresenter.swift; sourceTree = "<group>"; };
 		BB9C46E32B5F008F00052D7D /* FeedImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageViewModel.swift; sourceTree = "<group>"; };
@@ -725,6 +746,7 @@
 		BB5CA5D32B28EA7900AF0D66 = {
 			isa = PBXGroup;
 			children = (
+				BB87D3C72BDE6BBD00499E6B /* xcconfig */,
 				BBC5FB292B4453B9000A8612 /* Test plans */,
 				BB5CA5DF2B28EA7900AF0D66 /* EssentialFeed */,
 				BB5CA5E92B28EA7900AF0D66 /* EssentialFeedTests */,
@@ -919,6 +941,34 @@
 				BBE2F3BE2B5BE46E00117DF2 /* Presentation */,
 			);
 			path = Feed;
+			sourceTree = "<group>";
+		};
+		BB87D3C72BDE6BBD00499E6B /* xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				BB87D3B22BDE6BBD00499E6B /* EssentialFeed-Debug.xcconfig */,
+				BB87D3B32BDE6BBD00499E6B /* EssentialFeed-Release.xcconfig */,
+				BB87D3B42BDE6BBD00499E6B /* EssentialFeed-Shared.xcconfig */,
+				BB87D3B52BDE6BBD00499E6B /* EssentialFeedAPIEndToEndTests-Debug.xcconfig */,
+				BB87D3B62BDE6BBD00499E6B /* EssentialFeedAPIEndToEndTests-Release.xcconfig */,
+				BB87D3B72BDE6BBD00499E6B /* EssentialFeedAPIEndToEndTests-Shared.xcconfig */,
+				BB87D3B82BDE6BBD00499E6B /* EssentialFeedCacheIntegrationTests-Debug.xcconfig */,
+				BB87D3B92BDE6BBD00499E6B /* EssentialFeedCacheIntegrationTests-Release.xcconfig */,
+				BB87D3BA2BDE6BBD00499E6B /* EssentialFeedCacheIntegrationTests-Shared.xcconfig */,
+				BB87D3BB2BDE6BBD00499E6B /* EssentialFeediOS-Debug.xcconfig */,
+				BB87D3BC2BDE6BBD00499E6B /* EssentialFeediOS-Release.xcconfig */,
+				BB87D3BD2BDE6BBD00499E6B /* EssentialFeediOS-Shared.xcconfig */,
+				BB87D3BE2BDE6BBD00499E6B /* EssentialFeediOSTests-Debug.xcconfig */,
+				BB87D3BF2BDE6BBD00499E6B /* EssentialFeediOSTests-Release.xcconfig */,
+				BB87D3C02BDE6BBD00499E6B /* EssentialFeediOSTests-Shared.xcconfig */,
+				BB87D3C12BDE6BBD00499E6B /* EssentialFeedTests-Debug.xcconfig */,
+				BB87D3C22BDE6BBD00499E6B /* EssentialFeedTests-Release.xcconfig */,
+				BB87D3C32BDE6BBD00499E6B /* EssentialFeedTests-Shared.xcconfig */,
+				BB87D3C42BDE6BBD00499E6B /* Project-Debug.xcconfig */,
+				BB87D3C52BDE6BBD00499E6B /* Project-Release.xcconfig */,
+				BB87D3C62BDE6BBD00499E6B /* Project-Shared.xcconfig */,
+			);
+			path = xcconfig;
 			sourceTree = "<group>";
 		};
 		BBC5FB292B4453B9000A8612 /* Test plans */ = {
@@ -1602,127 +1652,15 @@
 		};
 		BB5CA5ED2B28EA7900AF0D66 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB87D3C42BDE6BBD00499E6B /* Project-Debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
 		BB5CA5EE2B28EA7900AF0D66 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB87D3C52BDE6BBD00499E6B /* Project-Release.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				SDKROOT = macosx;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
