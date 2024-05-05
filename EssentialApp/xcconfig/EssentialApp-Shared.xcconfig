@@ -36,15 +36,6 @@ CURRENT_PROJECT_VERSION = 1
 
 
 
-// User Script Sandboxing
-// 
-// If enabled, the build system will sandbox user scripts to disallow undeclared
-// input/output dependencies.
-
-ENABLE_USER_SCRIPT_SANDBOXING = NO
-
-
-
 // Generate Info.plist File
 // 
 // If enabled, automatically generate an Info.plist file with content from build
