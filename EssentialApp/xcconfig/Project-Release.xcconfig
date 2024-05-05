@@ -1,3 +1,4 @@
+#include "Pods/Target Support Files/Pods-EssentialApp/Pods-EssentialApp.release.xcconfig"
 #include "Project-Shared.xcconfig"
 #include "../../xcconfig/Release.xcconfig"
 

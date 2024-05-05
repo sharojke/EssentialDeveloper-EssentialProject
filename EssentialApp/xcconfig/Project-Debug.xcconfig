@@ -1,2 +1,3 @@
+#include "Pods/Target Support Files/Pods-EssentialApp/Pods-EssentialApp.debug.xcconfig"
 #include "Project-Shared.xcconfig"
 #include "../../xcconfig/Debug.xcconfig"
