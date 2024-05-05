@@ -1,0 +1,6 @@
+framework module Pods_EssentialApp {
+  umbrella header "Pods-EssentialApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

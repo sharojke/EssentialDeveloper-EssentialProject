@@ -1,0 +1,6 @@
+framework module EssentialFeediOS {
+  umbrella header "EssentialFeediOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

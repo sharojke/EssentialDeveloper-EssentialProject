@@ -1,0 +1,3 @@
+${PODS_ROOT}/Target Support Files/Pods-EssentialApp-EssentialAppTests/Pods-EssentialApp-EssentialAppTests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/EssentialFeed/EssentialFeed.framework
+${BUILT_PRODUCTS_DIR}/EssentialFeediOS/EssentialFeediOS.framework

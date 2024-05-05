@@ -1,0 +1,32 @@
+{
+  "name": "EssentialFeediOS",
+  "version": "1.0.0",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE.md"
+  },
+  "summary": "Essential Feed iOS platform agnostic module",
+  "homepage": "https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject",
+  "authors": {
+    "Vlad Sharaev": "sharaev.vl.vl@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject.git",
+    "branch": "main"
+  },
+  "source_files": "EssentialFeed/EssentialFeediOS/**/**/**/**/*.swift",
+  "resources": "EssentialFeed/EssentialFeediOS/**/**/**/**/*.{storyboard,xcassets}",
+  "swift_versions": [
+    "5"
+  ],
+  "platforms": {
+    "ios": "17.0"
+  },
+  "frameworks": "UIKit",
+  "dependencies": {
+    "EssentialFeed": [
+
+    ]
+  },
+  "swift_version": "5"
+}

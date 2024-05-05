@@ -1,0 +1,2 @@
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EssentialFeed.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EssentialFeediOS.framework

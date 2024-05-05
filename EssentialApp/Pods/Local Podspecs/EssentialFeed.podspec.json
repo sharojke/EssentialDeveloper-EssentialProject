@@ -1,0 +1,31 @@
+{
+  "name": "EssentialFeed",
+  "version": "1.0.0",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE.md"
+  },
+  "summary": "Essential Feed platform agnostic module",
+  "homepage": "https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject",
+  "authors": {
+    "Vlad Sharaev": "sharaev.vl.vl@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject.git",
+    "branch": "main"
+  },
+  "source_files": "EssentialFeed/EssentialFeed/**/**/**/**/*.swift",
+  "resources": [
+    "EssentialFeed/EssentialFeed/Feed/Cache/Infrastructure/CoreData/FeedStore.xcdatamodeld",
+    "EssentialFeed/EssentialFeed/Presentation/*.lproj"
+  ],
+  "swift_versions": [
+    "5"
+  ],
+  "platforms": {
+    "ios": "17.0",
+    "osx": "12.4"
+  },
+  "frameworks": "CoreData",
+  "swift_version": "5"
+}

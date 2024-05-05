@@ -1,0 +1,22 @@
+PODS:
+  - EssentialFeed (1.0.0)
+  - EssentialFeediOS (1.0.0):
+    - EssentialFeed
+
+DEPENDENCIES:
+  - EssentialFeed (from `../`)
+  - EssentialFeediOS (from `../`)
+
+EXTERNAL SOURCES:
+  EssentialFeed:
+    :path: "../"
+  EssentialFeediOS:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  EssentialFeed: 80210728227ce687c18edb78eb96ebe1b8bb630c
+  EssentialFeediOS: 26b023dad68fb7a6f42da5fa4d1ab4b2e77e49fc
+
+PODFILE CHECKSUM: 905f4615becbc5320ddb031987fc193f9387e03e
+
+COCOAPODS: 1.14.3

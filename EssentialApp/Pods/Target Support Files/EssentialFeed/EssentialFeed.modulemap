@@ -1,0 +1,6 @@
+framework module EssentialFeed {
+  umbrella header "EssentialFeed-umbrella.h"
+
+  export *
+  module * { export * }
+}

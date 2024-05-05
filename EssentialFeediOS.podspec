@@ -7,6 +7,7 @@ Pod::Spec.new do |spec|
   spec.authors = { 'Vlad Sharaev' => 'sharaev.vl.vl@gmail.com' }
   spec.source = { :git => 'https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject.git', :branch => 'main' }
   spec.source_files = 'EssentialFeed/EssentialFeediOS/**/**/**/**/*.swift'
+  spec.resources = 'EssentialFeed/EssentialFeediOS/**/**/**/**/*.{storyboard,xcassets}'
   spec.swift_versions = ['5']
   spec.ios.deployment_target = '17.0'
   spec.framework = 'UIKit'
