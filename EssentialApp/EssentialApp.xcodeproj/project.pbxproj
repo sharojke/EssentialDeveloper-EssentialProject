@@ -18,10 +18,6 @@
 		BB4707C62B6C1A31005AE87D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4707C52B6C1A31005AE87D /* ViewController.swift */; };
 		BB4707CB2B6C1A33005AE87D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB4707CA2B6C1A33005AE87D /* Assets.xcassets */; };
 		BB4707CE2B6C1A33005AE87D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB4707CC2B6C1A33005AE87D /* LaunchScreen.storyboard */; };
-		BB4707EF2B6C1C69005AE87D /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4707ED2B6C1C69005AE87D /* EssentialFeed.framework */; };
-		BB4707F02B6C1C69005AE87D /* EssentialFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB4707ED2B6C1C69005AE87D /* EssentialFeed.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BB4707F12B6C1C69005AE87D /* EssentialFeediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4707EE2B6C1C69005AE87D /* EssentialFeediOS.framework */; };
-		BB4707F22B6C1C69005AE87D /* EssentialFeediOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB4707EE2B6C1C69005AE87D /* EssentialFeediOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BB5F64A42B80C3AF00392E36 /* UIView+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5F64A32B80C3AF00392E36 /* UIView+TestHelpers.swift */; };
 		BBA4BB322B72D60800EC09E6 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA4BB312B72D60800EC09E6 /* XCTestCase+MemoryLeakTracking.swift */; };
 		BBA4BB342B72D66A00EC09E6 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA4BB332B72D66A00EC09E6 /* SharedTestHelpers.swift */; };
@@ -59,8 +55,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BB4707F02B6C1C69005AE87D /* EssentialFeed.framework in Embed Frameworks */,
-				BB4707F22B6C1C69005AE87D /* EssentialFeediOS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -119,8 +113,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB4707EF2B6C1C69005AE87D /* EssentialFeed.framework in Frameworks */,
-				BB4707F12B6C1C69005AE87D /* EssentialFeediOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
