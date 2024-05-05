@@ -18,9 +18,6 @@
       </FileRef>
    </Group>
    <FileRef
-      location = "group:EssentialApp.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
