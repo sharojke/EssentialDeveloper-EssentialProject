@@ -14,11 +14,6 @@
     "git": "https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject.git",
     "branch": "main"
   },
-  "source_files": "EssentialFeed/EssentialFeed/**/**/**/**/*.swift",
-  "resources": [
-    "EssentialFeed/EssentialFeed/Feed/Cache/Infrastructure/CoreData/FeedStore.xcdatamodeld",
-    "EssentialFeed/EssentialFeed/Presentation/*.lproj"
-  ],
   "swift_versions": [
     "5"
   ],
@@ -26,6 +21,89 @@
     "ios": "17.0",
     "osx": "12.4"
   },
-  "frameworks": "CoreData",
+  "default_subspecs": "none",
+  "subspecs": [
+    {
+      "name": "FeedFeature",
+      "source_files": "EssentialFeed/EssentialFeed/Feed/Domain/*.swift"
+    },
+    {
+      "name": "FeedAPI",
+      "source_files": "EssentialFeed/EssentialFeed/Feed/API/**/*.swift",
+      "dependencies": {
+        "EssentialFeed/FeedFeature": [
+
+        ]
+      }
+    },
+    {
+      "name": "FeedCache",
+      "source_files": "EssentialFeed/EssentialFeed/Feed/Cache/*.swift",
+      "dependencies": {
+        "EssentialFeed/FeedFeature": [
+
+        ]
+      }
+    },
+    {
+      "name": "FeedCacheInfrastructure",
+      "source_files": "EssentialFeed/EssentialFeed/Feed/Cache/Infrastructure/**/*.swift",
+      "resources": "EssentialFeed/EssentialFeed/Feed/Cache/Infrastructure/CoreData/FeedStore.xcdatamodeld",
+      "dependencies": {
+        "EssentialFeed/FeedCache": [
+
+        ]
+      }
+    },
+    {
+      "name": "FeedPresentation",
+      "source_files": "EssentialFeed/EssentialFeed/Feed/Presentation/*.swift",
+      "dependencies": {
+        "EssentialFeed/FeedFeature": [
+
+        ]
+      }
+    },
+    {
+      "name": "ImageCommentsFeature",
+      "source_files": "EssentialFeed/EssentialFeed/Image Comments/Domain/*.swift"
+    },
+    {
+      "name": "ImageCommentsAPI",
+      "source_files": "EssentialFeed/EssentialFeed/Image Comments/API/*.swift",
+      "dependencies": {
+        "EssentialFeed/ImageCommentsFeature": [
+
+        ]
+      }
+    },
+    {
+      "name": "ImageCommentsPresentation",
+      "source_files": "EssentialFeed/EssentialFeed/Image Comments/Presentation/*.swift",
+      "dependencies": {
+        "EssentialFeed/ImageCommentsFeature": [
+
+        ]
+      }
+    },
+    {
+      "name": "SharedAPI",
+      "source_files": "EssentialFeed/EssentialFeed/Shared/API/*.swift"
+    },
+    {
+      "name": "SharedAPIInfra",
+      "source_files": "EssentialFeed/EssentialFeed/Shared/API Infra/*.swift",
+      "dependencies": {
+        "EssentialFeed/SharedAPI": [
+
+        ]
+      }
+    },
+    {
+      "name": "SharedPresentation",
+      "source_files": "EssentialFeed/EssentialFeed/Shared/Presentation/*.swift",
+      "resources": "EssentialFeed/EssentialFeed/Shared/Presentation/*.lproj"
+    }
+  ],
   "swift_version": "5"
 }

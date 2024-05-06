@@ -3,7 +3,20 @@ platform :ios, '17.0'
 target 'EssentialApp' do
   use_frameworks!
 
-  pod 'EssentialFeed', :path => '../' 
+  pod 'EssentialFeed/FeedFeature', :path => '../' 
+  pod 'EssentialFeed/FeedAPI', :path => '../' 
+  pod 'EssentialFeed/FeedCache', :path => '../' 
+  pod 'EssentialFeed/FeedCacheInfrastructure', :path => '../' 
+  pod 'EssentialFeed/FeedPresentation', :path => '../' 
+
+  pod 'EssentialFeed/ImageCommentsFeature', :path => '../' 
+  pod 'EssentialFeed/ImageCommentsAPI', :path => '../' 
+  pod 'EssentialFeed/ImageCommentsPresentation', :path => '../'
+
+  pod 'EssentialFeed/SharedAPI', :path => '../' 
+  pod 'EssentialFeed/SharedAPIInfra', :path => '../' 
+  pod 'EssentialFeed/SharedPresentation', :path => '../'
+
   pod 'EssentialFeediOS', :path => '../'
 
   target 'EssentialAppTests' do

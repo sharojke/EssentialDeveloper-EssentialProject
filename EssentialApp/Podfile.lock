@@ -1,10 +1,38 @@
 PODS:
   - EssentialFeed (1.0.0)
+  - EssentialFeed/FeedAPI (1.0.0):
+    - EssentialFeed/FeedFeature
+  - EssentialFeed/FeedCache (1.0.0):
+    - EssentialFeed/FeedFeature
+  - EssentialFeed/FeedCacheInfrastructure (1.0.0):
+    - EssentialFeed/FeedCache
+  - EssentialFeed/FeedFeature (1.0.0)
+  - EssentialFeed/FeedPresentation (1.0.0):
+    - EssentialFeed/FeedFeature
+  - EssentialFeed/ImageCommentsAPI (1.0.0):
+    - EssentialFeed/ImageCommentsFeature
+  - EssentialFeed/ImageCommentsFeature (1.0.0)
+  - EssentialFeed/ImageCommentsPresentation (1.0.0):
+    - EssentialFeed/ImageCommentsFeature
+  - EssentialFeed/SharedAPI (1.0.0)
+  - EssentialFeed/SharedAPIInfra (1.0.0):
+    - EssentialFeed/SharedAPI
+  - EssentialFeed/SharedPresentation (1.0.0)
   - EssentialFeediOS (1.0.0):
     - EssentialFeed
 
 DEPENDENCIES:
-  - EssentialFeed (from `../`)
+  - EssentialFeed/FeedAPI (from `../`)
+  - EssentialFeed/FeedCache (from `../`)
+  - EssentialFeed/FeedCacheInfrastructure (from `../`)
+  - EssentialFeed/FeedFeature (from `../`)
+  - EssentialFeed/FeedPresentation (from `../`)
+  - EssentialFeed/ImageCommentsAPI (from `../`)
+  - EssentialFeed/ImageCommentsFeature (from `../`)
+  - EssentialFeed/ImageCommentsPresentation (from `../`)
+  - EssentialFeed/SharedAPI (from `../`)
+  - EssentialFeed/SharedAPIInfra (from `../`)
+  - EssentialFeed/SharedPresentation (from `../`)
   - EssentialFeediOS (from `../`)
 
 EXTERNAL SOURCES:
@@ -14,9 +42,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  EssentialFeed: 80210728227ce687c18edb78eb96ebe1b8bb630c
+  EssentialFeed: 39934d3fceac405e08416dc9f9d8fe7795815f99
   EssentialFeediOS: 26b023dad68fb7a6f42da5fa4d1ab4b2e77e49fc
 
-PODFILE CHECKSUM: 905f4615becbc5320ddb031987fc193f9387e03e
+PODFILE CHECKSUM: f6f1bb84d671cf82f871b5a6021899d81a148cf3
 
 COCOAPODS: 1.14.3
