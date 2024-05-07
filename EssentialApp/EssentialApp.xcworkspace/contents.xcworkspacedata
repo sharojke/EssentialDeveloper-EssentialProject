@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
-   <FileRef
-      location = "container:EssentialApp.xcodeproj">
-   </FileRef>
    <Group
       location = "group:../xcconfig"
       name = "xcconfig">
@@ -18,9 +15,9 @@
       </FileRef>
    </Group>
    <FileRef
-      location = "group:Pods/Pods.xcodeproj">
+      location = "container:EssentialApp.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:EssentialApp.xcodeproj">
+      location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

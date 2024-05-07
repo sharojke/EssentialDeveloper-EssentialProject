@@ -6,13 +6,13 @@
     "file": "LICENSE.md"
   },
   "summary": "Essential Feed platform agnostic module",
-  "homepage": "https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject",
+  "homepage": "https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject-EssentialFeed",
   "authors": {
     "Vlad Sharaev": "sharaev.vl.vl@gmail.com"
   },
   "source": {
-    "git": "https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject.git",
-    "branch": "main"
+    "git": "https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject-EssentialFeed.git",
+    "tag": "1.0.0"
   },
   "swift_versions": [
     "5"

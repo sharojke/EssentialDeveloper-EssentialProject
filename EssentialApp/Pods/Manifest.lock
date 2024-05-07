@@ -22,29 +22,37 @@ PODS:
     - EssentialFeed
 
 DEPENDENCIES:
-  - EssentialFeed/FeedAPI (from `../`)
-  - EssentialFeed/FeedCache (from `../`)
-  - EssentialFeed/FeedCacheInfrastructure (from `../`)
-  - EssentialFeed/FeedFeature (from `../`)
-  - EssentialFeed/FeedPresentation (from `../`)
-  - EssentialFeed/ImageCommentsAPI (from `../`)
-  - EssentialFeed/ImageCommentsFeature (from `../`)
-  - EssentialFeed/ImageCommentsPresentation (from `../`)
-  - EssentialFeed/SharedAPI (from `../`)
-  - EssentialFeed/SharedAPIInfra (from `../`)
-  - EssentialFeed/SharedPresentation (from `../`)
-  - EssentialFeediOS (from `../`)
+  - EssentialFeed/FeedAPI (from `https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject-EssentialFeed.git`)
+  - EssentialFeed/FeedCache (from `https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject-EssentialFeed.git`)
+  - EssentialFeed/FeedCacheInfrastructure (from `https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject-EssentialFeed.git`)
+  - EssentialFeed/FeedFeature (from `https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject-EssentialFeed.git`)
+  - EssentialFeed/FeedPresentation (from `https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject-EssentialFeed.git`)
+  - EssentialFeed/ImageCommentsAPI (from `https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject-EssentialFeed.git`)
+  - EssentialFeed/ImageCommentsFeature (from `https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject-EssentialFeed.git`)
+  - EssentialFeed/ImageCommentsPresentation (from `https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject-EssentialFeed.git`)
+  - EssentialFeed/SharedAPI (from `https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject-EssentialFeed.git`)
+  - EssentialFeed/SharedAPIInfra (from `https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject-EssentialFeed.git`)
+  - EssentialFeed/SharedPresentation (from `https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject-EssentialFeed.git`)
+  - EssentialFeediOS (from `https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject-EssentialFeed.git`)
 
 EXTERNAL SOURCES:
   EssentialFeed:
-    :path: "../"
+    :git: https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject-EssentialFeed.git
   EssentialFeediOS:
-    :path: "../"
+    :git: https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject-EssentialFeed.git
+
+CHECKOUT OPTIONS:
+  EssentialFeed:
+    :commit: 61a220d6e0062224af5625d6637487f9f0a18f96
+    :git: https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject-EssentialFeed.git
+  EssentialFeediOS:
+    :commit: 61a220d6e0062224af5625d6637487f9f0a18f96
+    :git: https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject-EssentialFeed.git
 
 SPEC CHECKSUMS:
-  EssentialFeed: 39934d3fceac405e08416dc9f9d8fe7795815f99
-  EssentialFeediOS: 26b023dad68fb7a6f42da5fa4d1ab4b2e77e49fc
+  EssentialFeed: 7040b09ce80a7dc948b049d1f4c69e1d93300e3a
+  EssentialFeediOS: 24b9ebb492405c4e885dc84bf110aa5035c62325
 
-PODFILE CHECKSUM: f6f1bb84d671cf82f871b5a6021899d81a148cf3
+PODFILE CHECKSUM: 8f18369a5fa6113bf5484a1dcec4a3debc299858
 
 COCOAPODS: 1.14.3
