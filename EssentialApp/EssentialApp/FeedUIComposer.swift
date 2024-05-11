@@ -36,7 +36,7 @@ public enum FeedUIComposer {
 
 private extension FeedUIComposer {
     static func makeFeedViewController(title: String) -> ListViewController {
-        let bundle = Bundle(for: ListViewController.self)
+        let bundle = EssentialFeediOS.bundle
         let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
         let viewController = storyboard.instantiateInitialViewController()
         let feedController = viewController as! ListViewController

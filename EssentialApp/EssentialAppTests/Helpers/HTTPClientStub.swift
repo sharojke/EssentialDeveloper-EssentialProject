@@ -1,4 +1,5 @@
 import EssentialFeed
+import Foundation
 
 private class Task: HTTPClientTask {
     func cancel() {}

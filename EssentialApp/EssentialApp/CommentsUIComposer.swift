@@ -47,7 +47,7 @@ public enum CommentsUIComposer {
 
 private extension CommentsUIComposer {
     static func makeCommentsViewController(title: String) -> ListViewController {
-        let bundle = Bundle(for: ListViewController.self)
+        let bundle = EssentialFeediOS.bundle
         let storyboard = UIStoryboard(name: "ImageComments", bundle: bundle)
         let storyboardViewController = storyboard.instantiateInitialViewController()
         let controller = storyboardViewController as! ListViewController

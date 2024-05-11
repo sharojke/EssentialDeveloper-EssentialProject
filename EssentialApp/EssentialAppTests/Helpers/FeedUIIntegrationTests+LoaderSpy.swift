@@ -1,6 +1,7 @@
 import Combine
 import EssentialFeed
 import EssentialFeediOS
+import Foundation
 
 extension FeedUIIntegrationTests {
     class LoaderSpy {

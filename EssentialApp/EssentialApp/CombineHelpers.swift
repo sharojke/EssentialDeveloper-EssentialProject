@@ -1,5 +1,6 @@
 import Combine
 import EssentialFeed
+import Foundation
 
 public extension Paginated {
     var loadMorePublisher: (() -> AnyPublisher<Self, Error>)? {

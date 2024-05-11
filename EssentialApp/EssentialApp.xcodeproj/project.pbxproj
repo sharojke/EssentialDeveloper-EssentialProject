@@ -3,13 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		BB007F712B77C9D10096EB68 /* XCTestCase+FeedImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB007F702B77C9D10096EB68 /* XCTestCase+FeedImageDataLoader.swift */; };
 		BB0A6D002B8A917600483377 /* CombineHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0A6CFF2B8A917600483377 /* CombineHelpers.swift */; };
 		BB124D3D2B755EFE00568504 /* FeedLoaderStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB124D3C2B755EFE00568504 /* FeedLoaderStub.swift */; };
+		BB1844532BEFBFA200EBD24C /* EssentialFeed in Frameworks */ = {isa = PBXBuildFile; productRef = BB1844522BEFBFA200EBD24C /* EssentialFeed */; };
+		BB1844552BEFBFA200EBD24C /* EssentialFeediOS in Frameworks */ = {isa = PBXBuildFile; productRef = BB1844542BEFBFA200EBD24C /* EssentialFeediOS */; };
 		BB24F4352BA22A8900628C59 /* CommentsUIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB24F4342BA22A8900628C59 /* CommentsUIIntegrationTests.swift */; };
 		BB24F4372BA22C1E00628C59 /* CommentsUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB24F4362BA22C1E00628C59 /* CommentsUIComposer.swift */; };
 		BB3779FC2BB7547F000C456F /* AnyScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3779FB2BB7547F000C456F /* AnyScheduler.swift */; };
@@ -18,10 +20,6 @@
 		BB4707C62B6C1A31005AE87D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4707C52B6C1A31005AE87D /* ViewController.swift */; };
 		BB4707CB2B6C1A33005AE87D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB4707CA2B6C1A33005AE87D /* Assets.xcassets */; };
 		BB4707CE2B6C1A33005AE87D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB4707CC2B6C1A33005AE87D /* LaunchScreen.storyboard */; };
-		BB4707EF2B6C1C69005AE87D /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4707ED2B6C1C69005AE87D /* EssentialFeed.framework */; };
-		BB4707F02B6C1C69005AE87D /* EssentialFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB4707ED2B6C1C69005AE87D /* EssentialFeed.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BB4707F12B6C1C69005AE87D /* EssentialFeediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB4707EE2B6C1C69005AE87D /* EssentialFeediOS.framework */; };
-		BB4707F22B6C1C69005AE87D /* EssentialFeediOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BB4707EE2B6C1C69005AE87D /* EssentialFeediOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BB5F64A42B80C3AF00392E36 /* UIView+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5F64A32B80C3AF00392E36 /* UIView+TestHelpers.swift */; };
 		BBA4BB322B72D60800EC09E6 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA4BB312B72D60800EC09E6 /* XCTestCase+MemoryLeakTracking.swift */; };
 		BBA4BB342B72D66A00EC09E6 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA4BB332B72D66A00EC09E6 /* SharedTestHelpers.swift */; };
@@ -59,8 +57,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BB4707F02B6C1C69005AE87D /* EssentialFeed.framework in Embed Frameworks */,
-				BB4707F22B6C1C69005AE87D /* EssentialFeediOS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -119,8 +115,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB4707EF2B6C1C69005AE87D /* EssentialFeed.framework in Frameworks */,
-				BB4707F12B6C1C69005AE87D /* EssentialFeediOS.framework in Frameworks */,
+				BB1844532BEFBFA200EBD24C /* EssentialFeed in Frameworks */,
+				BB1844552BEFBFA200EBD24C /* EssentialFeediOS in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +254,10 @@
 			dependencies = (
 			);
 			name = EssentialApp;
+			packageProductDependencies = (
+				BB1844522BEFBFA200EBD24C /* EssentialFeed */,
+				BB1844542BEFBFA200EBD24C /* EssentialFeediOS */,
+			);
 			productName = EssentialApp;
 			productReference = BB4707BE2B6C1A31005AE87D /* EssentialApp.app */;
 			productType = "com.apple.product-type.application";
@@ -276,6 +276,8 @@
 				BB4707FD2B6C2C1E005AE87D /* PBXTargetDependency */,
 			);
 			name = EssentialAppTests;
+			packageProductDependencies = (
+			);
 			productName = EssentialAppTests;
 			productReference = BB4707F82B6C2C1E005AE87D /* EssentialAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -308,6 +310,10 @@
 				Base,
 			);
 			mainGroup = BB4707B52B6C1A31005AE87D;
+			packageReferences = (
+				BB1844502BEFBF8B00EBD24C /* XCLocalSwiftPackageReference "../EssentialFeed" */,
+				BB1844512BEFBF9200EBD24C /* XCLocalSwiftPackageReference "../EssentialFeediOS" */,
+			);
 			productRefGroup = BB4707BF2B6C1A31005AE87D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -496,6 +502,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		BB1844502BEFBF8B00EBD24C /* XCLocalSwiftPackageReference "../EssentialFeed" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../EssentialFeed;
+		};
+		BB1844512BEFBF9200EBD24C /* XCLocalSwiftPackageReference "../EssentialFeediOS" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../EssentialFeediOS;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BB1844522BEFBFA200EBD24C /* EssentialFeed */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB1844502BEFBF8B00EBD24C /* XCLocalSwiftPackageReference "../EssentialFeed" */;
+			productName = EssentialFeed;
+		};
+		BB1844542BEFBFA200EBD24C /* EssentialFeediOS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB1844512BEFBF9200EBD24C /* XCLocalSwiftPackageReference "../EssentialFeediOS" */;
+			productName = EssentialFeediOS;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BB4707B62B6C1A31005AE87D /* Project object */;
 }
