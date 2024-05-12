@@ -3,15 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		BB007F712B77C9D10096EB68 /* XCTestCase+FeedImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB007F702B77C9D10096EB68 /* XCTestCase+FeedImageDataLoader.swift */; };
 		BB0A6D002B8A917600483377 /* CombineHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0A6CFF2B8A917600483377 /* CombineHelpers.swift */; };
 		BB124D3D2B755EFE00568504 /* FeedLoaderStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB124D3C2B755EFE00568504 /* FeedLoaderStub.swift */; };
-		BB1844532BEFBFA200EBD24C /* EssentialFeed in Frameworks */ = {isa = PBXBuildFile; productRef = BB1844522BEFBFA200EBD24C /* EssentialFeed */; };
-		BB1844552BEFBFA200EBD24C /* EssentialFeediOS in Frameworks */ = {isa = PBXBuildFile; productRef = BB1844542BEFBFA200EBD24C /* EssentialFeediOS */; };
 		BB24F4352BA22A8900628C59 /* CommentsUIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB24F4342BA22A8900628C59 /* CommentsUIIntegrationTests.swift */; };
 		BB24F4372BA22C1E00628C59 /* CommentsUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB24F4362BA22C1E00628C59 /* CommentsUIComposer.swift */; };
 		BB3779FC2BB7547F000C456F /* AnyScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3779FB2BB7547F000C456F /* AnyScheduler.swift */; };
@@ -37,6 +35,7 @@
 		BBBB19682B7AADFA006C5AC2 /* UIKit+Simulations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB195E2B7AADFA006C5AC2 /* UIKit+Simulations.swift */; };
 		BBBB196A2B7AAE2D006C5AC2 /* FeedUIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB19692B7AAE2D006C5AC2 /* FeedUIIntegrationTests.swift */; };
 		BBBB196C2B7AB0BD006C5AC2 /* FeedAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBB196B2B7AB0BD006C5AC2 /* FeedAcceptanceTests.swift */; };
+		BBBE231C2BF3D1E7007958A1 /* EssentialFeediOS in Frameworks */ = {isa = PBXBuildFile; productRef = BBBE231B2BF3D1E7007958A1 /* EssentialFeediOS */; };
 		BBFADC782B7C062300692CFC /* HTTPClientStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFADC772B7C062300692CFC /* HTTPClientStub.swift */; };
 /* End PBXBuildFile section */
 
@@ -115,8 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB1844532BEFBFA200EBD24C /* EssentialFeed in Frameworks */,
-				BB1844552BEFBFA200EBD24C /* EssentialFeediOS in Frameworks */,
+				BBBE231C2BF3D1E7007958A1 /* EssentialFeediOS in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,8 +253,7 @@
 			);
 			name = EssentialApp;
 			packageProductDependencies = (
-				BB1844522BEFBFA200EBD24C /* EssentialFeed */,
-				BB1844542BEFBFA200EBD24C /* EssentialFeediOS */,
+				BBBE231B2BF3D1E7007958A1 /* EssentialFeediOS */,
 			);
 			productName = EssentialApp;
 			productReference = BB4707BE2B6C1A31005AE87D /* EssentialApp.app */;
@@ -311,8 +308,7 @@
 			);
 			mainGroup = BB4707B52B6C1A31005AE87D;
 			packageReferences = (
-				BB1844502BEFBF8B00EBD24C /* XCLocalSwiftPackageReference "../EssentialFeed" */,
-				BB1844512BEFBF9200EBD24C /* XCLocalSwiftPackageReference "../EssentialFeediOS" */,
+				BBBE231A2BF3D1E7007958A1 /* XCRemoteSwiftPackageReference "EssentialDeveloper-EssentialProject-EssentialFeediOS" */,
 			);
 			productRefGroup = BB4707BF2B6C1A31005AE87D /* Products */;
 			projectDirPath = "";
@@ -503,26 +499,21 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		BB1844502BEFBF8B00EBD24C /* XCLocalSwiftPackageReference "../EssentialFeed" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../EssentialFeed;
+/* Begin XCRemoteSwiftPackageReference section */
+		BBBE231A2BF3D1E7007958A1 /* XCRemoteSwiftPackageReference "EssentialDeveloper-EssentialProject-EssentialFeediOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject-EssentialFeediOS.git";
+			requirement = {
+				kind = exactVersion;
+				version = 1.0.9;
+			};
 		};
-		BB1844512BEFBF9200EBD24C /* XCLocalSwiftPackageReference "../EssentialFeediOS" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../EssentialFeediOS;
-		};
-/* End XCLocalSwiftPackageReference section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		BB1844522BEFBFA200EBD24C /* EssentialFeed */ = {
+		BBBE231B2BF3D1E7007958A1 /* EssentialFeediOS */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BB1844502BEFBF8B00EBD24C /* XCLocalSwiftPackageReference "../EssentialFeed" */;
-			productName = EssentialFeed;
-		};
-		BB1844542BEFBFA200EBD24C /* EssentialFeediOS */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BB1844512BEFBF9200EBD24C /* XCLocalSwiftPackageReference "../EssentialFeediOS" */;
+			package = BBBE231A2BF3D1E7007958A1 /* XCRemoteSwiftPackageReference "EssentialDeveloper-EssentialProject-EssentialFeediOS" */;
 			productName = EssentialFeediOS;
 		};
 /* End XCSwiftPackageProductDependency section */

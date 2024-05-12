@@ -1,0 +1,24 @@
+{
+  "originHash" : "5be26630cc437d75817751f77f1c4438c40aa8db99ac7439fc6bfff80b6b7ca2",
+  "pins" : [
+    {
+      "identity" : "essentialdeveloper-essentialproject-essentialfeed",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject-EssentialFeed.git",
+      "state" : {
+        "revision" : "5e8aa9d2af7756397ee8f6dcd833699ebbb6eabf",
+        "version" : "2.0.6"
+      }
+    },
+    {
+      "identity" : "essentialdeveloper-essentialproject-essentialfeedios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sharaev-vl/EssentialDeveloper-EssentialProject-EssentialFeediOS.git",
+      "state" : {
+        "revision" : "2b4de80ec432ae55f02d58c5ebe86775a4789549",
+        "version" : "1.0.9"
+      }
+    }
+  ],
+  "version" : 3
+}
